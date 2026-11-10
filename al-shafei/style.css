@@ -73,7 +73,7 @@ section{padding:56px 0}
 .tabs button i{font-style:normal;color:var(--copper);margin-left:4px}
 .tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--ink)}
 @media (hover:hover){.tabs button:hover{color:var(--ink)}}
-.allgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px 12px;min-height:60vh;touch-action:pan-y pinch-zoom;transition:opacity .25s}
+.allgrid{display:grid;grid-template-columns:1fr;gap:34px;min-height:60vh;touch-action:pan-y pinch-zoom;transition:opacity .25s}
 .allgrid.fade{opacity:.2}
 @media (min-width:760px){.allgrid{grid-template-columns:repeat(3,1fr);gap:36px 22px}}
 @media (min-width:1100px){.allgrid{grid-template-columns:repeat(4,1fr)}}
@@ -86,6 +86,7 @@ section{padding:56px 0}
 .tile b{font:500 18px/1.2 var(--display)}
 .tile small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 @media (hover:hover){.tile:hover .pic img{transform:scale(1.04)}}
+@media (max-width:759px){.tile b{font-size:22px}.tile small{font-size:11px}.tile .c{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:10px}}
 .work .hint{padding:18px 0 0;margin:0}
 @media (hover:hover) and (pointer:fine){.work .hint{display:none}}
 .studio{border-top:1px solid var(--line)}
