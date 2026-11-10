@@ -38,7 +38,7 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--copper);outline-off
 /* ---- home ---- */
 .hero{margin-top:calc(var(--head) + env(safe-area-inset-top,0px))}
 .hero .pic{height:calc(100svh - var(--head) - env(safe-area-inset-top,0px) - 92px);min-height:360px;max-height:900px;overflow:hidden;background:var(--paper-2)}
-.hero .pic img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;animation:settle 1.6s cubic-bezier(.2,.7,.2,1) both}
+.hero .pic img{width:100%;height:100%;object-fit:cover;object-position:55% 60%;animation:settle 1.6s cubic-bezier(.2,.7,.2,1) both}
 .cap{display:flex;justify-content:space-between;gap:12px;padding:10px var(--padr) 0 var(--pad);font-size:12px;letter-spacing:.06em;color:var(--muted)}
 .intro{padding:64px var(--padr) 40px var(--pad);max-width:1240px;margin:auto}
 .intro p{margin:0;max-width:20em;font:400 clamp(28px,6.4vw,48px)/1.2 var(--display);letter-spacing:.005em}
