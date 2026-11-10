@@ -15,6 +15,59 @@
     rise.forEach(function (el) { io.observe(el); });
   } else rise.forEach(function (el) { el.classList.add("in"); });
 
+  // ---- All work: room tabs; tap a tab or swipe the grid left/right (touch or two-finger trackpad) ----
+  var tabBox = document.querySelector(".tabs"), grid = document.getElementById("allgrid");
+  if (tabBox && grid) {
+    var tabs = [].slice.call(tabBox.querySelectorAll("button")), tiles = [].slice.call(grid.children);
+    var curTab = 0;
+    var setTab = function (i, user) {
+      i = Math.max(0, Math.min(tabs.length - 1, i));
+      if (i === curTab && !user) return;
+      curTab = i;
+      var t = tabs[i].getAttribute("data-t");
+      tabs.forEach(function (b, k) { b.setAttribute("aria-selected", k === i ? "true" : "false"); });
+      tabs[i].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+      grid.classList.add("fade");
+      setTimeout(function () {
+        tiles.forEach(function (el) { el.hidden = !(t === "all" || el.getAttribute("data-tab") === t); });
+        grid.classList.remove("fade");
+      }, 160);
+      try { sessionStorage.setItem("alshafei-tab", t); } catch (er) {}
+      var r = tabBox.getBoundingClientRect(), work = document.getElementById("work");
+      if (user && r.top < (top ? top.offsetHeight : 60) - 1) window.scrollTo({ top: work.offsetTop + 30, behavior: "smooth" });
+    };
+    tabs.forEach(function (b, k) { b.addEventListener("click", function () { setTab(k, true); }); });
+    try {
+      var saved = sessionStorage.getItem("alshafei-tab");
+      tabs.forEach(function (b, k) { if (b.getAttribute("data-t") === saved) setTab(k, false); });
+    } catch (er) {}
+    var gx = 0, gy = 0, gt = 0;
+    grid.addEventListener("touchstart", function (ev) {
+      if (ev.touches.length !== 1) { gt = 0; return; }
+      gx = ev.touches[0].clientX; gy = ev.touches[0].clientY; gt = Date.now();
+    }, { passive: true });
+    grid.addEventListener("touchend", function (ev) {
+      if (!gt) return;
+      var t = ev.changedTouches[0], dx = t.clientX - gx, dy = t.clientY - gy;
+      if (Date.now() - gt < 700 && Math.abs(dx) > 70 && Math.abs(dx) > 2 * Math.abs(dy)) setTab(curTab + (dx < 0 ? 1 : -1), true);
+      gt = 0;
+    }, { passive: true });
+    var ga = 0, gT = 0, gLock = false;
+    grid.addEventListener("wheel", function (ev) {
+      if (ev.ctrlKey || Math.abs(ev.deltaX) < 2 * Math.abs(ev.deltaY)) return;
+      ev.preventDefault();
+      var now = Date.now();
+      if (gLock && now - gT < 300) { gT = now; return; }
+      if (now - gT > 300) ga = 0;
+      gLock = false; gT = now; ga += ev.deltaX;
+      if (Math.abs(ga) > 60) { setTab(curTab + (ga > 0 ? 1 : -1), true); ga = 0; gLock = true; }
+    }, { passive: false });
+  }
+  // a project's "All work" link opens the same room tab
+  document.querySelectorAll(".back[data-tab]").forEach(function (a) {
+    a.addEventListener("click", function () { try { sessionStorage.setItem("alshafei-tab", a.getAttribute("data-tab")); } catch (er) {} });
+  });
+
   var V = document.getElementById("viewer");
   var body = document.body;
   var prevUrl = body.getAttribute("data-prev"), nextUrl = body.getAttribute("data-next");
