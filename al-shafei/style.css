@@ -145,3 +145,5 @@ footer .mark{font-size:14px;color:var(--ink)}
 .card.rise.in:nth-child(even){transform:none}
 @media (min-width:760px){.card.rise:nth-child(even){transform:translateY(132px)}.card.rise.in:nth-child(even){transform:translateY(110px)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}}
+
+.intro.first{margin-top:calc(var(--head) + env(safe-area-inset-top,0px));padding-top:72px}
