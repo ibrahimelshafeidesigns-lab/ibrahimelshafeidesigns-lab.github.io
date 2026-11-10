@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Al Shafei - Logo options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Aref+Ruqaa:wght@400;700&family=Jost:wght@300;400&family=Reem+Kufi:wght@400;500&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=El+Messiri:wght@400;500&display=swap">
+<style>
+:root{--paper:#f6f3ee;--ink:#22201d;--muted:#7a756d;--copper:#a8714a;--line:#e3ddd3}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:300 15px/1.6 "Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+header{padding:28px max(20px,env(safe-area-inset-left)) 8px;max-width:980px;margin:auto}
+header h1{margin:0;font-weight:400;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+header p{max-width:36em;margin:6px 0 0;font-size:15px;color:var(--ink)}
+main{max-width:980px;margin:auto;padding:8px max(16px,env(safe-area-inset-left)) 40px;display:grid;gap:22px}
+.opt{border:1px solid var(--line);background:#fff}
+.tag{display:flex;justify-content:space-between;align-items:baseline;padding:14px 18px;border-bottom:1px solid var(--line)}
+.tag b{font-weight:500;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+.tag span{font-size:13px;color:var(--muted)}
+.light,.dark{display:flex;align-items:center;justify-content:center;padding:48px 16px;min-height:170px}
+.dark{background:#22201d;color:#f3eee6}
+/* the lockup */
+.mark{display:flex;align-items:center;gap:clamp(14px,3.2vw,26px);white-space:nowrap}
+.mark .rule{width:1px;align-self:stretch;background:var(--copper);min-height:38px}
+.mark .ar{direction:rtl}
+/* A Classic */
+.A .en{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:clamp(20px,5.2vw,52px);letter-spacing:.22em;margin-right:-.24em}
+.A .ar{font-family:"Aref Ruqaa",serif;font-weight:400;font-size:clamp(24px,6.2vw,60px);line-height:1;transform:translateY(-.06em)}
+/* B Modern */
+.B .en{font-family:"Jost",sans-serif;font-weight:300;font-size:clamp(16px,4.3vw,42px);letter-spacing:.32em;margin-right:-.34em}
+.B .ar{font-family:"Reem Kufi",sans-serif;font-weight:400;font-size:clamp(20px,5.4vw,48px);line-height:1}
+/* C Elegant */
+.C .en{font-family:"Bodoni Moda",serif;font-weight:400;font-size:clamp(19px,5vw,48px);letter-spacing:.14em;margin-right:-.14em}
+.C .ar{font-family:"El Messiri",sans-serif;font-weight:400;font-size:clamp(22px,5.8vw,52px);line-height:1}
+/* small use: as it would sit in the site menu */
+.small{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-top:1px solid var(--line);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.small .mark{gap:10px}.small .mark .rule{min-height:20px}
+.small .A .en,.small .B .en,.small .C .en{font-size:16px}
+.small .A .ar,.small .C .ar{font-size:20px}.small .B .ar{font-size:18px}
+.small nav{display:flex;gap:14px}
+@media (max-width:420px){.small nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Al Shafei &middot; logo options</h1>
+  <p>Three font pairs. Each is shown on light, on dark, and small as it would sit in the site menu. Pick one: A, B or C.</p>
+</header>
+<main>
+  <section class="opt" id="A">
+    <div class="tag"><b>A &middot; Classic</b><span>Cormorant + Ruqaa calligraphy</span></div>
+    <div class="light"><div class="mark A"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div></div>
+    <div class="dark"><div class="mark A"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div></div>
+    <div class="small"><div class="mark A"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div><nav><span>Projects</span><span>Studio</span><span>Contact</span></nav></div>
+  </section>
+  <section class="opt" id="B">
+    <div class="tag"><b>B &middot; Modern</b><span>Jost + Kufi</span></div>
+    <div class="light"><div class="mark B"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div></div>
+    <div class="dark"><div class="mark B"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div></div>
+    <div class="small"><div class="mark B"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div><nav><span>Projects</span><span>Studio</span><span>Contact</span></nav></div>
+  </section>
+  <section class="opt" id="C">
+    <div class="tag"><b>C &middot; Elegant</b><span>Bodoni + El Messiri</span></div>
+    <div class="light"><div class="mark C"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div></div>
+    <div class="dark"><div class="mark C"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div></div>
+    <div class="small"><div class="mark C"><span class="en">AL SHAFEI</span><i class="rule"></i><span class="ar">الشافعي</span></div><nav><span>Projects</span><span>Studio</span><span>Contact</span></nav></div>
+  </section>
+</main>
+</body>
+</html>
