@@ -29,11 +29,11 @@
       tabs[i].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
       grid.classList.add("fade");
       setTimeout(function () {
-        tiles.forEach(function (el) { el.hidden = !(t === "all" || el.getAttribute("data-tab") === t); });
+        tiles.forEach(function (el) { el.hidden = !(t === "all" || (t === "best" ? el.hasAttribute("data-best") : el.getAttribute("data-tab") === t)); });
         grid.classList.remove("fade");
       }, 160);
       try { sessionStorage.setItem("alshafei-tab", t); } catch (er) {}
-      var r = tabBox.getBoundingClientRect(), work = document.getElementById("work");
+      var r = tabBox.getBoundingClientRect(), work = document.getElementById("projects");
       if (user && r.top < (top ? top.offsetHeight : 60) - 1) window.scrollTo({ top: work.offsetTop + 30, behavior: "smooth" });
     };
     tabs.forEach(function (b, k) { b.addEventListener("click", function () { setTab(k, true); }); });
