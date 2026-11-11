@@ -147,3 +147,10 @@ footer .mark{font-size:14px;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}}
 
 .intro.first{margin-top:calc(var(--head) + env(safe-area-inset-top,0px));padding-top:72px}
+
+/* ---- WhatsApp button that stays on screen on phones ---- */
+.fab{position:fixed;z-index:9;left:var(--pad);right:var(--padr);bottom:max(16px,env(safe-area-inset-bottom,0px));transform:translateY(170%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.fab.on{transform:none}
+.fab .btn{display:flex;box-shadow:0 10px 30px rgba(34,32,29,.25)}
+html.lock .fab{display:none}
+@media (min-width:760px){.fab{display:none}}

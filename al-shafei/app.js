@@ -235,3 +235,12 @@
   track.addEventListener("pointerup", function () { drag = null; });
   track.addEventListener("pointercancel", function () { drag = null; });
 })();
+
+/* WhatsApp button on phones: shows after the first screen, hides at Contact */
+(function () {
+  var f = document.querySelector(".fab"), ct = document.getElementById("contact"), near = false;
+  if (!f) return;
+  function upd() { f.classList.toggle("on", window.scrollY > window.innerHeight * 0.6 && !near); }
+  if (ct && "IntersectionObserver" in window) new IntersectionObserver(function (es) { near = es[0].isIntersecting; upd(); }).observe(ct);
+  window.addEventListener("scroll", upd, { passive: true }); upd();
+})();
