@@ -244,3 +244,27 @@
   if (ct && "IntersectionObserver" in window) new IntersectionObserver(function (es) { near = es[0].isIntersecting; upd(); }).observe(ct);
   window.addEventListener("scroll", upd, { passive: true }); upd();
 })();
+
+/* The opening question typed live, the room pills under it open that room's projects, and the thin scroll line (2026-11-11) */
+(function () {
+  var t = document.querySelector(".ask .typed");
+  if (t && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    var full = t.textContent, i = 0;
+    t.textContent = "";
+    var step = function () { i++; t.textContent = full.slice(0, i); if (i < full.length) setTimeout(step, 38 + Math.random() * 46); };
+    setTimeout(step, 350);
+  }
+  document.querySelectorAll(".pills [data-go]").forEach(function (p) {
+    p.addEventListener("click", function () {
+      document.querySelectorAll(".pills button").forEach(function (b) { b.classList.toggle("on", b === p); });
+      var tab = document.querySelector('.tabs [data-t="' + p.getAttribute("data-go") + '"]');
+      if (tab) tab.click();
+      var w = document.getElementById("projects"); if (w) w.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+  var bar = document.querySelector(".prog b");
+  if (bar) {
+    var upd = function () { var h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = "scaleX(" + (h > 0 ? Math.min(1, scrollY / h) : 0) + ")"; };
+    addEventListener("scroll", upd, { passive: true }); upd();
+  }
+})();
