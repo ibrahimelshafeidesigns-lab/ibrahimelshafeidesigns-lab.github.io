@@ -191,3 +191,6 @@ body{background:var(--paper) repeating-linear-gradient(0deg,rgba(34,32,29,.022) 
 .prog b{display:block;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left}
 @media (max-width:759px){.prog{display:none}}
 @media (prefers-reduced-motion:reduce){.caret{display:none}}
+/* the EN / عربي switch in the header */
+.top nav a.lang{font-family:"IBM Plex Sans Arabic","Jost",sans-serif;letter-spacing:0;text-transform:none;font-size:13px;color:var(--copper)}
+@media (max-width:420px){.top nav a[href$="#studio"]{display:none}}
