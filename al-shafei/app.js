@@ -29,18 +29,31 @@
       tabs[i].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
       grid.classList.add("fade");
       setTimeout(function () {
-        tiles.forEach(function (el) { el.hidden = !(t === "all" || (t === "best" ? el.hasAttribute("data-best") : el.getAttribute("data-tab") === t)); });
+        tiles.forEach(function (el) { el.hidden = !(t === "all" || (t === "best" ? el.hasAttribute("data-best") : (" " + el.getAttribute("data-tab") + " ").indexOf(" " + t + " ") >= 0)); });
         grid.classList.remove("fade");
       }, 160);
       try { sessionStorage.setItem("alshafei-tab", t); } catch (er) {}
+      // each room has its own link (…/al-shafei/#dressings): the address bar follows the tab, ready to copy
+      if (user && history.replaceState) try { history.replaceState(null, "", t === "all" ? "#projects" : "#" + t); } catch (er) {}
       var r = tabBox.getBoundingClientRect(), work = document.getElementById("projects");
       if (user && r.top < (top ? top.offsetHeight : 60) - 1) window.scrollTo({ top: work.offsetTop + 30, behavior: "smooth" });
     };
     tabs.forEach(function (b, k) { b.addEventListener("click", function () { setTab(k, true); }); });
-    try {
+    var fromLink = function () {  // a link ending in #kitchens, #dressings, ... opens that tab
+      var h = (location.hash || "").slice(1).toLowerCase(), hit = -1;
+      tabs.forEach(function (b, k) { if (h && b.getAttribute("data-t") === h) hit = k; });
+      if (hit < 0) return false;
+      setTab(hit, false);
+      var work = document.getElementById("projects");
+      var go = function () { setTimeout(function () { window.scrollTo({ top: work.offsetTop + 30 }); }, 220); };
+      if (document.readyState === "complete") go(); else window.addEventListener("load", go);
+      return true;
+    };
+    if (!fromLink()) try {
       var saved = sessionStorage.getItem("alshafei-tab");
       tabs.forEach(function (b, k) { if (b.getAttribute("data-t") === saved) setTab(k, false); });
     } catch (er) {}
+    window.addEventListener("hashchange", fromLink);
     var gx = 0, gy = 0, gt = 0;
     grid.addEventListener("touchstart", function (ev) {
       if (ev.touches.length !== 1) { gt = 0; return; }
@@ -65,7 +78,12 @@
   }
   // a project's "All work" link opens the same room tab
   document.querySelectorAll(".back[data-tab]").forEach(function (a) {
-    a.addEventListener("click", function () { try { sessionStorage.setItem("alshafei-tab", a.getAttribute("data-tab")); } catch (er) {} });
+    a.addEventListener("click", function () {
+      try {  // a project in two rooms (a bedroom also under Dressings) goes back to the room it was opened from
+        var own = a.getAttribute("data-tab").split(" "), saved = sessionStorage.getItem("alshafei-tab");
+        if (saved !== "all" && own.indexOf(saved) < 0) sessionStorage.setItem("alshafei-tab", own[0]);
+      } catch (er) {}
+    });
   });
 
   var V = document.getElementById("viewer");
@@ -234,37 +252,4 @@
   });
   track.addEventListener("pointerup", function () { drag = null; });
   track.addEventListener("pointercancel", function () { drag = null; });
-})();
-
-/* WhatsApp button on phones: shows after the first screen, hides at Contact */
-(function () {
-  var f = document.querySelector(".fab"), ct = document.getElementById("contact"), near = false;
-  if (!f) return;
-  function upd() { f.classList.toggle("on", window.scrollY > window.innerHeight * 0.6 && !near); }
-  if (ct && "IntersectionObserver" in window) new IntersectionObserver(function (es) { near = es[0].isIntersecting; upd(); }).observe(ct);
-  window.addEventListener("scroll", upd, { passive: true }); upd();
-})();
-
-/* The opening question typed live, the room pills under it open that room's projects, and the thin scroll line (2026-11-11) */
-(function () {
-  var t = document.querySelector(".ask .typed");
-  if (t && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
-    var full = t.textContent, i = 0;
-    t.textContent = "";
-    var step = function () { i++; t.textContent = full.slice(0, i); if (i < full.length) setTimeout(step, 38 + Math.random() * 46); };
-    setTimeout(step, 350);
-  }
-  document.querySelectorAll(".pills [data-go]").forEach(function (p) {
-    p.addEventListener("click", function () {
-      document.querySelectorAll(".pills button").forEach(function (b) { b.classList.toggle("on", b === p); });
-      var tab = document.querySelector('.tabs [data-t="' + p.getAttribute("data-go") + '"]');
-      if (tab) tab.click();
-      var w = document.getElementById("projects"); if (w) w.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-  var bar = document.querySelector(".prog b");
-  if (bar) {
-    var upd = function () { var h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = "scaleX(" + (h > 0 ? Math.min(1, scrollY / h) : 0) + ")"; };
-    addEventListener("scroll", upd, { passive: true }); upd();
-  }
 })();
