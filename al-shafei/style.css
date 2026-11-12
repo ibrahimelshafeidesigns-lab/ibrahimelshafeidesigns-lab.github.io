@@ -147,3 +147,50 @@ footer .mark{font-size:14px;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}}
 
 .intro.first{margin-top:calc(var(--head) + env(safe-area-inset-top,0px));padding-top:72px}
+
+/* ---- WhatsApp button that stays on screen on phones ---- */
+.fab{position:fixed;z-index:9;left:var(--pad);right:var(--padr);bottom:max(16px,env(safe-area-inset-bottom,0px));transform:translateY(170%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.fab.on{transform:none}
+.fab .btn{display:flex;box-shadow:0 10px 30px rgba(34,32,29,.25)}
+html.lock .fab{display:none}
+@media (min-width:760px){.fab{display:none}}
+
+/* ---- the "paper screen" look (Ibrahim 2026-11-11, after the America by Design reel): faint lines across warm paper,
+   a question typed live in the big serif, small monospace labels with one copper dot, outlined pills, a dotted location map,
+   a thin scroll line. Calm: one typing line, nothing else moves on its own. ---- */
+:root{--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+body{background:var(--paper) repeating-linear-gradient(0deg,rgba(34,32,29,.022) 0 1px,transparent 1px 4px)}
+.top{background:rgba(246,243,238,.94)}
+.label,.kick{display:flex;align-items:center;gap:10px;font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.label::before,.kick::before{content:"";flex:0 0 6px;width:6px;height:6px;border-radius:50%;background:var(--copper)}
+.intro.first{padding-top:84px;padding-bottom:48px}
+.intro .kick{margin:0 0 22px}
+.ask{margin:0;max-width:13em;min-height:2.4em;font:400 clamp(40px,8.4vw,76px)/1.06 var(--display);letter-spacing:-.005em}
+.caret{display:inline-block;width:.06em;min-width:3px;height:.86em;margin-left:.06em;background:var(--ink);vertical-align:-.06em;animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.intro .sub{margin:22px 0 0;max-width:30em;font:300 17px/1.6 var(--text);color:var(--ink-2)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.pills button,.tabs button{border:1px solid var(--line);border-radius:999px;background:rgba(246,243,238,.6);color:var(--ink-2)}
+.pills button{min-height:44px;padding:0 18px;font:400 17px/1 var(--display);cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+@media (hover:hover){.pills button:hover{border-color:var(--ink);color:var(--ink)}}
+.pills button:active,.pills button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tabs button{font:400 11px/1 var(--mono);letter-spacing:.1em}
+.tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tile small,.card small,.ph .kind,.back,.next small,.work .hint,footer,.cap{font-family:var(--mono);letter-spacing:.1em}
+.ph .kind{display:inline-flex;align-items:center;gap:10px}
+.ph .kind::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--copper)}
+.loc{position:relative;margin:4px 0 30px;max-width:620px}
+.loc svg{display:block;width:100%;height:auto;background-image:radial-gradient(rgba(34,32,29,.16) 1px,transparent 1.5px);background-size:11px 11px}
+.loc .arc{fill:none;stroke:var(--copper);stroke-width:1.6}
+.loc .halo{fill:var(--copper);opacity:.18}
+.loc .pin{fill:var(--copper)}
+.loc b{display:block;margin-top:14px;font:400 clamp(28px,6vw,40px)/1.1 var(--display);color:var(--ink)}
+.loc small{display:block;margin-top:6px;font:400 11px/1.4 var(--mono);letter-spacing:.12em;color:var(--muted)}
+.prog{position:fixed;z-index:8;right:var(--padr);bottom:18px;display:flex;align-items:center;gap:10px;font:400 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.prog i{display:block;width:90px;height:1px;background:var(--line)}
+.prog b{display:block;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left}
+@media (max-width:759px){.prog{display:none}}
+@media (prefers-reduced-motion:reduce){.caret{display:none}}
+/* the EN / عربي switch in the header */
+.top nav a.lang{font-family:"IBM Plex Sans Arabic","Jost",sans-serif;letter-spacing:0;text-transform:none;font-size:13px;color:var(--copper)}
+@media (max-width:420px){.top nav a[href$="#studio"]{display:none}}
