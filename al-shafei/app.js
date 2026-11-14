@@ -54,27 +54,7 @@
       tabs.forEach(function (b, k) { if (b.getAttribute("data-t") === saved) setTab(k, false); });
     } catch (er) {}
     window.addEventListener("hashchange", fromLink);
-    var gx = 0, gy = 0, gt = 0;
-    grid.addEventListener("touchstart", function (ev) {
-      if (ev.touches.length !== 1) { gt = 0; return; }
-      gx = ev.touches[0].clientX; gy = ev.touches[0].clientY; gt = Date.now();
-    }, { passive: true });
-    grid.addEventListener("touchend", function (ev) {
-      if (!gt) return;
-      var t = ev.changedTouches[0], dx = t.clientX - gx, dy = t.clientY - gy;
-      if (Date.now() - gt < 700 && Math.abs(dx) > 70 && Math.abs(dx) > 2 * Math.abs(dy)) setTab(curTab + (dx < 0 ? 1 : -1), true);
-      gt = 0;
-    }, { passive: true });
-    var ga = 0, gT = 0, gLock = false;
-    grid.addEventListener("wheel", function (ev) {
-      if (ev.ctrlKey || Math.abs(ev.deltaX) < 2 * Math.abs(ev.deltaY)) return;
-      ev.preventDefault();
-      var now = Date.now();
-      if (gLock && now - gT < 300) { gT = now; return; }
-      if (now - gT > 300) ga = 0;
-      gLock = false; gT = now; ga += ev.deltaX;
-      if (Math.abs(ga) > 60) { setTab(curTab + (ga > 0 ? 1 : -1), true); ga = 0; gLock = true; }
-    }, { passive: false });
+    // (2026-11-14) swiping the grid no longer changes the room: a sideways swipe now moves a project's own photos
   }
   // a project's "All work" link opens the same room tab
   document.querySelectorAll(".back[data-tab]").forEach(function (a) {
@@ -335,6 +315,63 @@
           if (p && p !== t) p.scrollIntoView({ inline: "start", block: "nearest", behavior: "auto" });
         });
       });
+    });
+  });
+})();
+
+/* Each project's picture is a side scroll of its own photos, Instagram style (2026-11-14): swipe (or two fingers on
+   a trackpad, or the small arrows on a laptop) moves through the photos, dots show where you are; a tap opens them
+   full screen on the same page at the photo shown, and closing comes back to that photo. */
+(function () {
+  var grid = document.getElementById("allgrid"), V = document.getElementById("viewer");
+  if (!grid) return;
+  var base = grid.getAttribute("data-base") || "img/";
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
+  [].forEach.call(grid.querySelectorAll(".tile[data-ph]"), function (t) {
+    var ph = t.getAttribute("data-ph").split(" ").filter(Boolean), pic = t.querySelector(".pic"), first = pic.querySelector("img");
+    var name = t.querySelector(".c b").textContent, kind = t.querySelector(".c small").textContent;
+    var car = null, dots = [], at = 0;
+    function idx() { return car ? Math.round(Math.abs(car.scrollLeft) / (car.clientWidth || 1)) : 0; }
+    function rtl() { return car && getComputedStyle(car).direction === "rtl" ? -1 : 1; }
+    function show(i, smooth) { if (car) car.scrollTo({ left: rtl() * i * car.clientWidth, behavior: smooth ? "smooth" : "auto" }); }
+    if (ph.length > 1) {
+      car = document.createElement("span"); car.className = "car";
+      ph.forEach(function (f, i) {
+        var im = first;
+        if (i) {
+          im = document.createElement("img");
+          im.alt = first.alt + " " + (i + 1); im.loading = "lazy"; im.decoding = "async"; im.draggable = false;
+          im.src = base + f.replace(/\.jpg$/, "-s.jpg");
+        }
+        car.appendChild(im);
+      });
+      pic.insertBefore(car, pic.firstChild);
+      var d = document.createElement("span"); d.className = "dots"; d.setAttribute("aria-hidden", "true");
+      ph.forEach(function (f, i) { var b = document.createElement("i"); if (!i) b.className = "on"; d.appendChild(b); dots.push(b); });
+      pic.appendChild(d);
+      var arrows = ["-1", "1"].map(function (s) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "cn " + (s === "1" ? "fw" : "bk");
+        b.setAttribute("aria-label", s === "1" ? "›" : "‹"); b.innerHTML = s === "1" ? "&rsaquo;" : "&lsaquo;";
+        b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); show(Math.max(0, Math.min(ph.length - 1, idx() + +s)), true); });
+        pic.appendChild(b); return b;
+      });
+      var upd = function () {
+        at = Math.min(ph.length - 1, idx());
+        dots.forEach(function (b, k) { b.className = k === at ? "on" : ""; });
+        arrows[0].hidden = at === 0; arrows[1].hidden = at === ph.length - 1;
+      };
+      car.addEventListener("scroll", upd, { passive: true }); upd();
+    }
+    if (!V || !V.show) return;
+    t.addEventListener("click", function (e) {
+      if (e.ctrlKey || e.metaKey || e.shiftKey) return;  // new tab still opens the project page
+      e.preventDefault();
+      var html = "";
+      ph.forEach(function (f, i) {
+        html += '<div class="slide" data-i="' + i + '" data-n="' + ph.length + '" data-name="' + esc(name) + '" data-kind="' + esc(kind) +
+          '"><img data-src="' + esc(base + f) + '" alt="' + esc(name + ", " + kind + " " + (i + 1)) + '" draggable="false"></div>';
+      });
+      V.show(html, idx(), function (i) { show(i, false); });
     });
   });
 })();
