@@ -330,6 +330,9 @@
   [].forEach.call(grid.querySelectorAll(".tile[data-ph]"), function (t) {
     var ph = t.getAttribute("data-ph").split(" ").filter(Boolean), pic = t.querySelector(".pic"), first = pic.querySelector("img");
     var name = t.querySelector(".c b").textContent, kind = t.querySelector(".c small").textContent;
+    // the cover photo comes first; it is not repeated and no other photo is skipped
+    var cov = (first.getAttribute("src") || "").replace(/^.*?img\//, "").replace(/-s\.jpg$/, ".jpg"), ci = ph.indexOf(cov);
+    if (ci > 0) { ph.splice(ci, 1); ph.unshift(cov); }
     var car = null, dots = [], at = 0;
     function idx() { return car ? Math.round(Math.abs(car.scrollLeft) / (car.clientWidth || 1)) : 0; }
     function rtl() { return car && getComputedStyle(car).direction === "rtl" ? -1 : 1; }
