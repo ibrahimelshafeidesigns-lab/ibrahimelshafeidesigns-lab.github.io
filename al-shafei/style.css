@@ -197,3 +197,8 @@ body{background:var(--paper) repeating-linear-gradient(0deg,rgba(34,32,29,.022) 
 /* the EN / عربي switch in the header */
 .top nav a.lang{font-family:"IBM Plex Sans Arabic","Jost",sans-serif;letter-spacing:0;text-transform:none;font-size:13px;color:var(--copper)}
 @media (max-width:420px){.top nav a[href$="#studio"]{display:none}}
+
+/* guide: every project opens to more photos */
+.guide{margin:-6px 0 16px;font-size:13px;color:var(--ink-2)}
+.tile .more{position:absolute;right:8px;bottom:8px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(246,243,238,.92);color:var(--ink);pointer-events:none}
+[dir=rtl] .tile .more{right:auto;left:8px}
