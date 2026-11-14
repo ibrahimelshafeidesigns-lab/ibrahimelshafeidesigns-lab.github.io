@@ -119,7 +119,18 @@
 
   if (!V) return;
   var track = V.querySelector(".track"), slides = [].slice.call(track.children), count = V.querySelector(".count");
+  var cap = V.querySelector(".vc"), onClose = null;
   var cur = 0, z = { s: 1, x: 0, y: 0 }, pushed = false;
+  // Arabic pages run right to left: the photo strip then scrolls with negative scrollLeft
+  function dir() { return getComputedStyle(track).direction === "rtl" ? -1 : 1; }
+  function idxNow() { return Math.round(Math.abs(track.scrollLeft) / track.clientWidth); }
+  function loadNear() {  // long lists (a whole room on the home page) load only the photos around the one shown
+    for (var k = Math.max(0, cur - 2); k <= Math.min(slides.length - 1, cur + 2); k++) {
+      var m = slides[k].querySelector("img"); if (!m.getAttribute("src")) m.src = m.getAttribute("data-src");
+    }
+  }
+  // home page: show a room's photos (slides = HTML), open at photo i; done(i) runs on close
+  V.show = function (html, i, done) { track.innerHTML = html; slides = [].slice.call(track.children); onClose = done || null; open(i); };
   function img() { return slides[cur].querySelector("img"); }
   function apply(anim) {
     var im = img();
@@ -142,17 +153,25 @@
     if (s <= 1.01) { reset(anim); return; }
     clamp(); apply(anim);
   }
-  function label() { count.textContent = (cur + 1) + " / " + slides.length; }
+  function label() {
+    var s = slides[cur];
+    if (s && s.hasAttribute("data-n")) {  // home page: "2 / 7" inside this project, and the project's name
+      count.textContent = (+s.getAttribute("data-i") + 1) + " / " + s.getAttribute("data-n");
+      if (cap) { cap.querySelector("b").textContent = s.getAttribute("data-name"); cap.querySelector("small").textContent = s.getAttribute("data-kind"); }
+    } else count.textContent = (cur + 1) + " / " + slides.length;
+    loadNear();
+  }
   function goTo(i, smooth) {
     i = Math.max(0, Math.min(slides.length - 1, i));
-    track.scrollTo({ left: i * track.clientWidth, behavior: smooth ? "smooth" : "auto" });
+    track.scrollTo({ left: dir() * i * track.clientWidth, behavior: smooth ? "smooth" : "auto" });
     if (i !== cur) { reset(); cur = i; label(); }
   }
   function open(i) {
-    slides.forEach(function (s) { var im = s.querySelector("img"); if (!im.getAttribute("src")) im.src = im.getAttribute("data-src"); });
-    V.hidden = false; document.documentElement.classList.add("lock");
+    if (slides.length <= 15) slides.forEach(function (s) { var im = s.querySelector("img"); if (!im.getAttribute("src")) im.src = im.getAttribute("data-src"); });
+    V.style.background = ""; V.hidden = false; document.documentElement.classList.add("lock");
     cur = i; label();
-    requestAnimationFrame(function () { track.scrollLeft = i * track.clientWidth; });
+    track.scrollLeft = dir() * i * track.clientWidth;
+    requestAnimationFrame(function () { track.scrollLeft = dir() * i * track.clientWidth; });
     if (!pushed) { history.pushState({ viewer: 1 }, ""); pushed = true; }
     V.querySelector(".x").focus({ preventScroll: true });
   }
@@ -160,6 +179,7 @@
     if (V.hidden) return;
     reset(); V.hidden = true; document.documentElement.classList.remove("lock");
     if (pushed && !fromPop) { pushed = false; history.back(); } else pushed = false;
+    if (onClose) onClose(cur);
   }
   window.addEventListener("popstate", function () { if (!V.hidden) close(true); });
   document.querySelectorAll("[data-open]").forEach(function (b) {
@@ -171,18 +191,20 @@
   document.addEventListener("keydown", function (e) {
     if (V.hidden) return;
     if (e.key === "Escape") close();
-    else if (e.key === "ArrowRight") goTo(cur + 1, true);
-    else if (e.key === "ArrowLeft") goTo(cur - 1, true);
+    else if (e.key === "ArrowRight") goTo(cur + dir(), true);
+    else if (e.key === "ArrowLeft") goTo(cur - dir(), true);
   });
   var scT;
   track.addEventListener("scroll", function () {
     clearTimeout(scT);
     scT = setTimeout(function () {
-      var i = Math.round(track.scrollLeft / track.clientWidth);
+      var i = Math.min(slides.length - 1, idxNow());
       if (i !== cur) { reset(); cur = i; label(); }
     }, 60);
   }, { passive: true });
-  window.addEventListener("resize", function () { if (!V.hidden) { reset(); track.scrollLeft = cur * track.clientWidth; } });
+  window.addEventListener("resize", function () { if (!V.hidden) { reset(); track.scrollLeft = dir() * cur * track.clientWidth; } });
+  // a tap on the dark space around the photo closes the viewer
+  track.addEventListener("click", function (e) { if (e.target.classList.contains("slide") && z.s <= 1.01) close(); });
 
   // ---- touch: pinch to zoom, one finger pans when zoomed, double tap toggles zoom ----
   var t0 = null, lastTap = 0;
@@ -215,9 +237,24 @@
       e.preventDefault();
       z.x = t0.x + e.touches[0].clientX - t0.px; z.y = t0.y + e.touches[0].clientY - t0.py;
       clamp(); apply(false);
+    } else if (!t0.pinch && e.touches.length === 1) {
+      // swipe down to close: the photo follows the finger and the dark fades
+      var dy = e.touches[0].clientY - t0.py, dx = e.touches[0].clientX - t0.px;
+      if (!t0.down && dy > 12 && dy > 1.4 * Math.abs(dx)) t0.down = true;
+      if (t0.down) {
+        e.preventDefault();
+        var im = img(); im.style.transition = "none"; im.style.transform = "translateY(" + Math.max(0, dy) + "px)";
+        V.style.background = "rgba(20,19,17," + Math.max(0.35, 1 - Math.max(0, dy) / 500) + ")";
+      }
     }
   }, { passive: false });
   track.addEventListener("touchend", function (e) {
+    if (e.touches.length === 0 && t0 && t0.down) {
+      var dyE = e.changedTouches[0].clientY - t0.py;
+      t0 = null; lastTap = 0;
+      if (dyE > 90) close(); else { V.style.background = ""; reset(true); }
+      return;
+    }
     if (e.touches.length === 0) {
       var c = e.changedTouches[0];
       lastTap = (t0 && !t0.pinch && Date.now() - t0.t < 250 && Math.hypot(c.clientX - t0.px, c.clientY - t0.py) < 10)
@@ -235,7 +272,7 @@
     // two-finger sideways swipe or a mouse wheel steps one photo per gesture
     // (after a step, the rest of the same gesture and its glide are ignored until 300 ms of quiet)
     e.preventDefault();
-    var now = Date.now(), d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    var now = Date.now(), d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX * dir() : e.deltaY;
     if (wLock && now - wT < 300) { wT = now; return; }
     if (now - wT > 300) wAcc = 0;
     wLock = false; wT = now; wAcc += d;
@@ -252,6 +289,54 @@
   });
   track.addEventListener("pointerup", function () { drag = null; });
   track.addEventListener("pointercancel", function () { drag = null; });
+})();
+
+/* Home page (2026-11-14): one side-scroll strip per room. Tapping a project opens its photos full screen on the
+   same page; swiping on past its last photo goes into the next project of that room. Closing lands on the project
+   last seen. Laptop: arrow buttons beside each room's name, or two-finger swipe on the strip. */
+(function () {
+  var rows = document.querySelector(".rows"), V = document.getElementById("viewer");
+  if (!rows) return;
+  var base = rows.getAttribute("data-base") || "img/";
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
+  rows.querySelectorAll(".row").forEach(function (row) {
+    var strip = row.querySelector(".strip"), tiles = [].slice.call(strip.querySelectorAll(".tile"));
+    var btns = row.querySelectorAll(".sl"), rtl = getComputedStyle(strip).direction === "rtl";
+    function ends() {
+      var x = Math.abs(strip.scrollLeft), max = strip.scrollWidth - strip.clientWidth - 2;
+      if (btns[0]) btns[0].disabled = x < 2;
+      if (btns[1]) btns[1].disabled = x >= max;
+    }
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var step = Math.max(tiles[0] ? tiles[0].offsetWidth : 300, strip.clientWidth - 120);
+        strip.scrollBy({ left: +b.getAttribute("data-d") * step * (rtl ? -1 : 1), behavior: "smooth" });
+      });
+    });
+    strip.addEventListener("scroll", ends, { passive: true }); ends();
+    if (!V || !V.show) return;
+    tiles.forEach(function (t, k) {
+      t.addEventListener("click", function (e) {
+        if (e.ctrlKey || e.metaKey || e.shiftKey) return;  // new tab still opens the project page
+        e.preventDefault();
+        var html = "", start = 0, n = 0;
+        tiles.forEach(function (p, j) {
+          var ph = (p.getAttribute("data-ph") || "").split(" ").filter(Boolean);
+          var name = p.querySelector(".c b").textContent, kind = p.querySelector(".c small").textContent;
+          if (j === k) start = n;
+          ph.forEach(function (f, i) {
+            html += '<div class="slide" data-p="' + j + '" data-i="' + i + '" data-n="' + ph.length + '" data-name="' + esc(name) +
+              '" data-kind="' + esc(kind) + '"><img data-src="' + esc(base + f) + '" alt="' + esc(name + ", " + kind + " " + (i + 1)) + '" draggable="false"></div>';
+            n++;
+          });
+        });
+        V.show(html, start, function (i) {  // back on the page: bring the project last seen into view
+          var s = V.querySelectorAll(".slide")[i], p = s ? tiles[+s.getAttribute("data-p")] : null;
+          if (p && p !== t) p.scrollIntoView({ inline: "start", block: "nearest", behavior: "auto" });
+        });
+      });
+    });
+  });
 })();
 
 /* WhatsApp button on phones: shows after the first screen, hides at Contact */

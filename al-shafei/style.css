@@ -202,3 +202,29 @@ body{background:var(--paper) repeating-linear-gradient(0deg,rgba(34,32,29,.022) 
 .guide{margin:-6px 0 16px;font-size:13px;color:var(--ink-2)}
 .tile .more{position:absolute;right:10px;top:10px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));pointer-events:none;line-height:0}
 [dir=rtl] .tile .more{position:absolute;right:10px;top:10px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));pointer-events:none;line-height:0}
+
+/* ---- home: one side-scroll strip per room (2026-11-14, replaces the room tabs) ---- */
+.work .wrap .label{margin-bottom:8px}
+.rows{display:grid;grid-template-columns:minmax(0,1fr);gap:46px;padding:22px 0 26px}
+.row{min-width:0;padding:0}
+.rh{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.rh h2{margin:0;font:400 clamp(28px,6.4vw,42px)/1.1 var(--display);letter-spacing:.005em}
+.rh .arr{display:none;gap:8px}
+@media (hover:hover) and (pointer:fine){.rh .arr{display:flex}}
+.sl{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:rgba(246,243,238,.6);color:var(--ink);font:300 18px/1 var(--text);cursor:pointer;transition:border-color .25s,opacity .25s}
+@media (hover:hover){.sl:hover{border-color:var(--ink)}}
+.sl:disabled{opacity:.3;cursor:default;border-color:var(--line)}
+.strip{--edge:max(var(--pad),calc((100% - 1240px) / 2 + 20px));display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;padding:0 var(--edge) 4px;scroll-padding:0 var(--edge)}
+.strip::-webkit-scrollbar{display:none}
+.strip .tile{flex:0 0 80%;max-width:420px;scroll-snap-align:start}
+.strip .tile:last-child{scroll-snap-align:end}
+@media (max-width:759px){.strip .tile .c{display:grid;gap:2px;padding-top:9px}}
+@media (min-width:760px){.strip{gap:18px}.strip .tile{flex-basis:clamp(240px,27vw,320px)}}
+/* home viewer: the project's name over the photos */
+#viewer .vc{display:flex;align-items:baseline;gap:10px;min-width:0;overflow:hidden;white-space:nowrap}
+#viewer .vc b{font:400 21px/1.2 var(--display);letter-spacing:0;overflow:hidden;text-overflow:ellipsis}
+#viewer .vc small{font:400 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.65}
+#viewer .count{direction:ltr;unicode-bidi:isolate}
+#viewer.home .count{margin-inline-start:auto;font-family:var(--mono);opacity:.8}
+[dir=rtl] #viewer .prev{left:auto;right:16px}[dir=rtl] #viewer .nxt{right:auto;left:16px}
+[dir=rtl] #viewer .x{margin-right:0;margin-left:-10px}
