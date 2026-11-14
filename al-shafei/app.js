@@ -25,6 +25,7 @@
       if (i === curTab && !user) return;
       curTab = i;
       var t = tabs[i].getAttribute("data-t");
+      grid.setAttribute("data-on", t);
       tabs.forEach(function (b, k) { b.setAttribute("aria-selected", k === i ? "true" : "false"); });
       tabs[i].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
       grid.classList.add("fade");

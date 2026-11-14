@@ -249,3 +249,6 @@ body{background:var(--paper) repeating-linear-gradient(0deg,rgba(34,32,29,.022) 
 .top .mark::after{grid-column:1/-1;justify-self:center;content:"Design & Craft";font:400 8.5px/1 "Jost",sans-serif;letter-spacing:.42em;margin-right:-.42em;text-transform:uppercase;color:var(--copper)}
 html[lang=ar] .top .mark::after{direction:ltr}
 @media (max-width:420px){.top .mark{column-gap:9px;row-gap:4px}.top .mark::after{font-size:7.5px;letter-spacing:.36em;margin-right:-.36em}}
+
+/* no kind line in one-room tabs */
+.allgrid[data-on=kitchens] .tile small,.allgrid[data-on=tv] .tile small,.allgrid[data-on=offices] .tile small{display:none}
