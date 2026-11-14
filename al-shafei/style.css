@@ -200,5 +200,5 @@ body{background:var(--paper) repeating-linear-gradient(0deg,rgba(34,32,29,.022) 
 
 /* guide: every project opens to more photos */
 .guide{margin:-6px 0 16px;font-size:13px;color:var(--ink-2)}
-.tile .more{position:absolute;right:8px;bottom:8px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(246,243,238,.92);color:var(--ink);pointer-events:none}
-[dir=rtl] .tile .more{right:auto;left:8px}
+.tile .more{position:absolute;right:10px;top:10px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));pointer-events:none;line-height:0}
+[dir=rtl] .tile .more{position:absolute;right:10px;top:10px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));pointer-events:none;line-height:0}
