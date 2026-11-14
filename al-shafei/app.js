@@ -31,12 +31,16 @@
       setTimeout(function () {
         tiles.forEach(function (el) { el.hidden = !(t === "all" || (t === "best" ? el.hasAttribute("data-best") : (" " + el.getAttribute("data-tab") + " ").indexOf(" " + t + " ") >= 0)); });
         grid.classList.remove("fade");
+        // (2026-11-14) a tapped tab always brings back the room's first project, just under the sticky tabs
+        if (user) {
+          // the sticky tabs' own reported spot can lag right after the page shrinks: use where they stick + their height
+          var gap = grid.getBoundingClientRect().top - ((parseFloat(getComputedStyle(tabBox).top) || 0) + tabBox.offsetHeight);
+          if (gap < 10) window.scrollTo({ top: Math.max(0, window.scrollY + gap - 18), behavior: "smooth" });
+        }
       }, 160);
       try { sessionStorage.setItem("alshafei-tab", t); } catch (er) {}
       // each room has its own link (…/al-shafei/#dressings): the address bar follows the tab, ready to copy
       if (user && history.replaceState) try { history.replaceState(null, "", t === "all" ? "#projects" : "#" + t); } catch (er) {}
-      var r = tabBox.getBoundingClientRect(), work = document.getElementById("projects");
-      if (user && r.top < (top ? top.offsetHeight : 60) - 1) window.scrollTo({ top: work.offsetTop + 30, behavior: "smooth" });
     };
     tabs.forEach(function (b, k) { b.addEventListener("click", function () { setTab(k, true); }); });
     var fromLink = function () {  // a link ending in #kitchens, #dressings, ... opens that tab
