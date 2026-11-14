@@ -247,5 +247,5 @@ body{background:var(--paper) repeating-linear-gradient(0deg,rgba(34,32,29,.022) 
 /* tagline */
 .top .mark{display:grid;grid-template-columns:auto auto auto;align-items:center;align-content:center;column-gap:12px;row-gap:5px}
 .top .mark::after{grid-column:1/-1;justify-self:center;content:"Design & Craft";font:400 8.5px/1 "Jost",sans-serif;letter-spacing:.42em;margin-right:-.42em;text-transform:uppercase;color:var(--copper)}
-html[lang=ar] .top .mark::after{content:"تصميم وتنفيذ";font:400 10.5px/1.1 "IBM Plex Sans Arabic","Jost",sans-serif;letter-spacing:.06em;margin:0}
-@media (max-width:420px){.top .mark{column-gap:9px;row-gap:4px}.top .mark::after{font-size:7.5px;letter-spacing:.36em;margin-right:-.36em}html[lang=ar] .top .mark::after{font-size:9.5px;margin:0}}
+html[lang=ar] .top .mark::after{direction:ltr}
+@media (max-width:420px){.top .mark{column-gap:9px;row-gap:4px}.top .mark::after{font-size:7.5px;letter-spacing:.36em;margin-right:-.36em}}
