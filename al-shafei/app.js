@@ -416,3 +416,16 @@
     addEventListener("scroll", upd, { passive: true }); upd();
   }
 })();
+
+/* nosave: block right-click, long-press menu, drag and Ctrl+S on photos */
+(function () {
+  function media(t) { return t && t.closest && t.closest("img,video,picture,.car,.photos,#viewer,.pic"); }
+  document.addEventListener("contextmenu", function (e) { if (media(e.target)) e.preventDefault(); }, true);
+  document.addEventListener("dragstart", function (e) { if (media(e.target)) e.preventDefault(); }, true);
+  document.addEventListener("keydown", function (e) { if ((e.ctrlKey || e.metaKey) && (e.key == "s" || e.key == "S")) e.preventDefault(); });
+  function fix() {
+    document.querySelectorAll("img").forEach(function (i) { i.draggable = false; });
+    document.querySelectorAll("video").forEach(function (v) { v.setAttribute("controlsList", "nodownload"); v.disablePictureInPicture = true; });
+  }
+  fix(); new MutationObserver(fix).observe(document.documentElement, { childList: true, subtree: true });
+})();

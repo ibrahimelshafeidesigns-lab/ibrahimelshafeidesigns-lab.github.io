@@ -257,3 +257,7 @@ html[lang=ar] .top .mark::after{direction:ltr}
 .photos button::after{content:"AL SHAFEI";display:block;padding:7px 0 2px;background:var(--paper,#f6f3ee);font:300 9px/1 Jost,"Segoe UI",sans-serif;letter-spacing:.34em;color:var(--muted,#8a847a);text-align:center;direction:ltr}
 #viewer::after{content:"AL SHAFEI";flex:0 0 auto;padding:4px 0 calc(10px + env(safe-area-inset-bottom,0px));font:300 10px/1 Jost,"Segoe UI",sans-serif;letter-spacing:.38em;color:#f3eee6;opacity:.55;text-align:center;direction:ltr}
 #viewer .slide{padding-bottom:4px}
+
+/* nosave: no long-press save / drag on photos */
+img,video,.photos,.car,#viewer{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none}
+img{pointer-events:auto}
