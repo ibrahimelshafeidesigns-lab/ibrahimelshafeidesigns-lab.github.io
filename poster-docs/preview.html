@@ -331,7 +331,7 @@ section,footer{overflow-x:clip}
 @media (max-width:600px){.slam{font-size:14vw;letter-spacing:.04em}.rv.fromL{transform:perspective(1000px) translateX(-40px) rotateY(30deg)}.rv.fromR{transform:perspective(1000px) translateX(40px) rotateY(-30deg)}}
 .cine{perspective:1400px}
 /* letterbox intro */
-#intro{position:fixed;inset:0;z-index:200;background:#07090B;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;cursor:pointer}
+#intro{position:fixed;inset:0;z-index:200;background:#07090B;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
 #intro .lb-t,#intro .lb-b{position:absolute;left:0;right:0;height:12vh;background:#000;z-index:3;transition:transform 1s cubic-bezier(.7,0,.2,1)}
 #intro .lb-t{top:0}#intro .lb-b{bottom:0}
 #intro.out .lb-t{transform:translateY(-100%)}#intro.out .lb-b{transform:translateY(100%)}
@@ -417,10 +417,8 @@ section,footer{overflow-x:clip}
   <div class="lb-t"></div><div class="lb-b"></div><div class="flash" id="flash"></div>
   <p class="presents" id="pres">Riva Ceramics Studio &nbsp;·&nbsp; a design story</p>
   <div class="slam" id="slam">HERONA<span class="sweep"></span></div>
-  <span class="skip">TAP TO SKIP</span>
 </div>
 <div id="speed"></div>
-<img id="fly" src="img/06-cutout.webp" alt="">
 <div class="prog" id="prog"></div>
 <header class="bar"><span class="brand">HERONA <span>Preview</span></span><span style="margin-inline-start:auto;font-size:13px;color:var(--muted-on-dark)">نسخة مختصرة</span></header>
 
@@ -511,7 +509,6 @@ function endIntro(){ if(done)return; done=true; intro.classList.add('out'); docu
 if(reduce){ intro.classList.add('gone'); w.forEach(function(el){el.classList.add('in')}); t.classList.add('go'); }
 else {
   document.body.style.overflow='hidden';
-  intro.addEventListener('click',endIntro);
   setTimeout(function(){$('#pres').classList.add('on')},250);
   setTimeout(function(){$('#slam').classList.add('on'); setTimeout(function(){$('#flash').classList.add('on'); intro.classList.add('shake')},480)},2050);
   setTimeout(endIntro,4300);
@@ -525,7 +522,7 @@ addEventListener('pointermove',function(e){mx=(e.clientX/W-.5);my=(e.clientY/H-.
 var sp=$('#speed'); for(var i=0;i<18;i++){var l=document.createElement('i');l.style.top=(Math.random()*100)+'%';l.style.left=(-20+Math.random()*60)+'%';l.style.width=(20+Math.random()*50)+'%';l.style.transform='rotate(-18deg)';sp.appendChild(l)}
 
 /* ===== flying vase path ===== */
-var fly=$('#fly'), prod=$('#prod'), edit=$('#edit'), fin=$('#finale'), kin=$$('#kin span'), soon=$('#soon');
+var prod=$('#prod'), edit=$('#edit'), fin=$('#finale'), kin=$$('#kin span'), soon=$('#soon');
 var lastY=scrollY, vel=0, prog=$('#prog');
 
 function frame(){
@@ -540,19 +537,6 @@ function frame(){
     // speed lines on fast scroll
     sp.style.opacity=Math.min(.9,Math.max(0,(Math.abs(vel)-6)/30));
     sp.style.transform='translateY('+(-vel*2)+'px) skewY('+(vel>0?-4:4)+'deg)';
-    // flying vase: swings across the screen between hero and finale
-    var a=prod.offsetTop-H*.6, b=fin.offsetTop;
-    var p=(y-a)/(b-a);
-    if(p>0&&p<1){
-      fly.classList.add('on');
-      var sw=Math.sin(p*Math.PI*3);          // swing left/right like a pendulum
-      var x=W*.5+sw*W*.42-fly.offsetWidth/2;
-      var yy=H*.18+Math.abs(Math.cos(p*Math.PI*3))*H*.25;
-      var rot=sw*-28+p*360;                   // full turn over the journey
-      var sc=.55+.25*Math.sin(p*Math.PI);
-      fly.style.transform='translate3d('+x+'px,'+yy+'px,0) rotate('+rot+'deg) scale('+sc+')';
-      fly.style.opacity=Math.min(1,Math.min(p,1-p)*8)*.85;
-    } else { fly.classList.remove('on'); fly.style.opacity=0; }
     // before/after: tilt toward the viewer as it enters
     var be=$('#ba').getBoundingClientRect(), q=Math.max(-1,Math.min(1,(be.top+be.height/2-H/2)/H));
     $('#ba').style.transform='perspective(1200px) rotateX('+(q*18)+'deg) rotateY('+(mx*6)+'deg)';
