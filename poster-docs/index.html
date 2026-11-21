@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>توثيق مراحل العمل — Digital Product Poster</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F2430">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400..800&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#F5F1E8;--paper2:#EAE3D4;--card:#FBF8F2;--ink:#1F2430;--soft:#4A4F5C;
+  --accent:#B5482A;--teal:#2E6B6E;--line:#9A8F7A;--muted:#6B6455;
+  --pad:clamp(20px,4vw,72px);
+}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--ink);}
+body{font-family:'Tajawal',Tahoma,sans-serif;color:var(--ink);-webkit-text-size-adjust:100%;}
+h1,h2,h3{font-family:'Cairo',Tahoma,sans-serif;line-height:1.25}
+h1{font-size:clamp(40px,7vw,96px);font-weight:800}
+h2{font-size:clamp(26px,3.6vw,48px);font-weight:700}
+h3{font-size:clamp(19px,1.9vw,26px);font-weight:700}
+p,td,th{font-size:clamp(15px,1.45vw,20px);line-height:1.6}
+
+/* ---------- top bar ---------- */
+.bar{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;gap:10px;
+  padding:10px var(--pad);padding-top:max(10px,env(safe-area-inset-top));
+  background:rgba(31,36,48,.94);backdrop-filter:blur(8px);color:var(--paper)}
+.bar .title{font-family:'Cairo',sans-serif;font-weight:700;font-size:15px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar button,.bar select{font:inherit;font-size:14px;color:var(--paper);background:#2E3442;border:1px solid #454C5C;border-radius:999px;padding:7px 14px;cursor:pointer}
+.bar button.on{background:var(--accent);border-color:var(--accent)}
+.bar select{max-width:42vw}
+.progress{position:fixed;top:0;right:0;height:3px;background:var(--accent);z-index:21;transition:width .3s}
+
+/* ---------- slides (phone = stacked) ---------- */
+.deck{padding-top:64px}
+.slide{background:var(--paper);padding:var(--pad);display:flex;flex-direction:column;gap:clamp(16px,2.2vw,32px);
+  border-bottom:6px solid var(--ink);scroll-margin-top:60px}
+.slide.alt{background:var(--paper2)}
+.slide.dark{background:var(--ink);color:var(--paper)}
+.slide.statement{background:var(--teal);color:var(--paper);justify-content:center}
+.num-tag{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.dark .num-tag,.statement .num-tag{color:#9EA3AE}
+.eyebrow{font-weight:700;color:var(--accent);font-size:clamp(14px,1.3vw,18px)}
+.dark .eyebrow,.statement .eyebrow{color:#F0B49E}
+.en{color:var(--soft);font-size:clamp(14px,1.3vw,18px)}
+.dark .en,.statement .en{color:#C9CCD4}
+.head{display:flex;flex-direction:column;gap:6px}
+.row{display:flex;flex-direction:column;gap:clamp(16px,2.4vw,36px)}
+.col{display:flex;flex-direction:column;gap:12px;flex:1;min-width:0}
+.note{color:var(--soft);font-size:clamp(14px,1.3vw,18px)}
+
+/* screenshot / image slot */
+.ph{position:relative;border:3px dashed var(--line);border-radius:14px;background:var(--card);
+  min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  padding:18px;text-align:center;cursor:pointer;overflow:hidden;flex:1}
+.ph:hover{border-color:var(--accent)}
+.ph .phlabel{font-weight:700;color:var(--muted)}
+.ph .phhint{font-size:14px;color:var(--muted)}
+.ph .plus{font-size:28px;line-height:1;color:var(--accent);font-weight:700}
+.ph.has{border-style:solid;border-color:#D8CFBE;padding:0;background:#fff;cursor:zoom-in}
+.ph.has>*:not(img):not(.x){display:none}
+.ph img{width:100%;height:100%;object-fit:contain;display:block;max-height:70vh}
+.ph .x{position:absolute;top:8px;left:8px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(31,36,48,.85);color:#fff;font-size:18px;cursor:pointer;display:none}
+.ph.has .x{display:block}
+.dark .ph{background:#2A303D;border-color:#6B7280}
+.dark .ph .phlabel,.dark .ph .phhint{color:#C9CCD4}
+
+.cap{background:var(--paper2);border-right:6px solid var(--accent);border-radius:8px;padding:12px 18px;display:flex;flex-direction:column;gap:2px}
+.alt .cap{background:var(--paper)}
+.badge{align-self:flex-start;font-weight:700;color:var(--paper);background:var(--accent);border-radius:999px;padding:4px 16px;font-size:clamp(14px,1.3vw,18px)}
+.badge.grey{background:var(--soft)}.badge.teal{background:var(--teal)}
+
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
+table{width:100%;border-collapse:collapse;background:var(--card);min-width:520px}
+.alt table{background:var(--paper)}
+th{background:var(--ink);color:var(--paper);font-weight:700;text-align:right;padding:10px 14px;white-space:nowrap}
+td{padding:10px 14px;border-top:1px solid #E0D8C8;vertical-align:top}
+table.narrow{min-width:0}
+
+.cards{display:grid;grid-template-columns:1fr;gap:12px}
+.card{background:var(--card);border-radius:12px;padding:14px 18px;display:flex;gap:14px;align-items:center}
+.alt .card{background:var(--paper)}
+.card .n{font-family:'Cairo',sans-serif;font-weight:800;font-size:30px;color:var(--accent);line-height:1}
+.swatches{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sw{display:flex;flex-direction:column;gap:6px}
+.sw .chip{height:90px;border-radius:12px;position:relative;overflow:hidden;border:1px solid #0001}
+.sw input[type=color]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:18px 32px}
+.meta .k{font-size:14px;color:#C9CCD4}.meta .v{font-weight:700}
+.accent-bar{width:110px;height:10px;background:var(--accent);border-radius:5px}
+.big{font-size:clamp(20px,2.4vw,34px)!important;line-height:1.45}
+
+/* editing */
+body.editing [data-e]{outline:2px dashed rgba(181,72,42,.55);outline-offset:3px;border-radius:4px;cursor:text}
+body.editing [data-e]:focus{outline:2px solid var(--accent);background:rgba(255,255,255,.35)}
+.dark [data-e]:focus,.statement [data-e]:focus{background:rgba(255,255,255,.08)!important}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-size:14px;z-index:30;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.show{opacity:1}
+
+/* nav arrows (laptop) */
+.nav{display:none}
+.lightbox{position:fixed;inset:0;background:rgba(15,18,25,.92);z-index:40;display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.lightbox.show{display:flex}
+
+/* ---------- laptop = one slide at a time ---------- */
+@media (min-width:900px) and (min-height:560px){
+  .deck{padding-top:0;height:100vh;overflow:hidden}
+  .slide{position:absolute;inset:0;padding:calc(72px + 2vh) var(--pad) calc(72px + 2vh);border:0;
+    opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;overflow-y:auto}
+  .slide.active{opacity:1;visibility:visible}
+  .row{flex-direction:row;flex:1;min-height:0}
+  .ph{min-height:0}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .card{flex-direction:column;align-items:flex-start}
+  .swatches{grid-template-columns:repeat(4,1fr)}
+  .sw .chip{height:clamp(110px,18vh,200px)}
+  .meta{grid-template-columns:repeat(4,auto);justify-content:start}
+  table{min-width:0}
+  .nav{display:flex;position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:20;gap:10px;align-items:center;
+    background:rgba(31,36,48,.9);color:var(--paper);border-radius:999px;padding:6px 8px}
+  .nav button{width:42px;height:42px;border-radius:50%;border:0;background:#2E3442;color:var(--paper);font-size:20px;cursor:pointer}
+  .nav button:hover{background:var(--accent)}
+  .nav .count{font-size:14px;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  .fixed-left{flex:0 0 40%!important}
+}
+
+/* ---------- print / Save as PDF ---------- */
+@media print{
+  @page{size:A4 landscape;margin:0}
+  html,body{background:#fff}
+  .bar,.nav,.progress,.toast,.ph .x,.lightbox{display:none!important}
+  .deck{padding:0;height:auto;overflow:visible}
+  .slide{position:relative!important;opacity:1!important;visibility:visible!important;inset:auto;
+    width:297mm;height:210mm;padding:14mm 16mm;border:0;page-break-after:always;break-after:page;overflow:hidden;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .row{flex-direction:row;flex:1;min-height:0}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .swatches{grid-template-columns:repeat(4,1fr)}
+  .meta{grid-template-columns:repeat(4,auto)}
+  .ph{min-height:0}.ph img{max-height:none}
+  table{min-width:0}
+  h1{font-size:60px}h2{font-size:30px}h3{font-size:17px}p,td,th{font-size:12.5px}
+  .eyebrow,.en,.note,.badge{font-size:12px}
+  [data-e]{outline:none!important}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="bar">
+  <span class="title">توثيق مراحل العمل — Digital Product Poster</span>
+  <select id="jump" aria-label="اذهب إلى شريحة"></select>
+  <button id="editBtn" title="تعديل النصوص">✏️ تعديل</button>
+  <button id="pdfBtn" title="حفظ كـ PDF">⬇︎ PDF</button>
+</header>
+
+<main class="deck" id="deck">
+
+<!-- 1 COVER -->
+<section class="slide dark" data-title="الغلاف" style="justify-content:space-between">
+  <div class="head">
+    <p class="eyebrow" data-e>مشروع تطبيقي — مبادئ الحاسب الآلي</p>
+    <p class="en" data-e>Digital Product Presentation Poster — Design Process Documentation</p>
+  </div>
+  <div class="head" style="gap:16px">
+    <div class="accent-bar"></div>
+    <h1 data-e>[اسم المنتج]</h1>
+    <p class="big" style="color:#C9CCD4" data-e>توثيق مراحل العمل: من الصورة الأصلية إلى اللوحة النهائية</p>
+  </div>
+  <div class="meta">
+    <div><p class="k">المجموعة</p><p class="v" data-e>[اسم المجموعة]</p></div>
+    <div><p class="k">أستاذ المقرر</p><p class="v" data-e>د. مروة عبدالرحمن</p></div>
+    <div><p class="k">الفرقة</p><p class="v" data-e>الإعدادية — كلية الفنون التطبيقية</p></div>
+    <div><p class="k">البرنامج المستخدم</p><p class="v" data-e>[Photopea / Canva]</p></div>
+  </div>
+</section>
+
+<!-- 2 TEAM -->
+<section class="slide" data-title="الفريق">
+  <div class="head"><p class="eyebrow">الفريق — Team Contribution Record</p><h2 data-e>مين عمل إيه</h2></div>
+  <div class="tw"><table>
+    <tr><th>الدور</th><th>الاسم</th><th>الفترة</th><th>اللي نفّذه فعلاً</th></tr>
+    <tr><td>قائد المجموعة — Team Leader</td><td data-e>[الاسم]</td><td data-e>[صباحي]</td><td data-e>[تنظيم المواعيد، توزيع المهام، مراجعة الاكتمال]</td></tr>
+    <tr><td>مسؤول الصور — Image Editor</td><td data-e>[الاسم]</td><td data-e>[مسائي]</td><td data-e>[اختيار الصور، القص، الإضاءة، إزالة الخلفية]</td></tr>
+    <tr><td>مسؤول التكوين — Composition</td><td data-e>[الاسم]</td><td data-e>[صباحي]</td><td data-e>[المسودتين، توزيع العناصر، الاتزان]</td></tr>
+    <tr><td>النصوص والألوان — Type &amp; Color</td><td data-e>[الاسم]</td><td data-e>[مسائي]</td><td data-e>[لوحة الألوان، الخطوط، كتابة النصوص]</td></tr>
+    <tr><td>التوثيق والإخراج — Documentation</td><td data-e>[الاسم]</td><td data-e>[صباحي]</td><td data-e>[السكرين شوت، التعليقات، التصدير]</td></tr>
+  </table></div>
+  <p class="note">المجموعة ممكن تجمع صباحي ومسائي — المهم كل واحد دوره مكتوب.</p>
+</section>
+
+<!-- 3 PRODUCT -->
+<section class="slide alt" data-title="المنتج">
+  <div class="head"><p class="eyebrow">المرحلة الأولى — Product Selection &amp; Research</p><h2 data-e>المنتج اللي اخترناه</h2></div>
+  <div class="row">
+    <div class="ph fixed-left"><span class="plus">+</span><p class="phlabel">صورة المنتج المرجعية</p><p class="phhint">اضغط لإضافة صورة</p></div>
+    <div class="col" style="gap:16px">
+      <div class="cap">
+        <p data-e><b>الاسم:</b> [اسم المنتج]</p>
+        <p data-e><b>الوظيفة:</b> [بيستخدم في إيه]</p>
+        <p data-e><b>الفئة المستخدمة:</b> [مين بيستخدمه]</p>
+        <p data-e><b>سبب الاختيار:</b> [شكل مميز، صورته واضحة، سهل نصوره]</p>
+      </div>
+      <div class="cards">
+        <div class="card"><span class="n">1</span><p data-e>[الميزة الأولى]</p></div>
+        <div class="card"><span class="n">2</span><p data-e>[الميزة الثانية]</p></div>
+        <div class="card"><span class="n">3</span><p data-e>[الميزة الثالثة]</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 SOURCES -->
+<section class="slide" data-title="مصادر الصور">
+  <div class="head"><p class="eyebrow">مصادر الصور — Image Sources</p><h2 data-e>كل صورة جت منين، وخدنا منها إيه</h2></div>
+  <div class="tw"><table>
+    <tr><th>#</th><th>الصورة</th><th>هناخد منها إيه</th><th>المصدر (اللينك أو الموقع)</th></tr>
+    <tr><td>1</td><td data-e>[صورة المنتج]</td><td data-e>المنتج نفسه</td><td data-e>[pinterest.com/pin/… أو تصوير المجموعة]</td></tr>
+    <tr><td>2</td><td data-e>[صورة الخلفية]</td><td data-e>الخلفية</td><td data-e>[الموقع / اللينك]</td></tr>
+    <tr><td>3</td><td data-e>[صورة عنصر]</td><td data-e>[عنصر زخرفي / ملمس]</td><td data-e>[الموقع / اللينك]</td></tr>
+    <tr><td>4</td><td data-e>[عناصر جرافيك]</td><td data-e>[أشكال / خطوط / أيقونات]</td><td data-e>[Canva Elements / …]</td></tr>
+  </table></div>
+  <p class="note" data-e>لو صورنا المنتج بنفسنا: نكتب «تصوير المجموعة — موبايل [النوع]».</p>
+</section>
+
+<!-- 5 ANALYSIS -->
+<section class="slide alt" data-title="دراسة الصورة">
+  <div class="head"><p class="eyebrow">المرحلة الثانية — Digital Image Analysis</p><h2 data-e>خصائص الصورة الأصلية</h2></div>
+  <div class="row">
+    <div class="ph fixed-left"><span class="plus">+</span><p class="phlabel">سكرين شوت لخصائص الصورة</p><p class="phhint">Image › Image Size أو Properties</p></div>
+    <div class="col"><div class="tw"><table class="narrow">
+      <tr><th>الخاصية</th><th>البيانات</th></tr>
+      <tr><td>اسم الصورة</td><td data-e>[product-original.jpg]</td></tr>
+      <tr><td>الصيغة — Format</td><td data-e>[JPG / PNG]</td></tr>
+      <tr><td>العرض — Width</td><td data-e>[____ px]</td></tr>
+      <tr><td>الارتفاع — Height</td><td data-e>[____ px]</td></tr>
+      <tr><td>الدقة — Resolution</td><td data-e>[72 / 300 dpi]</td></tr>
+      <tr><td>مناسبة للرقمي؟</td><td data-e>[نعم — لأن …]</td></tr>
+      <tr><td>محتاجة إيه</td><td data-e>[قص الأطراف، تفتيح، إزالة خلفية]</td></tr>
+      <tr><td>صيغة التصدير</td><td data-e>[PNG للشفافية / JPG]</td></tr>
+    </table></div></div>
+  </div>
+</section>
+
+<!-- 6 STEPS A -->
+<section class="slide" data-title="خطوات 1–2: القص">
+  <div class="head"><p class="eyebrow" data-e>المرحلة الثالثة — Basic Image Editing · البرنامج: [Photopea]</p><h2 data-e>القص — Cropping</h2></div>
+  <div class="row">
+    <div class="col"><p class="badge">خطوة 1</p>
+      <div class="ph"><span class="plus">+</span><p class="phlabel">سكرين شوت: أداة القص شغالة</p><p class="phhint">إطار القص ظاهر قبل التنفيذ</p></div>
+      <div class="cap"><p data-e><b>الأداة:</b> Crop Tool (C)</p><p data-e><b>اللي عملناه:</b> [حددنا المنتج وشلنا المساحة الفاضية يمين وشمال]</p></div>
+    </div>
+    <div class="col"><p class="badge">خطوة 2</p>
+      <div class="ph"><span class="plus">+</span><p class="phlabel">سكرين شوت: بعد القص + Resize</p><p class="phhint">نافذة Image Size مفتوحة</p></div>
+      <div class="cap"><p data-e><b>الأداة:</b> Image › Image Size</p><p data-e><b>القيم:</b> [من 4000×3000 إلى 2000×1500 px — Constrain Proportions شغال]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 STEPS B -->
+<section class="slide alt" data-title="خطوات 3–4: الخلفية">
+  <div class="head"><p class="eyebrow" data-e>المرحلة الثالثة — Basic Image Editing · البرنامج: [Photopea]</p><h2 data-e>معالجة الخلفية — Background Removal</h2></div>
+  <div class="row">
+    <div class="col"><p class="badge">خطوة 3</p>
+      <div class="ph"><span class="plus">+</span><p class="phlabel">سكرين شوت: السيلكشن ظاهر حوالين المنتج</p><p class="phhint">قبل ما نشيل الخلفية</p></div>
+      <div class="cap"><p data-e><b>الأداة:</b> [Magic Wand / Quick Selection / Select Subject]</p><p data-e><b>اللي عملناه:</b> [حددنا المنتج وعدّلنا الحواف بـ Refine Edge]</p></div>
+    </div>
+    <div class="col"><p class="badge">خطوة 4</p>
+      <div class="ph"><span class="plus">+</span><p class="phlabel">سكرين شوت: المنتج على الخلفية الجديدة</p><p class="phhint">لوحة Layers ظاهرة</p></div>
+      <div class="cap"><p data-e><b>الأداة:</b> [Delete / Layer Mask + سحب لصورة الخلفية]</p><p data-e><b>اللي عملناه:</b> [شلنا الخلفية وحطينا المنتج على الخلفية من صورة 2]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 STEPS C -->
+<section class="slide" data-title="خطوات 5–6: الإضاءة والألوان">
+  <div class="head"><p class="eyebrow" data-e>المرحلة الثالثة — Basic Image Editing · البرنامج: [Photopea]</p><h2 data-e>الإضاءة والألوان — Brightness, Contrast &amp; Saturation</h2></div>
+  <div class="row">
+    <div class="col"><p class="badge">خطوة 5</p>
+      <div class="ph"><span class="plus">+</span><p class="phlabel">سكرين شوت: نافذة Brightness/Contrast</p><p class="phhint">والقيم ظاهرة على الشاشة</p></div>
+      <div class="cap"><p data-e><b>الأداة:</b> Image › Adjustments › Brightness/Contrast</p><p data-e><b>القيم:</b> [Brightness +15 · Contrast +10 — عشان تفاصيل المنتج تبان]</p></div>
+    </div>
+    <div class="col"><p class="badge">خطوة 6</p>
+      <div class="ph"><span class="plus">+</span><p class="phlabel">سكرين شوت: نافذة Hue/Saturation</p><p class="phhint">والقيم ظاهرة على الشاشة</p></div>
+      <div class="cap"><p data-e><b>الأداة:</b> Image › Adjustments › Hue/Saturation</p><p data-e><b>القيم:</b> [Saturation +8 — من غير ما نغيّر لون المنتج الحقيقي]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 BEFORE AFTER -->
+<section class="slide alt" data-title="قبل وبعد">
+  <div class="head"><p class="eyebrow">نتيجة التحرير — Before &amp; After</p><h2 data-e>قبل وبعد</h2></div>
+  <div class="row">
+    <div class="col"><p class="badge grey">قبل — الأصلية</p><div class="ph"><span class="plus">+</span><p class="phlabel">الصورة الأصلية بدون تعديل</p></div></div>
+    <div class="col"><p class="badge">بعد — النهائية</p><div class="ph"><span class="plus">+</span><p class="phlabel">الصورة بعد المعالجة</p></div></div>
+  </div>
+  <div class="cap"><p data-e><b>ملخص التعديلات:</b> [قص → Resize → إزالة الخلفية → خلفية جديدة → Brightness/Contrast → Saturation]</p></div>
+</section>
+
+<!-- 10 SKETCHES -->
+<section class="slide" data-title="مسودات التكوين">
+  <div class="head"><p class="eyebrow">المرحلة الرابعة — Digital Composition</p><h2 data-e>مسودتين للتكوين، واخترنا واحدة</h2></div>
+  <div class="row">
+    <div class="col"><p class="badge grey" data-e>مسودة A — [متماثل]</p><div class="ph"><span class="plus">+</span><p class="phlabel">Layout Sketch A</p><p class="phhint">رسم باليد أو على البرنامج</p></div></div>
+    <div class="col"><p class="badge teal" data-e>مسودة B — [غير متماثل] — المعتمدة</p><div class="ph"><span class="plus">+</span><p class="phlabel">Layout Sketch B</p><p class="phhint">رسم باليد أو على البرنامج</p></div></div>
+  </div>
+  <div class="cap"><p data-e><b>ليه اخترنا B:</b> [المنتج أكبر عنصر فبيبان الأول، والنص على جنب فاتح مساحة فاضية، والتكوين متزن رغم إنه مش متماثل]</p></div>
+</section>
+
+<!-- 11 PALETTE -->
+<section class="slide alt" data-title="لوحة الألوان">
+  <div class="head"><p class="eyebrow">المرحلة الخامسة — Color Palette</p><h2 data-e>لوحة الألوان</h2><p class="note">اضغط على أي لون لتغييره.</p></div>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#7A5232"><input type="color" value="#7A5232" aria-label="اللون الأساسي"></div><h3>أساسي — Primary</h3><p class="note"><span class="hex">#7A5232</span> · <span data-e>[من لون المنتج نفسه]</span></p></div>
+    <div class="sw"><div class="chip" style="background:#E6D5BC"><input type="color" value="#E6D5BC" aria-label="اللون المساعد"></div><h3>مساعد — Secondary</h3><p class="note"><span class="hex">#E6D5BC</span> · <span data-e>[للخلفية]</span></p></div>
+    <div class="sw"><div class="chip" style="background:#C4532D"><input type="color" value="#C4532D" aria-label="لون الإبراز"></div><h3>إبراز — Accent</h3><p class="note"><span class="hex">#C4532D</span> · <span data-e>[للعنوان والأرقام]</span></p></div>
+    <div class="sw"><div class="chip" style="background:#2B2B2B"><input type="color" value="#2B2B2B" aria-label="اللون المحايد"></div><h3>محايد — Neutral</h3><p class="note"><span class="hex">#2B2B2B</span> · <span data-e>[للنصوص]</span></p></div>
+  </div>
+  <div class="cap"><p data-e><b>ليه الألوان دي:</b> [مأخوذة من المنتج بأداة Eyedropper، ومتوافقة مع شخصيته، والنص الغامق على الخلفية الفاتحة مقروء]</p></div>
+</section>
+
+<!-- 12 TYPE -->
+<section class="slide" data-title="الخطوط">
+  <div class="head"><p class="eyebrow">المرحلة الخامسة — Typography</p><h2 data-e>الخطوط والأحجام</h2></div>
+  <div class="tw"><table>
+    <tr><th>العنصر</th><th>الخط</th><th>الحجم</th><th>ليه</th></tr>
+    <tr><td>العنوان الرئيسي</td><td data-e>[Cairo Bold]</td><td data-e>[120 pt]</td><td data-e>[أكبر حاجة بعد الصورة — أول ما تتقري]</td></tr>
+    <tr><td>العنوان الفرعي</td><td data-e>[Cairo Medium]</td><td data-e>[48 pt]</td><td data-e>[بيشرح المنتج في سطر]</td></tr>
+    <tr><td>الوصف</td><td data-e>[Tajawal Regular]</td><td data-e>[28 pt]</td><td data-e>[سهل القراءة، مختصر]</td></tr>
+    <tr><td>الخصائص التلاتة</td><td data-e>[Tajawal Bold]</td><td data-e>[32 pt]</td><td data-e>[واضحة ومنفصلة بأرقام أو أيقونات]</td></tr>
+  </table></div>
+  <p class="note">قاعدة: خطين بالكتير، والأهمية بتبان بالحجم والوزن — مش بخط جديد.</p>
+</section>
+
+<!-- 13 GRID -->
+<section class="slide alt" data-title="الشبكة والمحاذاة">
+  <div class="head"><p class="eyebrow">المرحلة الخامسة — Grid &amp; Alignment</p><h2 data-e>الشبكة والمحاذاة</h2></div>
+  <div class="row">
+    <div class="ph fixed-left"><span class="plus">+</span><p class="phlabel">سكرين شوت: التصميم والـ Guides ظاهرة</p><p class="phhint">View › Show Guides / Rulers</p></div>
+    <div class="col"><div class="tw"><table class="narrow">
+      <tr><th>الإعداد</th><th>القيمة</th></tr>
+      <tr><td>مقاس اللوحة</td><td data-e>[1080 × 1350 px]</td></tr>
+      <tr><td>الهوامش — Margins</td><td data-e>[80 px من كل ناحية]</td></tr>
+      <tr><td>الأعمدة — Columns</td><td data-e>[3 أعمدة، فاصل 40 px]</td></tr>
+      <tr><td>المسافة بين العناصر</td><td data-e>[40 px ثابتة]</td></tr>
+      <tr><td>محاذاة النصوص</td><td data-e>[يمين — على نفس الخط]</td></tr>
+      <tr><td>مكان الصورة</td><td data-e>[عمودين — فوق]</td></tr>
+    </table></div></div>
+  </div>
+</section>
+
+<!-- 14 FINAL -->
+<section class="slide dark" data-title="اللوحة النهائية">
+  <div class="head"><p class="eyebrow">المرحلة السادسة — Final Design &amp; Export</p><h2 data-e>اللوحة النهائية</h2></div>
+  <div class="row">
+    <div class="ph fixed-left"><span class="plus">+</span><p class="phlabel">Final Product Poster</p><p class="phhint">الصورة المصدّرة</p></div>
+    <div class="col" style="gap:20px;justify-content:center">
+      <div><p class="en">صيغة التصدير</p><p class="big" style="font-weight:700" data-e>[PNG]</p></div>
+      <div><p class="en">المقاس النهائي</p><p class="big" style="font-weight:700" data-e>[1080 × 1350 px]</p></div>
+      <div><p class="en">ملف التصميم القابل للتعديل</p><p class="big" style="font-weight:700" data-e>[Group-X_Poster.psd]</p></div>
+      <div><p class="en">ملف الصورة النهائية</p><p class="big" style="font-weight:700" data-e>[Group-X_Poster_Final.png]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 DECISIONS -->
+<section class="slide" data-title="قرارات التصميم">
+  <div class="head"><p class="eyebrow">ملخص قرارات التصميم — Design Decisions</p><h2 data-e>قررنا إيه، وليه</h2></div>
+  <div class="tw"><table>
+    <tr><th>القرار</th><th>اخترنا</th><th>السبب</th></tr>
+    <tr><td>التكوين</td><td data-e>[غير متماثل]</td><td data-e>[المنتج يبقى البطل والنص مايزحمهوش]</td></tr>
+    <tr><td>التسلسل الهرمي</td><td data-e>[الصورة ← الاسم ← الخصائص ← الوصف]</td><td data-e>[عين المشاهد تمشي بالترتيب ده]</td></tr>
+    <tr><td>الألوان</td><td data-e>[من لون المنتج]</td><td data-e>[شخصية المنتج + تباين مقروء]</td></tr>
+    <tr><td>الخطوط</td><td data-e>[خطين بس]</td><td data-e>[وضوح وبدون زحمة]</td></tr>
+    <tr><td>المساحة الفارغة</td><td data-e>[حوالين المنتج]</td><td data-e>[تريّح العين وتبرز المنتج]</td></tr>
+  </table></div>
+</section>
+
+<!-- 16 PROBLEM -->
+<section class="slide statement" data-title="المشكلة والحل">
+  <p class="eyebrow">أبرز مشكلة واجهتنا — والحل</p>
+  <div class="row" style="flex:0 0 auto">
+    <div class="col"><h3>المشكلة</h3><p class="big" data-e>[حواف المنتج طلعت مش نضيفة بعد إزالة الخلفية]</p></div>
+    <div class="col"><h3>الحل</h3><p class="big" data-e>[استخدمنا Refine Edge وصغّرنا الـ Feather لحد ما الحواف بقت طبيعية]</p></div>
+  </div>
+</section>
+
+<!-- 17 CHECKLIST -->
+<section class="slide alt" data-title="قائمة المراجعة">
+  <div class="head"><p class="eyebrow">قائمة المراجعة قبل التسليم — Review Checklist</p><h2 data-e>راجعنا اللوحة كلها</h2><p class="note">اضغط على أي بند لتعليمه.</p></div>
+  <div class="row" style="flex:0 0 auto">
+    <div class="col"><div class="tw"><table class="narrow check">
+      <tr><th>السؤال</th><th>تم؟</th></tr>
+      <tr><td>صورة المنتج واضحة؟</td><td class="tick">—</td></tr>
+      <tr><td>القص صحيح؟</td><td class="tick">—</td></tr>
+      <tr><td>الأبعاد متناسبة؟</td><td class="tick">—</td></tr>
+      <tr><td>الألوان طبيعية ومناسبة؟</td><td class="tick">—</td></tr>
+      <tr><td>اسم المنتج واضح؟</td><td class="tick">—</td></tr>
+    </table></div></div>
+    <div class="col"><div class="tw"><table class="narrow check">
+      <tr><th>السؤال</th><th>تم؟</th></tr>
+      <tr><td>المعلومات مرتبة؟</td><td class="tick">—</td></tr>
+      <tr><td>التكوين متزن؟</td><td class="tick">—</td></tr>
+      <tr><td>فيه مساحات فارغة كفاية؟</td><td class="tick">—</td></tr>
+      <tr><td>العناصر متناسقة؟</td><td class="tick">—</td></tr>
+      <tr><td>النصوص مقروءة؟</td><td class="tick">—</td></tr>
+    </table></div></div>
+  </div>
+  <div class="cap"><p><b>ملفات التسليم:</b> اللوحة النهائية · ملف التوثيق PDF · الملف القابل للتعديل · سجل المساهمات · العرض الشفهي</p></div>
+</section>
+
+<!-- 18 THANKS -->
+<section class="slide dark" data-title="شكراً" style="justify-content:center">
+  <div class="accent-bar"></div>
+  <h1 data-e>شكراً</h1>
+  <p class="big" style="color:#C9CCD4" data-e>[اسم المجموعة] — [اسم المنتج]</p>
+  <p class="en" data-e>أدوات مساعدة استُخدمت في المشروع: [Photopea · Canva · …]</p>
+</section>
+
+</main>
+
+<nav class="nav" aria-label="التنقل">
+  <button id="prev" aria-label="السابق">›</button>
+  <span class="count" id="count">1 / 18</span>
+  <button id="next" aria-label="التالي">‹</button>
+</nav>
+<input type="file" id="file" accept="image/*" hidden>
+<div class="lightbox" id="lb"><img alt=""></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var KEY='posterDocs:v1:';
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+  var desk=window.matchMedia('(min-width:900px) and (min-height:560px)');
+  var $=function(id){return document.getElementById(id)};
+  function store(k,v){try{ if(v===null) localStorage.removeItem(KEY+k); else localStorage.setItem(KEY+k,v); return true;}catch(e){toast('المساحة ممتلئة — الصورة متحفظتش');return false;}}
+  function load(k){try{return localStorage.getItem(KEY+k)}catch(e){return null}}
+  var tt;function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show')},2200)}
+
+  /* numbering + jump menu */
+  var jump=$('jump');
+  slides.forEach(function(s,i){
+    var tag=document.createElement('p');tag.className='num-tag';tag.textContent=(i+1)+' / '+N;s.insertBefore(tag,s.firstChild);
+    s.id='s'+(i+1);
+    var o=document.createElement('option');o.value=i;o.textContent=(i+1)+'. '+s.dataset.title;jump.appendChild(o);
+  });
+
+  function show(i){
+    cur=Math.max(0,Math.min(N-1,i));
+    slides.forEach(function(s,j){s.classList.toggle('active',j===cur)});
+    $('count').textContent=(cur+1)+' / '+N; jump.value=cur;
+    $('progress').style.width=((cur+1)/N*100)+'%';
+    if(history.replaceState) history.replaceState(null,'','#'+(cur+1));
+  }
+  function go(i){ if(desk.matches) show(i); else { cur=i; slides[i].scrollIntoView({behavior:'smooth'}); } }
+  $('next').onclick=function(){go(cur+1)}; $('prev').onclick=function(){go(cur-1)};
+  jump.onchange=function(){go(+jump.value)};
+  document.addEventListener('keydown',function(e){
+    if(document.body.classList.contains('editing')&&document.activeElement&&document.activeElement.isContentEditable) return;
+    if(!desk.matches) return;
+    if(['ArrowLeft','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1)}
+    if(['ArrowRight','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1)}
+    if(e.key==='Home')go(0); if(e.key==='End')go(N-1);
+  });
+  /* swipe on laptop touchscreens / tablets in slideshow mode (RTL: swipe right = next) */
+  var sx=null;document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',function(e){ if(sx===null||!desk.matches)return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>60) go(cur+(dx>0?1:-1)); sx=null; });
+  /* phone: track position while scrolling */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ if(desk.matches) return; es.forEach(function(en){ if(en.isIntersecting){ cur=slides.indexOf(en.target); jump.value=cur; $('progress').style.width=((cur+1)/N*100)+'%'; } }); },{rootMargin:'-45% 0px -50% 0px'});
+    slides.forEach(function(s){io.observe(s)});
+  }
+  var start=parseInt((location.hash||'').slice(1),10); start=isNaN(start)?0:start-1;
+  show(start); if(!desk.matches&&start>0) setTimeout(function(){slides[start].scrollIntoView()},300);
+  desk.addEventListener&&desk.addEventListener('change',function(){show(cur)});
+  window.addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1),10); if(!isNaN(n)&&n-1!==cur) go(n-1);});
+
+  /* editable text */
+  var eds=[].slice.call(document.querySelectorAll('[data-e]'));
+  eds.forEach(function(el,i){ var v=load('t'+i); if(v!==null) el.innerHTML=v;
+    el.addEventListener('input',function(){ store('t'+i, el.innerHTML); });
+    el.addEventListener('paste',function(e){ e.preventDefault(); var t=(e.clipboardData||window.clipboardData).getData('text'); document.execCommand('insertText',false,t); });
+  });
+  $('editBtn').onclick=function(){
+    var on=document.body.classList.toggle('editing'); this.classList.toggle('on',on);
+    eds.forEach(function(el){ el.contentEditable=on?'true':'false'; });
+    this.textContent=on?'✓ تم':'✏️ تعديل';
+    toast(on?'اضغط على أي نص وعدّله — بيتحفظ تلقائي على الجهاز ده':'اتحفظ');
+  };
+
+  /* image slots */
+  var phs=[].slice.call(document.querySelectorAll('.ph')), target=null;
+  function setImg(ph,src){
+    var img=ph.querySelector('img'); if(!img){img=document.createElement('img');img.alt='';ph.appendChild(img);}
+    img.src=src; ph.classList.add('has');
+    if(!ph.querySelector('.x')){var x=document.createElement('button');x.className='x';x.type='button';x.setAttribute('aria-label','حذف الصورة');x.textContent='×';
+      x.onclick=function(e){e.stopPropagation(); if(!confirm('تشيل الصورة دي؟'))return; store('i'+ph.dataset.i,null); img.remove(); x.remove(); ph.classList.remove('has');};
+      ph.appendChild(x);}
+  }
+  phs.forEach(function(ph,i){ ph.dataset.i=i; ph.setAttribute('role','button'); ph.tabIndex=0;
+    var v=load('i'+i); if(v) setImg(ph,v);
+    ph.addEventListener('click',function(){ if(ph.classList.contains('has')){ var lb=$('lb'); lb.querySelector('img').src=ph.querySelector('img').src; lb.classList.add('show'); return;} target=ph; $('file').value=''; $('file').click(); });
+  });
+  $('lb').onclick=function(){this.classList.remove('show')};
+  $('file').onchange=function(){
+    var f=this.files&&this.files[0]; if(!f||!target)return; var ph=target;
+    var r=new FileReader(); r.onload=function(){ var im=new Image(); im.onload=function(){
+      var m=1600, w=im.width, h=im.height, s=Math.min(1,m/Math.max(w,h));
+      var c=document.createElement('canvas'); c.width=Math.round(w*s); c.height=Math.round(h*s);
+      var g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,c.width,c.height); g.drawImage(im,0,0,c.width,c.height);
+      var d=c.toDataURL('image/jpeg',.82); setImg(ph,d); if(store('i'+ph.dataset.i,d)) toast('الصورة اتضافت');
+    }; im.src=r.result; }; r.readAsDataURL(f);
+  };
+
+  /* palette */
+  [].slice.call(document.querySelectorAll('.sw')).forEach(function(sw,i){
+    var inp=sw.querySelector('input'), chip=sw.querySelector('.chip'), hex=sw.querySelector('.hex');
+    var v=load('c'+i); if(v){inp.value=v;chip.style.background=v;hex.textContent=v.toUpperCase();}
+    inp.addEventListener('input',function(){chip.style.background=inp.value;hex.textContent=inp.value.toUpperCase();store('c'+i,inp.value);});
+  });
+
+  /* checklist */
+  [].slice.call(document.querySelectorAll('td.tick')).forEach(function(td,i){
+    function paint(v){td.textContent=v==='1'?'✓ نعم':'—'; td.style.color=v==='1'?'#2E6B6E':''; td.style.fontWeight=v==='1'?'700':'';}
+    paint(load('k'+i)); td.parentNode.style.cursor='pointer';
+    td.parentNode.addEventListener('click',function(){var v=load('k'+i)==='1'?null:'1';store('k'+i,v);paint(v);});
+  });
+
+  /* PDF */
+  $('pdfBtn').onclick=function(){ toast('اختار «Save as PDF» من نافذة الطباعة'); setTimeout(function(){window.print()},400); };
+})();
+</script>
+</body>
+</html>
