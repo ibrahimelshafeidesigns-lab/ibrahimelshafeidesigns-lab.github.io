@@ -354,12 +354,25 @@ section,footer{overflow-x:clip}
 @keyframes flash{0%{opacity:.0}15%{opacity:.85}100%{opacity:0}}
 .skip{position:absolute;bottom:calc(12vh + 14px);left:50%;transform:translateX(-50%);z-index:4;font-size:12px;letter-spacing:.25em;color:#5E6870;font-family:var(--serif);direction:ltr}
 /* play gate */
-.gate{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;gap:14px;background:none;border:0;color:#F2EFE9;cursor:pointer;font:inherit;transition:opacity .5s,transform .5s}
-.gate .pl{width:96px;height:96px;border-radius:50%;border:1px solid rgba(242,239,233,.5);display:grid;place-items:center;font-size:30px;padding-left:6px;animation:pulse 2s ease-in-out infinite}
-.gate .gt{font-size:20px;font-weight:300;letter-spacing:.04em}
-.gate .gs{font-size:13px;color:#8D97A0}
-.gate.hide{opacity:0;transform:scale(1.3);pointer-events:none}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.45)}50%{box-shadow:0 0 0 18px rgba(201,169,110,0)}}
+.gate{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .9s ease,transform 1.2s cubic-bezier(.6,0,.2,1)}
+.gate.hide{opacity:0;transform:scale(1.08);pointer-events:none}
+.g-bg{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;object-position:35% 60%;filter:brightness(.7) saturate(.85);animation:kb 18s ease-in-out infinite alternate}
+@media (min-aspect-ratio:1/1){.g-bg{object-fit:contain;object-position:50% 30%;inset:0;width:100%;height:100%;-webkit-mask-image:radial-gradient(ellipse 34% 62% at 50% 42%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 34% 62% at 50% 42%,#000 55%,transparent 100%)}.g-in{margin-top:34vh}}
+@keyframes kb{from{transform:scale(1.08) translate(1%,0)}to{transform:scale(1) translate(-1%,-1%)}}
+.g-vig{position:absolute;inset:0;background:radial-gradient(70% 70% at 50% 45%,rgba(7,9,11,.15),rgba(7,9,11,.92) 100%),linear-gradient(transparent 55%,rgba(7,9,11,.9))}
+.g-grain{position:absolute;inset:-50%;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.g-in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px;margin-top:22vh}
+.g-eyebrow{font-family:var(--serif);font-weight:500;letter-spacing:.55em;font-size:clamp(11px,1.2vw,14px);color:#C9A96E;direction:ltr;opacity:0;animation:gIn 1.2s .2s ease forwards;margin-right:-.55em}
+.g-ar{font-weight:200;font-size:clamp(40px,7vw,84px);line-height:1.15;color:#F2EFE9;margin-top:14px;opacity:0;animation:gIn 1.4s .45s ease forwards}
+.g-en{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.8vw,22px);color:#A9B2BA;letter-spacing:.2em;direction:ltr;margin-top:4px;opacity:0;animation:gIn 1.4s .65s ease forwards}
+.g-btn{margin-top:38px;display:inline-flex;align-items:center;gap:14px;padding:8px 26px 8px 10px;border-radius:999px;border:1px solid rgba(201,169,110,.65);background:rgba(18,23,28,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F2EFE9;font:inherit;font-size:18px;font-weight:400;cursor:pointer;opacity:0;animation:gIn 1.2s .95s ease forwards,glow 2.6s 2.2s ease-in-out infinite;transition:background .35s,transform .35s;-webkit-tap-highlight-color:transparent}
+.g-btn:hover,.g-btn:active{background:#C9A96E;color:#12171C;transform:scale(1.03)}
+.g-ic{width:46px;height:46px;border-radius:50%;background:#C9A96E;color:#12171C;display:grid;place-items:center;padding-left:3px;transition:background .35s,color .35s}
+.g-btn:hover .g-ic,.g-btn:active .g-ic{background:#12171C;color:#C9A96E}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.35)}50%{box-shadow:0 0 0 14px rgba(201,169,110,0)}}
+.g-hint{margin-top:18px;font-size:13px;color:#8D97A0;display:flex;align-items:center;gap:7px;opacity:0;animation:gIn 1s 1.3s ease forwards}
+@keyframes gIn{from{opacity:0;transform:translateY(18px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
 #intro .presents,#intro .slam{position:absolute}
 /* shake */
 .shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97)}
@@ -426,13 +439,23 @@ section,footer{overflow-x:clip}
 <body>
 <div id="intro" role="presentation">
   <div class="lb-t"></div><div class="lb-b"></div><div class="flash" id="flash"></div>
-  <button class="gate" id="gate" type="button" aria-label="ابدأ العرض بالصوت"><span class="pl">▶</span><span class="gt">ابدأ العرض</span><span class="gs">مع الصوت 🔊</span></button>
+  <div class="gate" id="gate">
+    <img class="g-bg" src="img/08-new-background.jpg" alt="">
+    <div class="g-vig"></div><div class="g-grain"></div>
+    <div class="g-in">
+      <p class="g-eyebrow">RIVA CERAMICS STUDIO</p>
+      <p class="g-ar">حكاية تصميم</p>
+      <p class="g-en">A DESIGN STORY</p>
+      <button class="g-btn" id="play" type="button"><span class="g-ic"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></span><span>ابدأ العرض</span></button>
+      <p class="g-hint"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 3a9 9 0 0 0-9 9v6a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H5v-1a7 7 0 0 1 14 0v1h-2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1a3 3 0 0 0 3-3v-6a9 9 0 0 0-9-9z" fill="currentColor"/></svg> شغّل الصوت للتجربة الكاملة</p>
+    </div>
+  </div>
   <p class="presents" id="pres">Riva Ceramics Studio &nbsp;·&nbsp; a design story</p>
   <div class="slam" id="slam">HERONA<span class="sweep"></span></div>
 </div>
 <div id="speed"></div>
 <div class="prog" id="prog"></div>
-<header class="bar"><span class="brand">HERONA <span>Preview</span></span><span style="margin-inline-start:auto;font-size:13px;color:var(--muted-on-dark)">نسخة مختصرة</span><button id="mute" type="button" aria-label="كتم الصوت" style="margin-inline-start:12px">🔊</button></header>
+<header class="bar"><span class="brand">HERONA <span>Preview</span></span><span style="margin-inline-start:auto;font-size:13px;color:var(--muted-on-dark)">نسخة مختصرة</span></header>
 
 <section class="hero cine" id="hero">
   <div class="bgw"></div>
@@ -512,9 +535,17 @@ var AUD=(function(){
   function impulse(sec,decay){var r=C.sampleRate,l=r*sec,b=C.createBuffer(2,l,r);for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var i=0;i<l;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/l,decay)}return b}
   function noiseBuf(sec){var b=C.createBuffer(1,C.sampleRate*sec,C.sampleRate),d=b.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;return b}
   function init(){
+    try{ if(navigator.audioSession) navigator.audioSession.type='playback'; }catch(e){}
     C=new (window.AudioContext||window.webkitAudioContext)();
     comp=C.createDynamicsCompressor(); comp.threshold.value=-14; comp.ratio.value=4;
-    master=C.createGain(); master.gain.value=.8; master.connect(comp); comp.connect(C.destination);
+    master=C.createGain(); master.gain.value=.8; master.connect(comp);
+    // iPhone: Safari mutes Web Audio on the silent switch, so also stream the mix through an <audio> element (media playback ignores the switch)
+    var isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    if(isIOS&&C.createMediaStreamDestination){
+      var md=C.createMediaStreamDestination(); comp.connect(md);
+      var el=document.createElement('audio'); el.setAttribute('playsinline',''); el.srcObject=md.stream; el.play().catch(function(){ comp.connect(C.destination) });
+      document.body.appendChild(el); window.__heronaAudio=el;
+    } else comp.connect(C.destination);
     rev=C.createConvolver(); rev.buffer=impulse(3.2,2.4); var rg=C.createGain(); rg.gain.value=.35; rev.connect(rg); rg.connect(master);
   }
   function out(node,wet){node.connect(master); if(wet){var g=C.createGain();g.gain.value=wet;node.connect(g);g.connect(rev)}}
@@ -561,12 +592,15 @@ var AUD=(function(){
     }
   }
   return {
-    start:function(){ try{ if(!C)init(); C.resume(); }catch(e){} },
+    start:function(){
+      try{ var u=document.createElement('audio'); u.setAttribute('playsinline',''); u.src='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA='; u.play().catch(function(){}); }catch(e){}
+      try{ if(!C)init(); C.resume(); var b=C.createBuffer(1,1,22050),sN=C.createBufferSource(); sN.buffer=b; sN.connect(C.destination); sN.start(0); }catch(e){}
+    },
     rise:function(){try{rise()}catch(e){}},
     hit:function(b){try{hit(b)}catch(e){}},
-    score:function(){ if(!C)return; scoreOn=true; next=C.currentTime+.1; timer=setInterval(sched,60); master.gain.setTargetAtTime(muted?0:.55,C.currentTime,.8); },
+    score:function(){ if(!C)return; scoreOn=true; next=C.currentTime+.1; timer=setInterval(sched,60); master.gain.setTargetAtTime(.6,C.currentTime,.8); },
     toggle:function(){ muted=!muted; if(C) master.gain.setTargetAtTime(muted?0:(scoreOn?.55:.8),C.currentTime,.15); return muted; },
-    pause:function(p){ if(C){ p?C.suspend():C.resume(); } }
+    pause:function(p){ if(C){ p?C.suspend():C.resume(); var el=window.__heronaAudio; if(el){ p?el.pause():el.play().catch(function(){}) } } }
   };
 })();
 document.addEventListener('visibilitychange',function(){AUD.pause(document.hidden)});
@@ -587,11 +621,11 @@ function endIntro(){ if(done)return; done=true; intro.classList.add('out'); docu
 if(reduce){ intro.classList.add('gone'); w.forEach(function(el){el.classList.add('in')}); t.classList.add('go'); }
 else {
   document.body.style.overflow='hidden';
-  $('#gate').addEventListener('click',function(){
-    $('#gate').classList.add('hide'); AUD.start();
-    setTimeout(function(){$('#pres').classList.add('on'); AUD.rise()},250);
-    setTimeout(function(){$('#slam').classList.add('on'); setTimeout(function(){$('#flash').classList.add('on'); intro.classList.add('shake'); AUD.hit(true)},480)},2050);
-    setTimeout(function(){endIntro(); AUD.score()},4300);
+  $('#play').addEventListener('click',function(){
+    AUD.start(); $('#gate').classList.add('hide');
+    setTimeout(function(){$('#pres').classList.add('on'); AUD.rise()},900);
+    setTimeout(function(){$('#slam').classList.add('on'); setTimeout(function(){$('#flash').classList.add('on'); intro.classList.add('shake'); AUD.hit(true)},480)},2700);
+    setTimeout(function(){endIntro(); AUD.score()},4950);
   });
 }
 
@@ -639,7 +673,6 @@ var swept=false; new IntersectionObserver(function(es){ if(es[0].isIntersecting&
 /* finale shake when it lands */
 var shook=false; new IntersectionObserver(function(es){ if(es[0].isIntersecting&&!shook&&!reduce){ shook=true; setTimeout(function(){fin.classList.add('shake'); AUD.hit(false)},300) } },{threshold:.8}).observe(fin);
 
-$('#mute').addEventListener('click',function(){ if(!document.querySelector('#gate.hide')&&$('#intro')){return} var m=AUD.toggle(); this.textContent=m?'🔇':'🔊'; this.setAttribute('aria-label',m?'تشغيل الصوت':'كتم الصوت'); });
 /* lightbox */
 $$('.zoom').forEach(function(im){im.addEventListener('click',function(){var lb=$('#lb');$('img',lb).src=im.src;lb.classList.add('show')})});
 $('#lb').addEventListener('click',function(){this.classList.remove('show')});
