@@ -346,7 +346,7 @@ section,footer{overflow-x:clip}
 .slam{position:absolute;font-family:var(--serif);font-weight:300;font-size:clamp(70px,17vw,260px);letter-spacing:.06em;color:#F2EFE9;direction:ltr;opacity:0;white-space:nowrap}
 .slam.on{animation:slam 1.5s cubic-bezier(.2,.9,.2,1) forwards}
 @keyframes slam{0%{opacity:0;transform:scale(3.2) rotate(-8deg);filter:blur(18px)}35%{opacity:1;transform:scale(.96) rotate(0);filter:blur(0)}45%{transform:scale(1.02)}55%,100%{opacity:1;transform:scale(1)}}
-.slam .sweep{position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.85) 50%,transparent 65%);mix-blend-mode:overlay;transform:translateX(-120%)}
+.slam .sweep{position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.85) 50%,transparent 65%);opacity:.5;transform:translateX(-120%)}
 .slam.on .sweep{animation:sweep 1.1s .55s ease forwards}
 @keyframes sweep{to{transform:translateX(120%)}}
 .flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:2;pointer-events:none}
@@ -366,7 +366,7 @@ section,footer{overflow-x:clip}
 .g-eyebrow{font-family:var(--serif);font-weight:500;letter-spacing:.55em;font-size:clamp(11px,1.2vw,14px);color:#C9A96E;direction:ltr;opacity:0;animation:gIn 1.2s .2s ease forwards;margin-right:-.55em}
 .g-ar{font-weight:200;font-size:clamp(40px,7vw,84px);line-height:1.15;color:#F2EFE9;margin-top:14px;opacity:0;animation:gIn 1.4s .45s ease forwards}
 .g-en{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.8vw,22px);color:#A9B2BA;letter-spacing:.2em;direction:ltr;margin-top:4px;opacity:0;animation:gIn 1.4s .65s ease forwards}
-.g-btn{margin-top:38px;display:inline-flex;align-items:center;gap:14px;padding:8px 26px 8px 10px;border-radius:999px;border:1px solid rgba(201,169,110,.65);background:rgba(18,23,28,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F2EFE9;font:inherit;font-size:18px;font-weight:400;cursor:pointer;opacity:0;animation:gIn 1.2s .95s ease forwards,glow 2.6s 2.2s ease-in-out infinite;transition:background .35s,transform .35s;-webkit-tap-highlight-color:transparent}
+.g-btn{margin-top:38px;display:inline-flex;align-items:center;gap:14px;padding:8px 26px 8px 10px;border-radius:999px;border:1px solid rgba(201,169,110,.65);background:rgba(18,23,28,.7);color:#F2EFE9;font:inherit;font-size:18px;font-weight:400;cursor:pointer;opacity:0;animation:gIn 1.2s .95s ease forwards,glow 2.6s 2.2s ease-in-out infinite;transition:background .35s,transform .35s;-webkit-tap-highlight-color:transparent}
 .g-btn:hover,.g-btn:active{background:#C9A96E;color:#12171C;transform:scale(1.03)}
 .g-ic{width:46px;height:46px;border-radius:50%;background:#C9A96E;color:#12171C;display:grid;place-items:center;padding-left:3px;transition:background .35s,color .35s}
 .g-btn:hover .g-ic,.g-btn:active .g-ic{background:#12171C;color:#C9A96E}
@@ -382,7 +382,7 @@ section,footer{overflow-x:clip}
 /* scroll indicator */
 #scue{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));transform:translate(-50%,20px);z-index:45;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;opacity:0;transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
 #scue.show{opacity:1;transform:translate(-50%,0)}
-#scue .sc-t{font-size:14px;font-weight:300;color:#E6E3DD;background:rgba(18,23,28,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:5px 14px;border-radius:999px;border:1px solid rgba(201,169,110,.35)}
+#scue .sc-t{font-size:14px;font-weight:300;color:#E6E3DD;background:rgba(18,23,28,.85);padding:5px 14px;border-radius:999px;border:1px solid rgba(201,169,110,.35)}
 #scue .sc-mouse{width:24px;height:38px;border:1.5px solid rgba(242,239,233,.75);border-radius:14px;position:relative}
 #scue .sc-mouse i{position:absolute;left:50%;top:7px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:#C9A96E;animation:wheel 1.6s cubic-bezier(.6,0,.4,1) infinite}
 @keyframes wheel{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
@@ -393,6 +393,13 @@ section,footer{overflow-x:clip}
 @media (hover:none){#scue .sc-mouse{display:none}}
 @media (prefers-reduced-motion:reduce){#scue .sc-mouse i,#scue .sc-ch b{animation:none;opacity:1}}
 
+
+/* performance */
+.bar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(18,23,28,.96)!important}
+.prog{width:100%!important;transform-origin:right;transform:scaleX(0);will-change:transform}
+#fin-on .ring,.finale.on .ring{animation-play-state:running}
+#speed{will-change:opacity,transform}
+.g-grain{will-change:transform}
 /* speed lines */
 #speed{position:fixed;inset:0;pointer-events:none;z-index:40;opacity:0;transition:opacity .25s}
 #speed i{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(242,239,233,.55),transparent);transform-origin:center}
@@ -407,7 +414,7 @@ section,footer{overflow-x:clip}
 .hero .poster .card3d{transform-style:preserve-3d;transition:transform .15s linear}
 .hero .poster.swing img{animation:swingIn 2.2s cubic-bezier(.25,1.4,.4,1) both}
 @keyframes swingIn{0%{transform:rotate(-70deg) translateY(-30px);opacity:0}25%{opacity:1}55%{transform:rotate(14deg)}75%{transform:rotate(-6deg)}90%{transform:rotate(2deg)}100%{transform:rotate(-3deg)}}
-.hero .poster .glint{position:absolute;inset:0;border-radius:3px;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.18) 48%,transparent 60%);mix-blend-mode:screen;pointer-events:none;transform:translateX(var(--gx,0))}
+.hero .poster .glint{position:absolute;inset:0;border-radius:3px;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.08) 48%,transparent 60%);pointer-events:none}
 .hero h1{white-space:nowrap;font-size:clamp(60px,10vw,150px)!important}
 .hero h1 .ch{display:inline-block;opacity:0;transform:translateY(60px) rotateX(-90deg);transform-origin:50% 100%}
 .hero h1.go .ch{animation:chIn .9s cubic-bezier(.2,.9,.2,1.2) forwards;animation-delay:calc(var(--i)*70ms)}
@@ -441,8 +448,8 @@ section,footer{overflow-x:clip}
 .finale .big{font-family:var(--serif);font-weight:300;font-size:clamp(54px,13vw,200px);letter-spacing:.08em;line-height:1;direction:ltr;will-change:transform}
 .finale .sub{font-family:var(--serif);letter-spacing:.5em;color:#8D97A0;font-size:clamp(12px,1.4vw,16px);margin-top:18px;direction:ltr}
 .finale .ar{margin-top:26px;font-weight:300;color:#A9B2BA;max-width:36ch}
-.finale .ring{position:absolute;width:140vmax;height:140vmax;border:1px solid rgba(201,169,110,.12);border-radius:50%;animation:spin 40s linear infinite}
-.finale .ring.r2{width:100vmax;height:100vmax;animation-duration:28s;animation-direction:reverse;border-style:dashed}
+.finale .ring{position:absolute;width:110vmin;height:110vmin;will-change:transform;animation-play-state:paused;border:1px solid rgba(201,169,110,.12);border-radius:50%;animation:spin 40s linear infinite}
+.finale .ring.r2{width:80vmin;height:80vmin;animation-duration:28s;animation-direction:reverse;border-style:dashed}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media (prefers-reduced-motion:reduce){
@@ -646,38 +653,34 @@ else {
   });
 }
 
-/* ===== poster tilt (mouse / device) + scroll rotation ===== */
-var card=$('#card3d'), glint=$('.glint'), mx=0, my=0;
-addEventListener('pointermove',function(e){mx=(e.clientX/W-.5);my=(e.clientY/H-.5)},{passive:true});
-
-/* ===== speed lines ===== */
-var sp=$('#speed'); for(var i=0;i<18;i++){var l=document.createElement('i');l.style.top=(Math.random()*100)+'%';l.style.left=(-20+Math.random()*60)+'%';l.style.width=(20+Math.random()*50)+'%';l.style.transform='rotate(-18deg)';sp.appendChild(l)}
-
-/* ===== flying vase path ===== */
-var prod=$('#prod'), edit=$('#edit'), fin=$('#finale'), kin=$$('#kin span'), soon=$('#soon');
-var lastY=scrollY, vel=0, prog=$('#prog');
-
+/* ===== on-demand animation: runs only while scrolling / pointer moving, and only for visible parts ===== */
+var card=$('#card3d'), mx=0, my=0, fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+var sp=$('#speed'); for(var i=0;i<10;i++){var l=document.createElement('i');l.style.top=(Math.random()*100)+'%';l.style.left=(-20+Math.random()*60)+'%';l.style.width=(20+Math.random()*50)+'%';l.style.transform='rotate(-18deg)';sp.appendChild(l)}
+var fin=$('#finale'), kin=$$('#kin span'), soon=$('#soon'), prog=$('#prog');
+var vis={hero:true,kin:false,fin:false};
+var vo=new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target.dataset.v]=e.isIntersecting}); kick();},{rootMargin:'10% 0px'});
+$('#hero').dataset.v='hero'; $('#stages').dataset.v='kin'; fin.dataset.v='fin';
+[$('#hero'),$('#stages'),fin].forEach(function(el){vo.observe(el)});
+var lastY=scrollY, vel=0, running=false, lastSp=-1;
+function kick(){ if(!running){ running=true; requestAnimationFrame(frame); } }
+addEventListener('scroll',kick,{passive:true});
+if(fine) addEventListener('pointermove',function(e){mx=(e.clientX/W-.5);my=(e.clientY/H-.5); if(vis.hero) kick();},{passive:true});
 function frame(){
   var y=scrollY, h=document.documentElement, max=h.scrollHeight-h.clientHeight;
-  vel=vel*.85+(y-lastY)*.15; lastY=y;
-  prog.style.width=(max>0?y/max*100:0)+'%';
+  vel=vel*.8+(y-lastY)*.2; lastY=y;
+  prog.style.transform='scaleX('+(max>0?y/max:0)+')';
   if(!reduce){
-    // poster: tilt with pointer + roll away on scroll
-    var r=Math.min(1,y/(H*.9));
-    card.style.transform='rotateY('+(mx*18 - r*35)+'deg) rotateX('+(-my*14 + r*20)+'deg) translateZ('+(-r*200)+'px) rotateZ('+(r*-12)+'deg)';
-    glint.style.setProperty('--gx',(mx*60)+'%');
-    // speed lines on fast scroll
-    sp.style.opacity=Math.min(.9,Math.max(0,(Math.abs(vel)-6)/30));
-    sp.style.transform='translateY('+(-vel*2)+'px) skewY('+(vel>0?-4:4)+'deg)';
-    // kinetic stage words slide in alternating
-    kin.forEach(function(s,i){var rr=s.getBoundingClientRect(), d=(rr.top+rr.height/2-H/2)/H; s.style.transform='translateX('+((i%2?1:-1)*d*260)+'px) rotate('+(d*(i%2?6:-6))+'deg)'; s.style.opacity=Math.max(0,1-Math.abs(d)*1.3)});
-    // finale: zoom + rotate in
-    var fr=fin.getBoundingClientRect(), f=Math.max(0,Math.min(1,1-fr.top/H));
-    soon.style.transform='scale('+(2.2-1.2*f)+') rotate('+((1-f)*-14)+'deg)'; soon.style.opacity=f; soon.style.filter='blur('+((1-f)*10)+'px)';
+    if(vis.hero){ var r=Math.min(1,y/(H*.9)); card.style.transform='rotateY('+(mx*16-r*35)+'deg) rotateX('+(-my*12+r*20)+'deg) translateZ('+(-r*200)+'px) rotateZ('+(r*-12)+'deg)'; }
+    var o=Math.min(.85,Math.max(0,(Math.abs(vel)-8)/30)); o=Math.round(o*20)/20;
+    if(o!==lastSp){ sp.style.opacity=o; lastSp=o; }
+    if(o>0) sp.style.transform='translate3d(0,'+(-vel*2)+'px,0)';
+    if(vis.kin) kin.forEach(function(s,i){var rr=s.getBoundingClientRect(), d=(rr.top+rr.height/2-H/2)/H; s.style.transform='translate3d('+((i%2?1:-1)*d*260)+'px,0,0) rotate('+(d*(i%2?6:-6))+'deg)'; s.style.opacity=Math.max(0,1-Math.abs(d)*1.3)});
+    if(vis.fin){ var fr=fin.getBoundingClientRect(), f=Math.max(0,Math.min(1,1-fr.top/H)); soon.style.transform='scale('+(2.2-1.2*f)+') rotate('+((1-f)*-14)+'deg)'; soon.style.opacity=f; }
   }
-  requestAnimationFrame(frame);
+  // keep going only while something is still settling
+  if(Math.abs(vel)>.5){ requestAnimationFrame(frame); } else { running=false; vel=0; if(lastSp!==0){sp.style.opacity=0;lastSp=0} }
 }
-requestAnimationFrame(frame);
+kick();
 
 /* before/after: pointer-driven, rAF-throttled */
 var ba=$('#ba'), aw=$('#aw'), hdl=$('#hdl'), awImg=$('#aw img'), pos=.5, raf=0, dragging=false, sweeping=false;
@@ -693,6 +696,7 @@ addEventListener('resize',size); awImg.addEventListener('load',size); size();
 var swept=false; new IntersectionObserver(function(es){ if(es[0].isIntersecting&&!swept&&!reduce){ swept=true; sweeping=true; var t0=null; (function an(ts){ if(!sweeping) return; if(!t0)t0=ts; var k=(ts-t0)/2200; if(k>1){setPos(.5);sweeping=false;return} setPos(.5+.42*Math.sin(k*Math.PI*2)); requestAnimationFrame(an) })(performance.now()); } },{threshold:.5}).observe(ba);
 
 /* finale shake when it lands */
+new IntersectionObserver(function(es){ fin.classList.toggle('on',es[0].isIntersecting) }).observe(fin);
 var shook=false; new IntersectionObserver(function(es){ if(es[0].isIntersecting&&!shook&&!reduce){ shook=true; setTimeout(function(){fin.classList.add('shake'); AUD.hit(false)},300) } },{threshold:.8}).observe(fin);
 
 
