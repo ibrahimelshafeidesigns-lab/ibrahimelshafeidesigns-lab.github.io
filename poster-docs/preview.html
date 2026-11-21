@@ -378,6 +378,21 @@ section,footer{overflow-x:clip}
 .shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97)}
 @keyframes shake{10%,90%{transform:translate3d(-1px,1px,0)}20%,80%{transform:translate3d(3px,-2px,0) rotate(.2deg)}30%,50%,70%{transform:translate3d(-6px,3px,0) rotate(-.4deg)}40%,60%{transform:translate3d(6px,-3px,0) rotate(.4deg)}}
 
+
+/* scroll indicator */
+#scue{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));transform:translate(-50%,20px);z-index:45;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;opacity:0;transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
+#scue.show{opacity:1;transform:translate(-50%,0)}
+#scue .sc-t{font-size:14px;font-weight:300;color:#E6E3DD;background:rgba(18,23,28,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:5px 14px;border-radius:999px;border:1px solid rgba(201,169,110,.35)}
+#scue .sc-mouse{width:24px;height:38px;border:1.5px solid rgba(242,239,233,.75);border-radius:14px;position:relative}
+#scue .sc-mouse i{position:absolute;left:50%;top:7px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:#C9A96E;animation:wheel 1.6s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+#scue .sc-ch{display:flex;flex-direction:column;align-items:center;margin-top:-2px}
+#scue .sc-ch b{width:12px;height:12px;border-right:2px solid #C9A96E;border-bottom:2px solid #C9A96E;transform:rotate(45deg);margin-top:-5px;opacity:0;animation:chev 1.6s infinite}
+#scue .sc-ch b:nth-child(2){animation-delay:.18s}#scue .sc-ch b:nth-child(3){animation-delay:.36s}
+@keyframes chev{0%{opacity:0;transform:translateY(-6px) rotate(45deg)}50%{opacity:1}100%{opacity:0;transform:translateY(6px) rotate(45deg)}}
+@media (hover:none){#scue .sc-mouse{display:none}}
+@media (prefers-reduced-motion:reduce){#scue .sc-mouse i,#scue .sc-ch b{animation:none;opacity:1}}
+
 /* speed lines */
 #speed{position:fixed;inset:0;pointer-events:none;z-index:40;opacity:0;transition:opacity .25s}
 #speed i{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(242,239,233,.55),transparent);transform-origin:center}
@@ -409,9 +424,12 @@ section,footer{overflow-x:clip}
 .feat{transition:transform .5s var(--ease)}
 .feat:hover{transform:translateY(-6px) rotate(-1deg)}
 
-/* before/after cinematic */
-.ba{transform-style:preserve-3d;transition:transform .2s}
-.ba .handle{transition:left .05s}
+/* before/after: GPU-friendly */
+.ba{touch-action:pan-y;cursor:ew-resize;contain:layout paint}
+.ba .aw{position:absolute;inset:0;overflow:hidden;width:50%;will-change:width}
+.ba .aw img{position:absolute;top:0;left:0;height:100%;width:auto;max-width:none}
+.ba .handle{left:0!important;transform:translateX(var(--hx,0px));will-change:transform}
+.ba img{pointer-events:none;user-select:none;-webkit-user-select:none}
 
 /* stage list kinetic */
 .kin{display:flex;flex-direction:column;align-items:center;gap:4px;margin:10px 0 24px}
@@ -454,6 +472,7 @@ section,footer{overflow-x:clip}
   <div class="slam" id="slam">HERONA<span class="sweep"></span></div>
 </div>
 <div id="speed"></div>
+<div id="scue" aria-hidden="true"><span class="sc-t">انزل لتحت</span><span class="sc-mouse"><i></i></span><span class="sc-ch"><b></b><b></b><b></b></span></div>
 <div class="prog" id="prog"></div>
 <header class="bar"><span class="brand">HERONA <span>Preview</span></span><span style="margin-inline-start:auto;font-size:13px;color:var(--muted-on-dark)">نسخة مختصرة</span></header>
 
@@ -468,7 +487,6 @@ section,footer{overflow-x:clip}
     </div>
     <div class="poster" id="poster3d"><div class="card3d" id="card3d"><img src="img/10-final-poster.jpg" alt="اللوحة النهائية: مزهرية هيرونا" class="zoom" width="1080" height="1350"><span class="glint"></span></div></div>
   </div>
-  <span class="cue">SCROLL</span>
 </section>
 <section class="stage alt" id="prod" style="padding-top:clamp(70px,9vw,120px)">
   <div class="wrap">
@@ -499,12 +517,11 @@ section,footer{overflow-x:clip}
     <p class="eyebrow rv">من التحرير</p>
     <h2 class="rv d1" style="margin:8px 0 6px">قبل وبعد — اسحب الخط</h2>
     <p class="muted rv" style="font-weight:300">إضاءة +22% · تباين +15% · تشبع −45%</p>
-    <div class="ba rv" id="ba">
-      <img src="img/02-resized.jpg" alt="قبل">
-      <img src="img/04-saturation.jpg" alt="بعد" class="after">
+    <div class="ba rv" id="ba" role="slider" aria-label="مقارنة قبل وبعد" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+      <img src="img/ba-before.jpg" alt="قبل" width="880" height="1100" draggable="false">
+      <div class="aw" id="aw"><img src="img/ba-after.jpg" alt="بعد" width="880" height="1100" draggable="false"></div>
       <span class="lab l">بعد</span><span class="lab r">قبل</span>
-      <div class="handle"></div>
-      <input type="range" min="0" max="100" value="50" aria-label="مقارنة قبل وبعد">
+      <div class="handle" id="hdl"></div>
     </div>
   </div>
 </section>
@@ -613,12 +630,12 @@ var t=$('#title'); t.innerHTML=t.textContent.split('').map(function(c,i){return 
 /* reveals */
 var w=$$('.rv');
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
-function startPage(){ w.forEach(function(el){io.observe(el)}); t.classList.add('go'); $('#poster3d').classList.add('swing'); }
+function startPage(){ w.forEach(function(el){io.observe(el)}); t.classList.add('go'); $('#poster3d').classList.add('swing'); setTimeout(function(){ if(typeof armCue==='function') armCue(); },1200); }
 
 /* ===== intro sequence ===== */
 var intro=$('#intro'), done=false;
 function endIntro(){ if(done)return; done=true; intro.classList.add('out'); document.body.style.overflow=''; setTimeout(function(){intro.classList.add('gone');intro.remove()},1100); setTimeout(startPage,350); }
-if(reduce){ intro.classList.add('gone'); w.forEach(function(el){el.classList.add('in')}); t.classList.add('go'); }
+if(reduce){ intro.classList.add('gone'); w.forEach(function(el){el.classList.add('in')}); t.classList.add('go'); setTimeout(function(){ if(typeof armCue==='function') armCue(); },500); }
 else {
   document.body.style.overflow='hidden';
   $('#play').addEventListener('click',function(){
@@ -652,9 +669,6 @@ function frame(){
     // speed lines on fast scroll
     sp.style.opacity=Math.min(.9,Math.max(0,(Math.abs(vel)-6)/30));
     sp.style.transform='translateY('+(-vel*2)+'px) skewY('+(vel>0?-4:4)+'deg)';
-    // before/after: tilt toward the viewer as it enters
-    var be=$('#ba').getBoundingClientRect(), q=Math.max(-1,Math.min(1,(be.top+be.height/2-H/2)/H));
-    $('#ba').style.transform='perspective(1200px) rotateX('+(q*18)+'deg) rotateY('+(mx*6)+'deg)';
     // kinetic stage words slide in alternating
     kin.forEach(function(s,i){var rr=s.getBoundingClientRect(), d=(rr.top+rr.height/2-H/2)/H; s.style.transform='translateX('+((i%2?1:-1)*d*260)+'px) rotate('+(d*(i%2?6:-6))+'deg)'; s.style.opacity=Math.max(0,1-Math.abs(d)*1.3)});
     // finale: zoom + rotate in
@@ -665,13 +679,29 @@ function frame(){
 }
 requestAnimationFrame(frame);
 
-/* before/after: auto sweep once */
-var ba=$('#ba'), rng=$('#ba input'); function setBA(v){ba.style.setProperty('--x',v+'%')} setBA(50);
-rng.addEventListener('input',function(){setBA(rng.value)});
-var swept=false; new IntersectionObserver(function(es){ if(es[0].isIntersecting&&!swept&&!reduce){ swept=true; var t0=null; (function an(ts){ if(!t0)t0=ts; var k=(ts-t0)/2200; if(k>1){setBA(50);rng.value=50;return} var v=50+45*Math.sin(k*Math.PI*2); setBA(v); rng.value=v; requestAnimationFrame(an) })(performance.now()); } },{threshold:.5}).observe(ba);
+/* before/after: pointer-driven, rAF-throttled */
+var ba=$('#ba'), aw=$('#aw'), hdl=$('#hdl'), awImg=$('#aw img'), pos=.5, raf=0, dragging=false, sweeping=false;
+function paint(){ raf=0; var w=ba.clientWidth; aw.style.width=(pos*100)+'%'; hdl.style.setProperty('--hx',(pos*w)+'px'); ba.setAttribute('aria-valuenow',Math.round(pos*100)); }
+function size(){ awImg.style.width=ba.clientWidth+'px'; paint(); }
+function setPos(p){ pos=Math.max(0,Math.min(1,p)); if(!raf) raf=requestAnimationFrame(paint); }
+function fromEvent(e){ var r=ba.getBoundingClientRect(); return (e.clientX-r.left)/r.width; }
+ba.addEventListener('pointerdown',function(e){ dragging=true; sweeping=false; try{ba.setPointerCapture(e.pointerId)}catch(_){} setPos(fromEvent(e)); });
+ba.addEventListener('pointermove',function(e){ if(dragging) setPos(fromEvent(e)); });
+['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){ ba.addEventListener(ev,function(){ dragging=false; }); });
+ba.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft'){setPos(pos-.05);e.preventDefault()} if(e.key==='ArrowRight'){setPos(pos+.05);e.preventDefault()} });
+addEventListener('resize',size); awImg.addEventListener('load',size); size();
+var swept=false; new IntersectionObserver(function(es){ if(es[0].isIntersecting&&!swept&&!reduce){ swept=true; sweeping=true; var t0=null; (function an(ts){ if(!sweeping) return; if(!t0)t0=ts; var k=(ts-t0)/2200; if(k>1){setPos(.5);sweeping=false;return} setPos(.5+.42*Math.sin(k*Math.PI*2)); requestAnimationFrame(an) })(performance.now()); } },{threshold:.5}).observe(ba);
 
 /* finale shake when it lands */
 var shook=false; new IntersectionObserver(function(es){ if(es[0].isIntersecting&&!shook&&!reduce){ shook=true; setTimeout(function(){fin.classList.add('shake'); AUD.hit(false)},300) } },{threshold:.8}).observe(fin);
+
+
+/* scroll indicator: show after intro, hide while scrolling, return when idle (not at the end) */
+var cue=$('#scue'), idleT=0, cueReady=false;
+function atEnd(){ var h=document.documentElement; return scrollY+innerHeight>=h.scrollHeight-innerHeight*.6; }
+function showCue(){ if(cueReady&&!atEnd()) cue.classList.add('show'); }
+addEventListener('scroll',function(){ cue.classList.remove('show'); clearTimeout(idleT); idleT=setTimeout(showCue,3500); },{passive:true});
+function armCue(){ cueReady=true; setTimeout(showCue,900); }
 
 /* lightbox */
 $$('.zoom').forEach(function(im){im.addEventListener('click',function(){var lb=$('#lb');$('img',lb).src=im.src;lb.classList.add('show')})});
