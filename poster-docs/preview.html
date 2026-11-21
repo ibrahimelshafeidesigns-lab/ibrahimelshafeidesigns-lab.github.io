@@ -425,10 +425,10 @@ section,footer{overflow-x:clip}
 .feat:hover{transform:translateY(-6px) rotate(-1deg)}
 
 /* before/after: GPU-friendly */
-.ba{touch-action:pan-y;cursor:ew-resize;contain:layout paint}
-.ba .aw{position:absolute;inset:0;overflow:hidden;width:50%;will-change:width}
+.ba{touch-action:pan-y;cursor:ew-resize;contain:layout paint;direction:ltr}
+.ba .aw{position:absolute;top:0;bottom:0;left:0;right:auto;overflow:hidden;width:50%;will-change:width}
 .ba .aw img{position:absolute;top:0;left:0;height:100%;width:auto;max-width:none}
-.ba .handle{left:0!important;transform:translateX(var(--hx,0px));will-change:transform}
+.ba .handle{left:0!important;right:auto;margin-left:-.5px;transform:translateX(var(--hx,0px));will-change:transform}
 .ba img{pointer-events:none;user-select:none;-webkit-user-select:none}
 
 /* stage list kinetic */
