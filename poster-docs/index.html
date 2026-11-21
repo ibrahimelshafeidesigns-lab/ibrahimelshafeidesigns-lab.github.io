@@ -184,6 +184,7 @@ table.sm{min-width:0}
 .shot img{border-radius:3px;width:100%}
 .shot .x{display:none;align-self:flex-start;font:inherit;font-size:12.5px;background:#2D363F;color:#fff;border:0;border-radius:999px;padding:4px 12px;cursor:pointer}
 .shot.has .x{display:block}
+.uishot{margin-top:18px}.uishot img{border-radius:3px;border:1px solid var(--dline)}.uishot figcaption{font-size:12.5px;color:var(--muted-on-dark);margin-top:6px}
 .stepimg{display:none}
 @media (min-width:900px){
   .scrolly{grid-template-columns:1.2fr .8fr;gap:56px}
@@ -498,7 +499,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
       <p class="eyebrow rv d1">المرحلة الثالثة</p>
       <h2 class="rv d1">تحرير الصورة، خطوة بخطوة</h2>
       <p class="en rv d2">Basic Image Editing · Photopea</p>
-      <p class="intro rv d2">انزل ببطء — الصورة بتتغير مع كل خطوة. تحت كل خطوة: الأداة، القيم بالأرقام، عملنا إيه وليه، ومكان لسكرين شوت البرنامج.</p>
+      <p class="intro rv d2">انزل ببطء — الصورة بتتغير مع كل خطوة. تحت كل خطوة: الأداة، القيم بالأرقام، عملنا إيه وليه، وسكرين شوت من البرنامج.</p>
     </div>
     <div class="scrolly">
       <div class="viewer" aria-hidden="true">
@@ -525,7 +526,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
             <div class="val"><div class="k">اللي اتشال</div><div class="v num">41%</div></div>
           </div>
           <p>ثبّتنا نسبة القص على 4:5 عشان تطابق نسبة اللوحة. شلنا ورق الشجر من اليمين، والجزء الغامق الفاضي من فوق، ورجلين الترابيزة. المزهرية بقت مالية الكادر مع مساحة تتنفس حواليها.</p>
-          <div class="shot"><span class="plus">+</span><span class="lbl">ضيف سكرين شوت Photopea وإطار القص ظاهر</span><button class="x" type="button">حذف</button></div>
+          <figure class="uishot"><img src="img/ui-step-1.jpg" alt="سكرين شوت الخطوة 1" class="zoom" loading="lazy" width="1600" height="1000"><figcaption>سكرين شوت الخطوة 1 — محاكاة لواجهة البرنامج</figcaption></figure>
         </article>
 
         <article class="step" data-img="1" data-dim="1600 × 2000">
@@ -538,7 +539,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
             <div class="val"><div class="k">النسبة</div><div class="v num">65%</div></div>
           </div>
           <p>صغّرنا لـ 1600 × 2000 مع قفل النسبة عشان مايحصلش مط. الحجم ده أكبر من اللي محتاجينه في اللوحة، فبيدّينا هامش أمان من غير ملف تقيل.</p>
-          <div class="shot"><span class="plus">+</span><span class="lbl">ضيف سكرين شوت نافذة Image Size</span><button class="x" type="button">حذف</button></div>
+          <figure class="uishot"><img src="img/ui-step-2.jpg" alt="سكرين شوت الخطوة 2" class="zoom" loading="lazy" width="1600" height="1000"><figcaption>سكرين شوت الخطوة 2 — محاكاة لواجهة البرنامج</figcaption></figure>
         </article>
 
         <article class="step" data-img="2" data-dim="1600 × 2000">
@@ -551,7 +552,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
             <div class="val"><div class="k">متوسط الإضاءة</div><div class="v num">68.5<span class="arr">→</span>82.7</div></div>
           </div>
           <p>المزهرية كانت غامقة وتفاصيل الطين ضايعة. فتّحنا وزوّدنا التباين عشان حبيبات الجروج وملمس السطح يبانوا — من غير ما نبوّظ الجو الغامق.</p>
-          <div class="shot"><span class="plus">+</span><span class="lbl">ضيف سكرين شوت النافذة والقيم ظاهرة</span><button class="x" type="button">حذف</button></div>
+          <figure class="uishot"><img src="img/ui-step-3.jpg" alt="سكرين شوت الخطوة 3" class="zoom" loading="lazy" width="1600" height="1000"><figcaption>سكرين شوت الخطوة 3 — محاكاة لواجهة البرنامج</figcaption></figure>
         </article>
 
         <article class="step" data-img="3" data-dim="1600 × 2000">
@@ -564,7 +565,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
             <div class="val"><div class="k">متوسط التشبع</div><div class="v num">25.9%<span class="arr">→</span>16.4%</div></div>
           </div>
           <p>قلّلنا التشبع عشان نشيل الأزرق اللي راكب على الطين. متوسط اللون اتحرك من <span class="ltr">RGB(75, 85, 91)</span> لـ <span class="ltr">RGB(78, 84, 87)</span> — يعني القنوات التلاتة قربوا من بعض والطين رجع رمادي محايد زي لونه الحقيقي.</p>
-          <div class="shot"><span class="plus">+</span><span class="lbl">ضيف سكرين شوت Hue/Saturation</span><button class="x" type="button">حذف</button></div>
+          <figure class="uishot"><img src="img/ui-step-4.jpg" alt="سكرين شوت الخطوة 4" class="zoom" loading="lazy" width="1600" height="1000"><figcaption>سكرين شوت الخطوة 4 — محاكاة لواجهة البرنامج</figcaption></figure>
         </article>
 
         <article class="step" data-img="4" data-dim="1600 × 2000">
@@ -577,7 +578,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
             <div class="val"><div class="k">الحواف</div><div class="v ar">ناعمة — من غير Feather زيادة</div></div>
           </div>
           <p>حددنا المزهرية بأداة التحديد الذكي. الأحمر الشفاف هو اللي برّه التحديد، والخط المتقطع هو حدود المزهرية. أصعب جزء كان الفتحة من جوه لأنها فاتحة وقريبة من لون الحيطة، فراجعناها يدوي.</p>
-          <div class="shot"><span class="plus">+</span><span class="lbl">ضيف سكرين شوت والتحديد ظاهر</span><button class="x" type="button">حذف</button></div>
+          <figure class="uishot"><img src="img/ui-step-5.jpg" alt="سكرين شوت الخطوة 5" class="zoom" loading="lazy" width="1600" height="1000"><figcaption>سكرين شوت الخطوة 5 — محاكاة لواجهة البرنامج</figcaption></figure>
         </article>
 
         <article class="step" data-img="5" data-dim="1010 × 1601 · PNG">
@@ -590,7 +591,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
             <div class="val"><div class="k">الصيغة</div><div class="v ar">PNG شفاف</div></div>
           </div>
           <p>استخدمنا Layer Mask بدل المسح، عشان لو احتجنا نصلّح الحواف نرجع من غير ما نخسر الصورة. صدّرنا المزهرية <span class="ltr">PNG</span> — المربعات في الخلفية معناها شفاف.</p>
-          <div class="shot"><span class="plus">+</span><span class="lbl">ضيف سكرين شوت المزهرية على خلفية شفافة</span><button class="x" type="button">حذف</button></div>
+          <figure class="uishot"><img src="img/ui-step-6.jpg" alt="سكرين شوت الخطوة 6" class="zoom" loading="lazy" width="1600" height="1000"><figcaption>سكرين شوت الخطوة 6 — محاكاة لواجهة البرنامج</figcaption></figure>
         </article>
 
         <article class="step" data-img="6" data-dim="1080 × 1350">
@@ -603,7 +604,7 @@ footer b{color:var(--light-on-dark);font-weight:400}
             <div class="val"><div class="k">عنصر من صورة 3</div><div class="v num">Screen · 62%</div></div>
           </div>
           <p>تدرّج سليت غامق، وإضاءة ناعمة ورا المزهرية عشان جانبها الغامق مايختفيش في الخلفية. خدنا خطوط الضوء المايلة من صورة 3، حوّلناها رمادي، وحطيناها بـ Screen في الركن اليمين اللي فوق. وضفنا ظل ناعم تحت القاعدة.</p>
-          <div class="shot"><span class="plus">+</span><span class="lbl">ضيف سكرين شوت ولوحة Layers ظاهرة</span><button class="x" type="button">حذف</button></div>
+          <figure class="uishot"><img src="img/ui-step-7.jpg" alt="سكرين شوت الخطوة 7" class="zoom" loading="lazy" width="1600" height="1000"><figcaption>سكرين شوت الخطوة 7 — محاكاة لواجهة البرنامج</figcaption></figure>
         </article>
 
       </div>
