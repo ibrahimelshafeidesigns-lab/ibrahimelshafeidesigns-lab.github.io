@@ -3,590 +3,402 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>البوليمرات | بحث كيمياء عامة</title>
-<meta name="description" content="بحث عن البوليمرات: التعريف، التاريخ، التصنيف، البلمرة، الخواص، التطبيقات، والبيئة.">
-<meta name="theme-color" content="#070b18">
+<title>البوليمرات | عرض تفاعلي</title>
+<meta name="theme-color" content="#04050d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#070b18; --ink:#eef2ff; --muted:#a7b0d0; --line:rgba(255,255,255,.12);
-  --a:#4fd1c5; --b:#8b5cf6; --c:#f472b6; --d:#facc15;
-  --card:rgba(12,17,36,.9);
-}
+:root{--a:#4fd1c5;--b:#8b5cf6;--c:#f472b6;--d:#facc15;--ink:#f3f5ff;--muted:#9aa3c7}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Tajawal',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.95;font-size:17.5px;overflow-x:hidden}
-h1,h2,h3{font-family:'Cairo',sans-serif;line-height:1.35}
-#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
-.glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:
-  radial-gradient(60vmax 60vmax at 85% 10%,rgba(139,92,246,.18),transparent 60%),
-  radial-gradient(50vmax 50vmax at 10% 90%,rgba(79,209,197,.14),transparent 60%)}
+html,body{background:#04050d;color:var(--ink);font-family:'Tajawal',system-ui,sans-serif;overflow-x:clip}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;touch-action:pan-y}
+.vign{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.65))}
+#bar{position:fixed;top:0;right:0;height:3px;width:0;z-index:30;background:linear-gradient(90deg,var(--c),var(--b),var(--a));box-shadow:0 0 14px var(--b),0 0 4px #fff}
+#dots{position:fixed;left:20px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:12px}
+#dots a{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.4s;display:block}
+#dots a.on{background:#fff;box-shadow:0 0 0 4px rgba(79,209,197,.25),0 0 14px var(--a);transform:scale(1.4)}
+@media(max-width:700px){#dots{left:10px;gap:9px}#dots a{width:6px;height:6px}}
+.badge{position:fixed;bottom:14px;left:14px;z-index:30;font:700 11px 'Cairo';letter-spacing:1px;color:var(--muted);border:1px solid rgba(255,255,255,.12);padding:5px 11px;border-radius:999px;background:rgba(4,5,13,.55);backdrop-filter:blur(8px);direction:ltr}
+.badge i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#34d399;margin-right:6px;box-shadow:0 0 8px #34d399;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:50;background:#04050d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .9s,visibility .9s}
+#loader.hide{opacity:0;visibility:hidden}
+.hex{width:74px;height:74px;position:relative;animation:spin 2.4s linear infinite}
+.hex svg{width:100%;height:100%;filter:drop-shadow(0 0 10px var(--a))}
+.hex path{stroke-dasharray:240;stroke-dashoffset:240;animation:draw 1.6s ease-in-out infinite alternate}
+#loader p{font:700 14px 'Cairo';color:var(--muted);letter-spacing:.5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* scenes */
 main{position:relative;z-index:2}
-#progress{position:fixed;top:0;right:0;height:4px;width:0;z-index:20;background:linear-gradient(90deg,var(--c),var(--b),var(--a));box-shadow:0 0 12px var(--b)}
-#counter{position:fixed;bottom:16px;left:16px;z-index:20;font:600 13px 'Cairo';background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:999px;backdrop-filter:blur(10px);color:var(--muted)}
-#counter b{color:var(--a)}
-nav.dots{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:10px}
-nav.dots a{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;display:block}
-nav.dots a.on{background:var(--a);transform:scale(1.6);box-shadow:0 0 10px var(--a)}
-@media(max-width:760px){nav.dots{display:none}}
+.sc{height:190vh;position:relative}
+.sc.hero{height:150vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;padding:0 7vw;pointer-events:none}
+.txt{max-width:min(620px,48vw);position:relative}
+.sc h2{white-space:nowrap}
+@media(max-width:700px){.stage{align-items:flex-start;padding:13vh 22px 0}.txt{max-width:100%}}
+.idx{font:900 15px 'Cairo';color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.45);letter-spacing:3px;direction:ltr;text-align:right;opacity:0;transform:translateY(20px);transition:.8s}
+.sc h2{font:900 clamp(54px,9vw,120px)/1.15 'Cairo';background:linear-gradient(100deg,#fff 10%,var(--a) 35%,var(--b) 55%,var(--c) 70%,#fff 90%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  clip-path:inset(0 0 0 100%);filter:blur(14px);opacity:0;transition:clip-path 1.1s cubic-bezier(.7,0,.2,1),filter 1.1s,opacity .4s;animation:shine 5s linear infinite;padding-bottom:6px}
+.sc p.l{font-size:clamp(18px,2.4vw,26px);color:#d8ddf5;margin-top:8px;opacity:0;transform:translateY(24px);transition:1s .35s cubic-bezier(.2,.8,.2,1);text-shadow:0 2px 20px #000}
+.sc .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font:700 14px 'Cairo';padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(10,12,30,.55);backdrop-filter:blur(8px);opacity:0;transform:scale(.6) translateY(10px);transition:.6s cubic-bezier(.3,1.6,.5,1)}
+.chip.f{direction:ltr;color:var(--d);border-color:rgba(250,204,21,.4)}
+.on .idx{opacity:1;transform:none}
+.on h2{clip-path:inset(0 0 0 0);filter:blur(0);opacity:1}
+.on p.l{opacity:1;transform:none}
+.on .chip{opacity:1;transform:none}
+@keyframes shine{to{background-position:-250% 0}}
+/* sparkles around headline */
+.spk{position:absolute;width:18px;height:18px;opacity:0;pointer-events:none}
+.spk svg{width:100%;height:100%;filter:drop-shadow(0 0 6px #fff)}
+.on .spk{animation:twinkle 2.2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.2) rotate(0)}50%{opacity:1;transform:scale(1) rotate(90deg)}}
 
 /* hero */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px}
-.hero .tag{font:600 14px 'Cairo';letter-spacing:.5px;color:var(--a);border:1px solid rgba(79,209,197,.4);padding:4px 14px;border-radius:999px;margin-bottom:18px;opacity:0;animation:up 1s .2s forwards}
-.hero h1{font-size:clamp(56px,14vw,150px);font-weight:900;background:linear-gradient(120deg,#fff,var(--a) 25%,var(--b) 45%,var(--c) 60%,#fff 75%,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 30px rgba(139,92,246,.35))}
-.hero h1{opacity:0;transform:perspective(800px) rotateX(-70deg) translateY(40px);animation:titleIn 1.3s .2s cubic-bezier(.2,.8,.2,1) forwards;background-size:200% 100%}
-.hero h1.done{animation:shine 6s linear infinite;opacity:1;transform:none}
-@keyframes titleIn{60%{filter:blur(0) drop-shadow(0 6px 30px rgba(139,92,246,.35))}to{opacity:1;transform:none}}
-@keyframes shine{to{background-position:-200% 0}}
-.hero p.sub{font-size:clamp(18px,3.6vw,26px);color:var(--muted);margin-top:6px;opacity:0;animation:up 1s 1.1s forwards}
-.meta{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;width:min(720px,100%);opacity:0;animation:up 1s 1.4s forwards}
-.meta div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;backdrop-filter:blur(10px);font-size:15px}
-.meta small{display:block;color:var(--muted);font-size:12.5px}
-.members{margin-top:12px;width:min(720px,100%);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;backdrop-filter:blur(10px);opacity:0;animation:up 1s 1.6s forwards}
-.members small{color:var(--muted)}
-.members ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:6px}
-.members li{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;padding:2px 14px;font-size:15px}
-.scroll-hint{margin-top:34px;color:var(--muted);font-size:14px;opacity:0;animation:up 1s 2s forwards}
-.scroll-hint i{display:block;width:24px;height:38px;border:2px solid var(--muted);border-radius:14px;margin:8px auto 0;position:relative}
-.scroll-hint i:after{content:"";position:absolute;top:6px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--a);animation:wheel 1.6s infinite}
-@keyframes letter{to{opacity:1;transform:none}}
-@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-@keyframes wheel{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(14px)}}
+.hero .stage{justify-content:center;text-align:center;align-items:center;padding:0 20px}
+.hero .txt{max-width:900px}
+.hero h2{font-size:clamp(68px,17vw,210px)}
+.hero .tag{display:inline-block;font:700 13px 'Cairo';color:var(--a);border:1px solid rgba(79,209,197,.45);padding:4px 16px;border-radius:999px;margin-bottom:10px;opacity:0;transition:1s .2s;background:rgba(79,209,197,.07)}
+.hero.on .tag{opacity:1}
+.hint{margin-top:40px;font-size:13px;color:var(--muted);opacity:0;transition:1s 1.2s}
+.hero.on .hint{opacity:1}
+.hint i{display:block;width:22px;height:36px;border:2px solid var(--muted);border-radius:12px;margin:8px auto 0;position:relative}
+.hint i:after{content:"";position:absolute;top:6px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--a);animation:wheel 1.6s infinite}
+@keyframes wheel{to{opacity:0;transform:translateY(14px)}}
 
-/* sections */
-section.s{padding:12vh 16px;perspective:1400px}
-.card{max-width:900px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:clamp(22px,4.5vw,48px);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 30px 80px rgba(0,0,0,.45);transform-style:preserve-3d;will-change:transform,opacity}
-.num{font:900 15px 'Cairo';color:var(--a);letter-spacing:1px}
-.card h2{font-size:clamp(28px,5.5vw,44px);margin:2px 0 16px;background:linear-gradient(90deg,#fff,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
-.card h3{font-size:clamp(20px,3.6vw,25px);margin:26px 0 8px;color:#fff}
-.card h3:before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--b);margin-left:10px;box-shadow:0 0 10px var(--b)}
-.card p{margin:10px 0;color:#dde3f7}
-.card ul.list{margin:10px 22px 10px 0}
-.card ul.list li{margin:6px 0}
-.card strong{color:#fff}
-.f{direction:ltr;unicode-bidi:isolate;font-family:'Cairo',monospace;color:var(--d);white-space:nowrap}
-.eq{direction:ltr;text-align:center;font:600 clamp(16px,3.4vw,22px) 'Cairo';background:rgba(0,0,0,.3);border:1px dashed rgba(250,204,21,.4);border-radius:14px;padding:14px;margin:16px 0;color:var(--d);overflow-x:auto;white-space:nowrap}
-.note{border-right:4px solid var(--c);background:rgba(244,114,182,.08);padding:12px 16px;border-radius:10px;margin:16px 0}
-.reveal>*{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
-.reveal.in>*{opacity:1;transform:none}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}
-.tile{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:16px;transition:transform .4s,border-color .4s}
-.tile:hover{transform:translateY(-6px) rotateX(6deg);border-color:var(--a)}
-.tile .ic{font-size:30px}
-.tile h4{font:700 18px 'Cairo';margin:6px 0;color:#fff}
-.tile p{font-size:15.5px;margin:0;color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
-.stat{text-align:center;padding:14px;border-radius:16px;background:linear-gradient(160deg,rgba(139,92,246,.18),rgba(79,209,197,.08));border:1px solid var(--line)}
-.stat b{display:block;font:900 clamp(26px,5vw,38px) 'Cairo';color:var(--a)}
-.stat span{font-size:14px;color:var(--muted)}
+/* big counter */
+.count{font:900 clamp(38px,6vw,70px) 'Cairo';direction:ltr;text-align:right;color:var(--d);text-shadow:0 0 24px rgba(250,204,21,.6);margin-top:10px;opacity:0;transition:.8s .5s}
+.on .count{opacity:1}
+.count small{font-size:.4em;color:var(--muted);text-shadow:none}
 
-/* timeline */
-.tl{position:relative;margin:20px 0;padding-right:26px}
-.tl:before{content:"";position:absolute;right:7px;top:0;bottom:0;width:2px;background:linear-gradient(var(--a),var(--b),var(--c))}
-.tl .ev{position:relative;margin:0 0 18px}
-.tl .ev:before{content:"";position:absolute;right:-25px;top:10px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--a)}
-.tl .yr{font:900 20px 'Cairo';color:var(--d)}
-.tl p{margin:2px 0}
+/* 3D chip ring */
+.ringwrap{perspective:900px;height:150px;margin-top:26px;position:relative;opacity:0;transition:1s .5s}
+.on .ringwrap{opacity:1}
+.ring{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.ring span{position:absolute;left:-60px;top:-22px;width:120px;height:44px;display:flex;align-items:center;justify-content:center;gap:6px;font:700 15px 'Cairo';border-radius:14px;background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(79,209,197,.2));border:1px solid rgba(255,255,255,.25);box-shadow:0 0 18px rgba(139,92,246,.45);backface-visibility:visible}
 
-/* chain diagrams */
-.chains{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}
-.chains figure{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center}
-.chains svg{width:100%;height:120px}
-.chains figcaption{font:700 16px 'Cairo';color:#fff}
-.chains figcaption small{display:block;font:400 14px 'Tajawal';color:var(--muted)}
-.chains path,.chains line{stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 2.2s ease}
-.in .chains path,.in .chains line{stroke-dashoffset:0}
-.chains circle{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
-.in .chains circle{transform:scale(1)}
-
-/* polymerization animation */
-.poly-anim{direction:ltr;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:18px 0;min-height:70px}
-.mono{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;font:700 13px 'Cairo';background:radial-gradient(circle at 35% 35%,#9ef5ec,#1f8f86);color:#04201d;box-shadow:0 0 18px rgba(79,209,197,.5);opacity:0;transform:translateX(120px) scale(.4)}
-.in .mono{animation:join .8s cubic-bezier(.2,.8,.2,1) forwards}
-.bond{width:18px;height:4px;background:var(--d);border-radius:2px;opacity:0}
-.in .bond{animation:fadein .4s forwards}
-@keyframes join{to{opacity:1;transform:none}}
-@keyframes fadein{to{opacity:1}}
-
-/* table */
-.tw{overflow-x:auto;margin:16px 0;border-radius:16px;border:1px solid var(--line)}
-table{width:100%;border-collapse:collapse;min-width:640px;font-size:15.5px}
-th,td{padding:11px 12px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
-th{background:rgba(139,92,246,.22);font:700 15px 'Cairo';color:#fff;position:sticky;top:0}
-tr:nth-child(even) td{background:rgba(255,255,255,.03)}
-td .f{white-space:normal}
-
-/* recycle codes */
-.codes{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:16px 0}
-.code{text-align:center;padding:14px 8px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-.code .tri{width:56px;height:56px;margin:0 auto 6px;position:relative;display:flex;align-items:center;justify-content:center;font:900 20px 'Cairo';color:var(--a)}
-.code .tri svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 14s linear infinite}
-.code b{display:block;font:700 15px 'Cairo';direction:ltr}
-.code span{font-size:13px;color:var(--muted)}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.refs li{margin:8px 0;color:var(--muted);font-size:15.5px}
-footer{text-align:center;color:var(--muted);font-size:14px;padding:40px 16px 70px;position:relative;z-index:2}
-
-@media(max-width:600px){body{font-size:16.5px}section.s{padding:8vh 10px}.card{border-radius:20px}}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* end */
+.end .txt{max-width:min(620px,48vw)}
+@media(max-width:700px){.end .txt{max-width:100%}}
+.end a.cta{pointer-events:auto;display:inline-block;margin-top:24px;font:700 16px 'Cairo';color:#04050d;background:linear-gradient(90deg,var(--a),var(--b));padding:11px 26px;border-radius:999px;text-decoration:none;box-shadow:0 0 30px rgba(139,92,246,.6);opacity:0;transition:1s .8s}
+.end.on a.cta{opacity:1}
+@media(prefers-reduced-motion:reduce){.sc h2{animation:none}}
 </style>
 </head>
 <body>
-<canvas id="bg" aria-hidden="true"></canvas>
-<div class="glow"></div>
-<div id="progress"></div>
-<div id="counter">طول السلسلة: <b id="nval">0</b> وحدة</div>
-<nav class="dots" id="dots"></nav>
+<div id="loader"><div class="hex"><svg viewBox="0 0 100 100"><path d="M50 6 L88 28 L88 72 L50 94 L12 72 L12 28 Z" fill="none" stroke="#4fd1c5" stroke-width="4"/></svg></div><p>جارٍ تحميل الجزيئات…</p></div>
+<canvas id="gl"></canvas>
+<div class="vign"></div>
+<div id="bar"></div>
+<nav id="dots"></nav>
+<div class="badge"><i></i>THREE.JS · WEBGL · BLOOM</div>
 
 <main>
-<!-- ============ HERO ============ -->
-<header class="hero" id="top">
-  <div class="tag">بحث مادة الكيمياء العامة · 2026 / 2027</div>
-  <h1 id="title">البوليمرات</h1>
-  <p class="sub">من جزيء صغير إلى سلسلة عملاقة تصنع عالمنا</p>
-  <div class="meta">
-    <div><small>المادة</small>كيمياء عامة</div>
-    <div><small>موضوع البحث</small>البوليمرات</div>
-    <div><small>مقدم إلى</small><span id="doctor">الدكتور / ............</span></div>
-  </div>
-  <div class="members"><small>أعضاء المجموعة</small><ul id="members"></ul></div>
-  <div class="scroll-hint">مرّر للأسفل وشاهد السلسلة وهي تنمو<i></i></div>
-</header>
+  <section class="sc hero" data-name="البداية"><div class="stage"><div class="txt">
+    <div class="tag">كيمياء عامة · 2026/2027</div>
+    <h2>البوليمرات</h2>
+    <p class="l">رحلة من جزيء واحد… إلى عالم كامل</p>
+    <div class="hint">مرّر للأسفل<i></i></div>
+  </div></div></section>
 
-<!-- 1 -->
-<section class="s" id="intro" data-title="مقدمة"><div class="card reveal">
-  <div class="num">01</div>
-  <h2>مقدمة</h2>
-  <p>انظر حولك الآن: غلاف الهاتف، زجاجة الماء، الملابس التي ترتديها، إطارات السيارات، وحتى الحمض النووي داخل خلاياك. كل هذه الأشياء تشترك في شيء واحد: أنها مصنوعة من <strong>البوليمرات</strong>.</p>
-  <p>البوليمرات من أهم فروع الكيمياء الحديثة، وقد غيّرت شكل الحياة خلال القرن العشرين. فقد حلّت محل المعادن والخشب والزجاج في آلاف التطبيقات، لأنها خفيفة الوزن، رخيصة، سهلة التشكيل، ومقاومة للماء والتآكل.</p>
-  <p>في هذا البحث نتعرف على معنى البوليمر، وكيف اكتشفه العلماء، وكيف تُصنّف البوليمرات، وكيف تتكون عن طريق تفاعلات البلمرة، ثم نتناول خواصها وأشهر أنواعها، والبوليمرات الطبيعية، وتطبيقاتها في حياتنا، وأخيراً أثرها على البيئة وطرق إعادة تدويرها.</p>
-  <div class="stats">
-    <div class="stat"><b data-count="1000" data-suffix="+">0</b><span>وحدة متكررة في السلسلة الواحدة غالباً</span></div>
-    <div class="stat"><b data-count="1907">0</b><span>عام اختراع أول بلاستيك صناعي بالكامل</span></div>
-    <div class="stat"><b data-count="1953">0</b><span>عام نوبل لـ"شتاودنجر" أبو البوليمرات</span></div>
-  </div>
-</div></section>
+  <section class="sc" data-name="المونومر"><div class="stage"><div class="txt">
+    <div class="idx">01</div><h2>المونومر</h2>
+    <p class="l">جزيء صغير… هو حجر البناء</p>
+    <div class="chips"><span class="chip f">CH₂ = CH₂</span><span class="chip">إيثيلين</span></div>
+  </div></div></section>
 
-<!-- 2 -->
-<section class="s" id="def" data-title="التعريف"><div class="card reveal">
-  <div class="num">02</div>
-  <h2>ما هو البوليمر؟</h2>
-  <p>كلمة <strong>بوليمر (Polymer)</strong> أصلها يوناني: <strong>Poly</strong> بمعنى "كثير"، و<strong>Meros</strong> بمعنى "جزء". إذن البوليمر هو "الشيء المكوّن من أجزاء كثيرة".</p>
-  <p><strong>البوليمر:</strong> جزيء ضخم (Macromolecule) يتكون من ارتباط عدد كبير جداً من الجزيئات الصغيرة المتشابهة بروابط تساهمية، لتكوين سلسلة طويلة.</p>
-  <p><strong>المونومر (Monomer):</strong> هو الجزيء الصغير الذي يتكرر ليبني البوليمر، مثل جزيء الإيثيلين <span class="f">CH<sub>2</sub>=CH<sub>2</sub></span> الذي يُبنى منه البولي إيثيلين.</p>
-  <p><strong>الوحدة المتكررة (Repeating unit):</strong> هي الجزء الذي يتكرر على طول السلسلة، ويُكتب بين قوسين مع الرمز n.</p>
-  <div class="poly-anim" aria-hidden="true">
-    <span class="mono" style="animation-delay:.0s">M</span><span class="bond" style="animation-delay:.5s"></span>
-    <span class="mono" style="animation-delay:.25s">M</span><span class="bond" style="animation-delay:.75s"></span>
-    <span class="mono" style="animation-delay:.5s">M</span><span class="bond" style="animation-delay:1s"></span>
-    <span class="mono" style="animation-delay:.75s">M</span><span class="bond" style="animation-delay:1.25s"></span>
-    <span class="mono" style="animation-delay:1s">M</span><span class="bond" style="animation-delay:1.5s"></span>
-    <span class="mono" style="animation-delay:1.25s">M</span>
-  </div>
-  <div class="eq">n CH₂=CH₂ &nbsp;⟶&nbsp; –[ CH₂–CH₂ ]ₙ–</div>
-  <h3>تشبيه بسيط</h3>
-  <p>تخيّل المونومر كأنه <strong>خرزة</strong> واحدة، والبوليمر هو <strong>العقد</strong> الطويل الناتج عن نظم آلاف الخرزات في خيط واحد. الخرزة وحدها صغيرة وضعيفة، لكن العقد الكامل له خواص مختلفة تماماً.</p>
-  <h3>درجة البلمرة والكتلة الجزيئية</h3>
-  <p><strong>درجة البلمرة (n):</strong> عدد الوحدات المتكررة في سلسلة البوليمر. وتُحسب الكتلة الجزيئية للبوليمر تقريباً بالعلاقة:</p>
-  <div class="eq">الكتلة الجزيئية للبوليمر = n × الكتلة الجزيئية للوحدة المتكررة</div>
-  <p><strong>مثال:</strong> سلسلة بولي إيثيلين بها 10,000 وحدة، وكتلة الوحدة <span class="f">C<sub>2</sub>H<sub>4</sub></span> تساوي 28 g/mol، إذن الكتلة الجزيئية ≈ 280,000 g/mol. بينما الماء كتلته 18 g/mol فقط!</p>
-  <div class="note">السلاسل في عينة البوليمر الواحدة لا تكون كلها بنفس الطول، لذلك نتكلم عن <strong>متوسط</strong> الكتلة الجزيئية، وليس قيمة واحدة ثابتة.</div>
-</div></section>
+  <section class="sc" data-name="البلمرة"><div class="stage"><div class="txt">
+    <div class="idx">02</div><h2>البلمرة</h2>
+    <p class="l">آلاف الجزيئات تتحد في سلسلة واحدة</p>
+    <div class="count" id="count">n = 1</div>
+    <div class="chips"><span class="chip f">n CH₂=CH₂ → –[CH₂–CH₂]ₙ–</span></div>
+  </div></div></section>
 
-<!-- 3 -->
-<section class="s" id="history" data-title="التاريخ"><div class="card reveal">
-  <div class="num">03</div>
-  <h2>تاريخ البوليمرات</h2>
-  <p>استخدم الإنسان البوليمرات الطبيعية منذ آلاف السنين، مثل الصوف والحرير والقطن والجلود والمطاط الطبيعي، دون أن يعرف تركيبها. أما فهمها علمياً وتصنيعها فبدأ في القرنين التاسع عشر والعشرين:</p>
-  <div class="tl">
-    <div class="ev"><div class="yr">1839</div><p><strong>تشارلز جوديير</strong> يكتشف <strong>الفلكنة</strong>: تسخين المطاط مع الكبريت ليصبح أقوى ولا يلين بالحرارة.</p></div>
-    <div class="ev"><div class="yr">1907</div><p><strong>ليو بيكلاند</strong> يخترع <strong>الباكليت</strong>، أول بلاستيك صناعي بالكامل، واستُخدم في التليفونات والأجهزة الكهربائية.</p></div>
-    <div class="ev"><div class="yr">1920</div><p>العالم الألماني <strong>هيرمان شتاودنجر</strong> يقترح أن البوليمرات جزيئات عملاقة مترابطة بروابط تساهمية، وحصل على <strong>جائزة نوبل عام 1953</strong>.</p></div>
-    <div class="ev"><div class="yr">1933</div><p>اكتشاف <strong>البولي إيثيلين</strong> بالصدفة في شركة ICI البريطانية.</p></div>
-    <div class="ev"><div class="yr">1935</div><p><strong>والاس كاروثرز</strong> في شركة دوبونت يصنع <strong>النايلون</strong>، أول ألياف صناعية بالكامل.</p></div>
-    <div class="ev"><div class="yr">1938</div><p><strong>روي بلنكت</strong> يكتشف <strong>التيفلون (PTFE)</strong> بالصدفة، المستخدم في أواني الطهي غير اللاصقة.</p></div>
-    <div class="ev"><div class="yr">1953</div><p><strong>كارل تسيجلر</strong> و<strong>جوليو ناتا</strong> يطوران محفزات تسمح بصناعة بوليمرات منتظمة التركيب، ونالا <strong>نوبل عام 1963</strong>.</p></div>
-    <div class="ev"><div class="yr">1965</div><p><strong>ستيفاني كوليك</strong> تخترع <strong>الكيفلار</strong>، أقوى من الصلب بالنسبة لوزنه، ويُستخدم في السترات الواقية.</p></div>
-  </div>
-</div></section>
+  <section class="sc" data-name="خطي"><div class="stage"><div class="txt">
+    <div class="idx">03</div><h2>خطي</h2>
+    <p class="l">سلاسل مستقيمة متراصة… صلبة وكثيفة</p>
+    <div class="chips"><span class="chip f">HDPE</span></div>
+  </div></div></section>
 
-<!-- 4 -->
-<section class="s" id="class" data-title="التصنيف"><div class="card reveal">
-  <div class="num">04</div>
-  <h2>تصنيف البوليمرات</h2>
-  <p>يمكن تصنيف البوليمرات بأكثر من طريقة، وأهمها:</p>
+  <section class="sc" data-name="متفرع"><div class="stage"><div class="txt">
+    <div class="idx">04</div><h2>متفرع</h2>
+    <p class="l">فروع تخرج من السلسلة… لين ومرن</p>
+    <div class="chips"><span class="chip f">LDPE</span></div>
+  </div></div></section>
 
-  <h3>أولاً: حسب المصدر</h3>
-  <div class="grid">
-    <div class="tile"><div class="ic">🌿</div><h4>بوليمرات طبيعية</h4><p>توجد في الطبيعة: السليلوز، النشا، البروتينات، الحرير، الصوف، المطاط الطبيعي، و DNA.</p></div>
-    <div class="tile"><div class="ic">🧪</div><h4>بوليمرات صناعية</h4><p>يصنعها الإنسان من البترول غالباً: البولي إيثيلين، PVC، النايلون، البوليستر.</p></div>
-    <div class="tile"><div class="ic">⚗️</div><h4>بوليمرات شبه صناعية</h4><p>بوليمر طبيعي تم تعديله كيميائياً، مثل الحرير الصناعي (الرايون) وأسيتات السليلوز.</p></div>
-  </div>
+  <section class="sc" data-name="متشابك"><div class="stage"><div class="txt">
+    <div class="idx">05</div><h2>متشابك</h2>
+    <p class="l">شبكة مترابطة… لا تنصهر أبداً</p>
+    <div class="chips"><span class="chip">الباكليت</span><span class="chip">المطاط المفلكن</span></div>
+  </div></div></section>
 
-  <h3>ثانياً: حسب شكل السلسلة</h3>
-  <div class="chains">
-    <figure>
-      <svg viewBox="0 0 260 120"><path d="M10 60 L40 40 L70 60 L100 40 L130 60 L160 40 L190 60 L220 40 L250 60" fill="none" stroke="#4fd1c5" stroke-width="4"/>
-      <g fill="#8b5cf6"><circle cx="10" cy="60" r="6"/><circle cx="40" cy="40" r="6"/><circle cx="70" cy="60" r="6"/><circle cx="100" cy="40" r="6"/><circle cx="130" cy="60" r="6"/><circle cx="160" cy="40" r="6"/><circle cx="190" cy="60" r="6"/><circle cx="220" cy="40" r="6"/><circle cx="250" cy="60" r="6"/></g></svg>
-      <figcaption>خطي (Linear)<small>سلسلة واحدة طويلة، مثل HDPE. السلاسل تترص بجانب بعضها فيكون البوليمر أكثر كثافة وصلابة.</small></figcaption>
-    </figure>
-    <figure>
-      <svg viewBox="0 0 260 120"><path d="M10 60 L40 50 L70 60 L100 50 L130 60 L160 50 L190 60 L220 50 L250 60" fill="none" stroke="#4fd1c5" stroke-width="4"/>
-      <path d="M70 60 L80 95 L60 112 M160 50 L150 18 L170 5 M220 50 L235 85" fill="none" stroke="#f472b6" stroke-width="4"/>
-      <g fill="#8b5cf6"><circle cx="10" cy="60" r="6"/><circle cx="40" cy="50" r="6"/><circle cx="70" cy="60" r="6"/><circle cx="100" cy="50" r="6"/><circle cx="130" cy="60" r="6"/><circle cx="160" cy="50" r="6"/><circle cx="190" cy="60" r="6"/><circle cx="220" cy="50" r="6"/><circle cx="250" cy="60" r="6"/><circle cx="80" cy="95" r="5"/><circle cx="60" cy="112" r="5"/><circle cx="150" cy="18" r="5"/><circle cx="170" cy="5" r="5"/><circle cx="235" cy="85" r="5"/></g></svg>
-      <figcaption>متفرع (Branched)<small>سلسلة رئيسية تخرج منها فروع، مثل LDPE. الفروع تمنع تراص السلاسل فيكون أقل كثافة وأكثر ليونة.</small></figcaption>
-    </figure>
-    <figure>
-      <svg viewBox="0 0 260 120"><path d="M10 30 L60 20 L110 30 L160 20 L210 30 L250 20 M10 95 L60 105 L110 95 L160 105 L210 95 L250 105" fill="none" stroke="#4fd1c5" stroke-width="4"/>
-      <path d="M60 20 L60 105 M160 20 L160 105 M210 30 L210 95" fill="none" stroke="#facc15" stroke-width="4"/>
-      <g fill="#8b5cf6"><circle cx="60" cy="20" r="6"/><circle cx="160" cy="20" r="6"/><circle cx="210" cy="30" r="6"/><circle cx="60" cy="105" r="6"/><circle cx="160" cy="105" r="6"/><circle cx="210" cy="95" r="6"/></g></svg>
-      <figcaption>متشابك (Cross-linked)<small>السلاسل مربوطة ببعضها بروابط تساهمية تكوّن شبكة، مثل الباكليت والمطاط المفلكن. صلب جداً ولا ينصهر.</small></figcaption>
-    </figure>
-  </div>
+  <section class="sc" data-name="في كل مكان"><div class="stage"><div class="txt">
+    <div class="idx">06</div><h2>في كل مكان</h2>
+    <p class="l">من كيس البقالة… إلى الطائرة</p>
+    <div class="ringwrap"><div class="ring" id="ring"></div></div>
+  </div></div></section>
 
-  <h3>ثالثاً: حسب السلوك الحراري</h3>
-  <div class="grid">
-    <div class="tile"><div class="ic">🔥</div><h4>اللدائن الحرارية (Thermoplastics)</h4><p>تلين بالتسخين وتتصلب بالتبريد، ويمكن تكرار ذلك. لذلك يمكن إعادة تشكيلها وتدويرها. مثل: PE، PP، PVC، PS.</p></div>
-    <div class="tile"><div class="ic">🧱</div><h4>المتصلدة بالحرارة (Thermosets)</h4><p>تتصلب مرة واحدة بشكل نهائي بسبب التشابك. لا تنصهر عند إعادة التسخين بل تتفحم. مثل: الباكليت والإيبوكسي.</p></div>
-    <div class="tile"><div class="ic">🎈</div><h4>المطاطيات (Elastomers)</h4><p>بوليمرات مرنة تتمدد كثيراً ثم تعود لشكلها الأصلي، بسبب وجود تشابك خفيف بين السلاسل. مثل: المطاط.</p></div>
-  </div>
+  <section class="sc" data-name="الطبيعة"><div class="stage"><div class="txt">
+    <div class="idx">07</div><h2>حتى أنت</h2>
+    <p class="l">الـ DNA والبروتين والصوف… بوليمرات طبيعية</p>
+    <div class="chips"><span class="chip">🧬 DNA</span><span class="chip">🐑 الصوف</span><span class="chip">🌳 السليلوز</span></div>
+  </div></div></section>
 
-  <h3>رابعاً: حسب نوع المونومر</h3>
-  <ul class="list">
-    <li><strong>بوليمر متجانس (Homopolymer):</strong> يتكون من نوع واحد فقط من المونومرات، مثل البولي إيثيلين.</li>
-    <li><strong>بوليمر مشترك (Copolymer):</strong> يتكون من نوعين أو أكثر من المونومرات، مثل مطاط SBR (ستايرين + بيوتادايين) المستخدم في الإطارات.</li>
-  </ul>
-</div></section>
+  <section class="sc" data-name="المستقبل"><div class="stage"><div class="txt">
+    <div class="idx">08</div><h2>المستقبل</h2>
+    <p class="l">أعد التدوير… واصنع بوليمرات تتحلل</p>
+    <div class="chips"><span class="chip">♻️ إعادة التدوير</span><span class="chip f">PLA</span><span class="chip f">PHA</span></div>
+  </div></div></section>
 
-<!-- 5 -->
-<section class="s" id="polymerization" data-title="البلمرة"><div class="card reveal">
-  <div class="num">05</div>
-  <h2>تفاعلات البلمرة</h2>
-  <p><strong>البلمرة (Polymerization):</strong> هي التفاعل الكيميائي الذي ترتبط فيه المونومرات ببعضها لتكوين البوليمر. وتوجد طريقتان رئيسيتان:</p>
-
-  <h3>1. البلمرة بالإضافة (Addition Polymerization)</h3>
-  <p>تحدث في المونومرات التي تحتوي على <strong>رابطة ثنائية</strong> <span class="f">C=C</span>. تنكسر رابطة باي (π) في كل مونومر، وتتصل المونومرات ببعضها مباشرة <strong>دون خروج أي نواتج جانبية</strong>، لذلك كتلة البوليمر = مجموع كتل المونومرات.</p>
-  <p>تتم على ثلاث مراحل (في حالة البلمرة بالجذور الحرة):</p>
-  <div class="grid">
-    <div class="tile"><div class="ic">⚡</div><h4>1) البدء</h4><p>مادة بادئة (مثل البيروكسيد) تنقسم بالحرارة إلى جذور حرة، والجذر يهاجم الرابطة الثنائية في أول مونومر.</p></div>
-    <div class="tile"><div class="ic">🔗</div><h4>2) الانتشار</h4><p>الجذر الجديد يهاجم مونومراً آخر، وهكذا تطول السلسلة بسرعة كبيرة بآلاف الوحدات.</p></div>
-    <div class="tile"><div class="ic">🛑</div><h4>3) الإنهاء</h4><p>يتوقف النمو عندما يتقابل جذران حران ويرتبطان معاً.</p></div>
-  </div>
-  <div class="eq">n CH₂=CHCl &nbsp;⟶&nbsp; –[ CH₂–CHCl ]ₙ– &nbsp;&nbsp;(PVC)</div>
-
-  <h3>2. البلمرة بالتكثيف (Condensation Polymerization)</h3>
-  <p>تحدث بين مونومرات تحتوي على <strong>مجموعتين وظيفيتين</strong> في كل طرف (مثل <span class="f">–OH</span> و <span class="f">–COOH</span> و <span class="f">–NH<sub>2</sub></span>). عند ارتباط كل مونومرين <strong>يخرج جزيء صغير</strong> مثل الماء <span class="f">H<sub>2</sub>O</span> أو <span class="f">HCl</span>.</p>
-  <p><strong>مثال: النايلون 6,6</strong> يتكون من تفاعل هكساميثيلين داي أمين مع حمض الأديبيك، ويخرج جزيء ماء عند تكوين كل رابطة أميد:</p>
-  <div class="eq">n H₂N–(CH₂)₆–NH₂ + n HOOC–(CH₂)₄–COOH ⟶ –[ NH–(CH₂)₆–NH–CO–(CH₂)₄–CO ]ₙ– + (2n−1) H₂O</div>
-  <p>ومن أمثلتها أيضاً: البوليستر (PET) من الإيثيلين جليكول وحمض التيريفثاليك، والبروتينات في جسم الإنسان التي تتكون من الأحماض الأمينية بخروج الماء.</p>
-
-  <h3>مقارنة بين النوعين</h3>
-  <div class="tw"><table>
-    <tr><th>وجه المقارنة</th><th>البلمرة بالإضافة</th><th>البلمرة بالتكثيف</th></tr>
-    <tr><td>نوع المونومر</td><td>يحتوي على رابطة ثنائية C=C</td><td>يحتوي على مجموعتين وظيفيتين</td></tr>
-    <tr><td>النواتج الجانبية</td><td>لا يوجد</td><td>يخرج جزيء صغير (H₂O أو HCl)</td></tr>
-    <tr><td>طريقة النمو</td><td>نمو سلسلي سريع (Chain-growth)</td><td>نمو تدريجي خطوة بخطوة (Step-growth)</td></tr>
-    <tr><td>أمثلة</td><td>PE، PP، PVC، PS، التيفلون</td><td>النايلون، PET، الباكليت، البروتينات</td></tr>
-  </table></div>
-</div></section>
-
-<!-- 6 -->
-<section class="s" id="props" data-title="الخواص"><div class="card reveal">
-  <div class="num">06</div>
-  <h2>خواص البوليمرات</h2>
-  <p>خواص البوليمر لا تعتمد فقط على نوع المونومر، بل أيضاً على طول السلاسل وشكلها وطريقة ترتيبها والقوى بينها.</p>
-  <h3>البنية البلورية وغير البلورية</h3>
-  <ul class="list">
-    <li><strong>المناطق البلورية (Crystalline):</strong> السلاسل فيها مرتبة ومتراصة بانتظام، فيكون البوليمر أقوى وأكثر كثافة وأقل شفافية.</li>
-    <li><strong>المناطق غير البلورية (Amorphous):</strong> السلاسل متشابكة بشكل عشوائي مثل طبق الإسباجتي، فيكون البوليمر أكثر شفافية ومرونة.</li>
-    <li>معظم البوليمرات <strong>شبه بلورية</strong>، أي تحتوي على المنطقتين معاً.</li>
-  </ul>
-  <h3>درجة التحول الزجاجي (T<sub>g</sub>)</h3>
-  <p>هي درجة الحرارة التي يتحول عندها البوليمر من حالة صلبة هشة "زجاجية" إلى حالة لينة "مطاطية". مثلاً المطاط درجة T<sub>g</sub> له أقل بكثير من درجة حرارة الغرفة لذلك يكون مرناً، بينما البولي ستايرين أعلى منها لذلك يكون صلباً وهشاً.</p>
-  <p>البوليمرات لا تنصهر عند درجة حرارة واحدة حادة مثل المواد البلورية البسيطة، بل تلين تدريجياً على مدى من درجات الحرارة.</p>
-  <h3>العوامل المؤثرة على الخواص</h3>
-  <div class="grid">
-    <div class="tile"><h4>طول السلسلة</h4><p>كلما زاد طول السلاسل زادت القوة ودرجة الانصهار، لأن السلاسل تتشابك أكثر.</p></div>
-    <div class="tile"><h4>القوى بين السلاسل</h4><p>الروابط الهيدروجينية في النايلون تجعله أقوى بكثير من البولي إيثيلين الذي توجد به قوى فان دير فالز فقط.</p></div>
-    <div class="tile"><h4>التفرع والتشابك</h4><p>التفرع يقلل الكثافة والصلابة، والتشابك يزيد الصلابة ويمنع الانصهار.</p></div>
-    <div class="tile"><h4>الإضافات</h4><p>تُضاف ملدّنات (Plasticizers) لجعل البوليمر أكثر ليونة مثل PVC المرن، وتُضاف أصباغ ومثبتات ومواد مالئة.</p></div>
-  </div>
-  <h3>خواص عامة مميزة</h3>
-  <ul class="list">
-    <li>خفيفة الوزن (كثافة منخفضة) مقارنة بالمعادن.</li>
-    <li>عوازل جيدة للكهرباء والحرارة، لذلك تُغلّف بها الأسلاك.</li>
-    <li>مقاومة للماء والأحماض والتآكل.</li>
-    <li>سهلة التشكيل بالحقن والبثق والنفخ.</li>
-    <li>عيبها: معظمها لا يتحلل في الطبيعة بسهولة، ويتأثر بالحرارة العالية.</li>
-  </ul>
-</div></section>
-
-<!-- 7 -->
-<section class="s" id="common" data-title="أنواع شائعة"><div class="card reveal">
-  <div class="num">07</div>
-  <h2>أشهر البوليمرات الصناعية</h2>
-  <p>الجدول التالي يوضح أشهر البوليمرات ومونومراتها ونوع البلمرة واستخداماتها:</p>
-  <div class="tw"><table>
-    <tr><th>البوليمر</th><th>المونومر</th><th>نوع البلمرة</th><th>أهم الاستخدامات</th></tr>
-    <tr><td><strong>البولي إيثيلين (PE)</strong></td><td>الإيثيلين <span class="f">CH₂=CH₂</span></td><td>إضافة</td><td>الأكياس، العبوات، الأنابيب، الأغلفة</td></tr>
-    <tr><td><strong>البولي بروبيلين (PP)</strong></td><td>البروبيلين <span class="f">CH₂=CH–CH₃</span></td><td>إضافة</td><td>علب الطعام، الحبال، أجزاء السيارات، السجاد</td></tr>
-    <tr><td><strong>بولي فينيل كلوريد (PVC)</strong></td><td>كلوريد الفينيل <span class="f">CH₂=CHCl</span></td><td>إضافة</td><td>مواسير المياه، عزل الأسلاك، الأرضيات، الشبابيك</td></tr>
-    <tr><td><strong>البولي ستايرين (PS)</strong></td><td>الستايرين <span class="f">CH₂=CH–C₆H₅</span></td><td>إضافة</td><td>الفوم، أكواب الاستخدام الواحد، مواد التغليف</td></tr>
-    <tr><td><strong>التيفلون (PTFE)</strong></td><td>رباعي فلورو الإيثيلين <span class="f">CF₂=CF₂</span></td><td>إضافة</td><td>أواني الطهي غير اللاصقة، العوازل</td></tr>
-    <tr><td><strong>النايلون 6,6</strong></td><td>هكساميثيلين داي أمين + حمض الأديبيك</td><td>تكثيف</td><td>الملابس، الجوارب، الحبال، الفرش</td></tr>
-    <tr><td><strong>البوليستر (PET)</strong></td><td>إيثيلين جليكول + حمض التيريفثاليك</td><td>تكثيف</td><td>زجاجات المياه والمشروبات، ألياف الملابس</td></tr>
-    <tr><td><strong>الباكليت</strong></td><td>الفينول + الفورمالدهيد</td><td>تكثيف</td><td>مقابض الأواني، المفاتيح الكهربائية</td></tr>
-    <tr><td><strong>المطاط الطبيعي</strong></td><td>الأيزوبرين <span class="f">CH₂=C(CH₃)–CH=CH₂</span></td><td>إضافة (طبيعي)</td><td>الإطارات، القفازات، الأحزمة</td></tr>
-  </table></div>
-  <div class="note">لاحظ أن كل بوليمرات الإضافة في الجدول مونومراتها تحتوي على رابطة ثنائية <span class="f">C=C</span>، والفرق بينها فقط في الذرة أو المجموعة المرتبطة بها (H أو CH₃ أو Cl أو حلقة بنزين أو F).</div>
-</div></section>
-
-<!-- 8 -->
-<section class="s" id="natural" data-title="بوليمرات طبيعية"><div class="card reveal">
-  <div class="num">08</div>
-  <h2>البوليمرات الطبيعية</h2>
-  <p>الطبيعة هي أقدم "مصنع" للبوليمرات. فجسم الإنسان والنباتات والحيوانات مبنية بالكامل تقريباً من البوليمرات:</p>
-  <div class="grid">
-    <div class="tile"><div class="ic">🌳</div><h4>السليلوز</h4><p>أكثر بوليمر عضوي انتشاراً على الأرض. يتكون من وحدات الجلوكوز، ويكوّن جدران الخلايا النباتية والخشب والقطن والورق.</p></div>
-    <div class="tile"><div class="ic">🍞</div><h4>النشا</h4><p>يتكون أيضاً من الجلوكوز لكن بطريقة ربط مختلفة، وهو مخزن الطاقة في النبات، موجود في الأرز والبطاطس والقمح.</p></div>
-    <div class="tile"><div class="ic">💪</div><h4>البروتينات</h4><p>بوليمرات من الأحماض الأمينية مرتبطة بروابط ببتيدية (بلمرة تكثيف). منها الإنزيمات والعضلات والهيموجلوبين.</p></div>
-    <div class="tile"><div class="ic">🐑</div><h4>الصوف والحرير</h4><p>الصوف مكوّن من بروتين <strong>الكيراتين</strong>، والحرير من بروتين <strong>الفيبروين</strong> الذي تنتجه دودة القز.</p></div>
-    <div class="tile"><div class="ic">🧬</div><h4>الأحماض النووية DNA و RNA</h4><p>بوليمرات من وحدات النيوكليوتيدات، وتحمل المعلومات الوراثية لكل كائن حي.</p></div>
-    <div class="tile"><div class="ic">🌴</div><h4>المطاط الطبيعي</h4><p>يُستخرج من عصارة شجرة المطاط، وهو بوليمر من الأيزوبرين، ويُفلكن بالكبريت لتحسين خواصه.</p></div>
-  </div>
-  <p>من المدهش أن السليلوز والنشا يتكونان من نفس المونومر (الجلوكوز)، لكن الاختلاف في طريقة ارتباط الوحدات يجعل الإنسان يستطيع هضم النشا ولا يستطيع هضم السليلوز.</p>
-</div></section>
-
-<!-- 9 -->
-<section class="s" id="apps" data-title="التطبيقات"><div class="card reveal">
-  <div class="num">09</div>
-  <h2>تطبيقات البوليمرات في حياتنا</h2>
-  <div class="grid">
-    <div class="tile"><div class="ic">📦</div><h4>التغليف</h4><p>أكبر مجال لاستخدام البلاستيك: أكياس، زجاجات، علب طعام، أغلفة تحافظ على الطعام.</p></div>
-    <div class="tile"><div class="ic">🏗️</div><h4>البناء</h4><p>مواسير PVC، عوازل حرارية من الفوم، دهانات وأرضيات وشبابيك.</p></div>
-    <div class="tile"><div class="ic">🚗</div><h4>السيارات والطائرات</h4><p>تقليل الوزن يقلل استهلاك الوقود: الإطارات، المصدات، التابلوه، ومواد مركبة من ألياف الكربون.</p></div>
-    <div class="tile"><div class="ic">🩺</div><h4>الطب</h4><p>الحقن والقفازات وأكياس الدم، خيوط جراحية تذوب في الجسم، عدسات لاصقة، ومفاصل صناعية.</p></div>
-    <div class="tile"><div class="ic">👕</div><h4>المنسوجات</h4><p>النايلون والبوليستر والأكريليك في الملابس والسجاد والحقائب.</p></div>
-    <div class="tile"><div class="ic">💻</div><h4>الإلكترونيات</h4><p>عزل الأسلاك، هياكل الأجهزة، لوحات الدوائر، وبوليمرات موصلة للكهرباء في الشاشات المرنة.</p></div>
-    <div class="tile"><div class="ic">🎨</div><h4>الدهانات واللواصق</h4><p>الدهانات الحديثة تحتوي على بوليمرات (راتنجات) تكوّن طبقة متماسكة بعد الجفاف، وكذلك الغراء والإيبوكسي.</p></div>
-    <div class="tile"><div class="ic">🛡️</div><h4>الحماية</h4><p>الكيفلار في السترات الواقية والخوذ، والبولي كربونات في الزجاج المضاد للكسر.</p></div>
-  </div>
-</div></section>
-
-<!-- 10 -->
-<section class="s" id="env" data-title="البيئة"><div class="card reveal">
-  <div class="num">10</div>
-  <h2>البوليمرات والبيئة</h2>
-  <p>الميزة التي تجعل البلاستيك مفيداً، وهي أنه <strong>متين ولا يتحلل بسهولة</strong>، هي نفسها سبب أكبر مشكلة بيئية له. فبعض أنواع البلاستيك تبقى في البيئة مئات السنين.</p>
-  <h3>أهم المشكلات</h3>
-  <ul class="list">
-    <li><strong>تراكم النفايات:</strong> نسبة صغيرة فقط من نفايات البلاستيك في العالم يُعاد تدويرها (حوالي 9% وفق تقرير منظمة OECD عام 2022)، والباقي يُدفن أو يُحرق أو يتسرب للبيئة.</li>
-    <li><strong>التلوث البحري:</strong> البلاستيك في البحار يضر بالأسماك والسلاحف والطيور التي تبتلعه أو تعلق فيه.</li>
-    <li><strong>الجسيمات البلاستيكية الدقيقة (Microplastics):</strong> قطع أصغر من 5 ملم تنتج من تكسر البلاستيك، وتم العثور عليها في المياه والتربة والطعام.</li>
-    <li><strong>الحرق:</strong> حرق بعض البوليمرات مثل PVC يطلق غازات سامة مثل كلوريد الهيدروجين.</li>
-  </ul>
-  <h3>رموز إعادة التدوير</h3>
-  <p>تُطبع على المنتجات البلاستيكية أرقام داخل مثلث لتسهيل فرزها:</p>
-  <div class="codes" id="codes"></div>
-  <h3>الحلول</h3>
-  <div class="grid">
-    <div class="tile"><div class="ic">♻️</div><h4>إعادة التدوير</h4><p><strong>ميكانيكي:</strong> فرز وغسيل وفرم وصهر وإعادة تشكيل. <strong>كيميائي:</strong> تكسير البوليمر للمونومرات وإعادة استخدامها.</p></div>
-    <div class="tile"><div class="ic">🌽</div><h4>بوليمرات قابلة للتحلل</h4><p>مثل <strong>PLA</strong> المصنوع من نشا الذرة، و<strong>PHA</strong> الذي تنتجه البكتيريا، وتتحلل بواسطة الكائنات الدقيقة في ظروف مناسبة.</p></div>
-    <div class="tile"><div class="ic">🛍️</div><h4>تقليل الاستخدام</h4><p>استخدام الأكياس القماش والزجاجات القابلة لإعادة الاستخدام، وتقليل منتجات الاستخدام الواحد.</p></div>
-  </div>
-</div></section>
-
-<!-- 11 -->
-<section class="s" id="conclusion" data-title="الخاتمة"><div class="card reveal">
-  <div class="num">11</div>
-  <h2>الخاتمة</h2>
-  <p>تعرّفنا في هذا البحث على البوليمرات، وهي جزيئات عملاقة تتكون من تكرار وحدات صغيرة تسمى المونومرات. ورأينا أن الإنسان استخدم البوليمرات الطبيعية منذ القدم، ثم بدأ في تصنيعها في القرن العشرين بعد أن أثبت شتاودنجر أنها جزيئات ضخمة مترابطة بروابط تساهمية.</p>
-  <p>وعرفنا أن البوليمرات تُصنّف حسب المصدر وشكل السلسلة والسلوك الحراري، وأنها تتكون بطريقتين: البلمرة بالإضافة والبلمرة بالتكثيف. كما أن خواصها تعتمد على طول السلاسل وترتيبها والقوى بينها، وهو ما يسمح للكيميائيين بتصميم بوليمر مناسب لكل استخدام.</p>
-  <p>وبالرغم من الفوائد الكبيرة للبوليمرات في الطب والبناء والصناعة والحياة اليومية، إلا أن التخلص منها يمثل تحدياً بيئياً كبيراً. لذلك فإن مستقبل علم البوليمرات يتجه نحو <strong>البوليمرات القابلة للتحلل</strong> و<strong>تحسين إعادة التدوير</strong>، حتى نستفيد منها دون أن نضر بكوكبنا.</p>
-</div></section>
-
-<!-- 12 -->
-<section class="s" id="refs" data-title="المراجع"><div class="card reveal">
-  <div class="num">12</div>
-  <h2>المراجع</h2>
-  <ol class="refs" style="margin-right:22px">
-    <li>Brown, T. L., LeMay, H. E., Bursten, B. E., et al. <em>Chemistry: The Central Science</em>. Pearson. (فصل المواد الحديثة والبوليمرات)</li>
-    <li>Callister, W. D., &amp; Rethwisch, D. G. <em>Materials Science and Engineering: An Introduction</em>. Wiley. (فصول تركيب وخواص البوليمرات)</li>
-    <li>Odian, G. <em>Principles of Polymerization</em>, 4th ed. Wiley-Interscience, 2004.</li>
-    <li>IUPAC. <em>Compendium of Chemical Terminology (Gold Book)</em>: تعريفات Polymer و Monomer و Macromolecule.</li>
-    <li>OECD. <em>Global Plastics Outlook: Economic Drivers, Environmental Impacts and Policy Options</em>. OECD Publishing, Paris, 2022.</li>
-    <li>The Nobel Prize: Hermann Staudinger (Chemistry 1953) و Karl Ziegler &amp; Giulio Natta (Chemistry 1963). nobelprize.org</li>
-  </ol>
-</div></section>
+  <section class="sc end" data-name="شكراً"><div class="stage"><div class="txt">
+    <h2>شكراً</h2>
+    <p class="l" id="doctor">مقدم إلى: الدكتور / ............</p>
+    <div class="chips" id="members"></div>
+    <a class="cta" href="research.html">اقرأ البحث الكامل ←</a>
+  </div></div></section>
 </main>
 
-<footer>بحث البوليمرات · مادة الكيمياء العامة 2026/2027<br><a href="#top" style="color:var(--a)">العودة للأعلى ↑</a></footer>
-
 <script>
-/* ======= عدّل هنا: أسماء المجموعة واسم الدكتور ======= */
-const MEMBERS = ["الطالب الأول","الطالب الثاني","الطالب الثالث","الطالب الرابع","الطالب الخامس"];
-const DOCTOR  = "الدكتور / ............";
-/* ===================================================== */
-document.getElementById('doctor').textContent = DOCTOR;
-document.getElementById('members').innerHTML = MEMBERS.map(m=>`<li>${m}</li>`).join('');
+/* ===== عدّل هنا: أسماء المجموعة واسم الدكتور ===== */
+const MEMBERS=["الطالب الأول","الطالب الثاني","الطالب الثالث","الطالب الرابع","الطالب الخامس"];
+const DOCTOR="الدكتور / ............";
+/* ================================================== */
+document.getElementById('doctor').textContent="مقدم إلى: "+DOCTOR;
+document.getElementById('members').innerHTML=MEMBERS.map(m=>`<span class="chip">${m}</span>`).join('');
 
-// hero letters
-const t = document.getElementById('title');
-setTimeout(()=>t.classList.add('done'),1600);
+// sparkle stars around each headline
+const star='<svg viewBox="0 0 24 24"><path d="M12 0 C13 8 16 11 24 12 C16 13 13 16 12 24 C11 16 8 13 0 12 C8 11 11 8 12 0Z" fill="#fff"/></svg>';
+document.querySelectorAll('.sc h2').forEach(h=>{
+  for(let i=0;i<6;i++){const s=document.createElement('span');s.className='spk';s.innerHTML=star;
+    s.style.top=(Math.random()*90-15)+'%';s.style.right=(Math.random()*100)+'%';
+    const z=8+Math.random()*16;s.style.width=s.style.height=z+'px';s.style.animationDelay=(Math.random()*2.2)+'s';
+    h.parentNode.insertBefore(s,h);}
+});
 
-// recycle codes
-const codes=[["1","PET","زجاجات المياه"],["2","HDPE","عبوات المنظفات"],["3","PVC","المواسير"],["4","LDPE","الأكياس"],["5","PP","علب الطعام"],["6","PS","الفوم"],["7","OTHER","أنواع أخرى"]];
-document.getElementById('codes').innerHTML = codes.map(c=>`<div class="code"><div class="tri"><svg viewBox="0 0 60 60"><path d="M30 6 L54 50 L6 50 Z" fill="none" stroke="#4fd1c5" stroke-width="3" stroke-dasharray="14 6"/></svg>${c[0]}</div><b>${c[1]}</b><span>${c[2]}</span></div>`).join('');
+// 3D ring of uses
+const uses=["🛍️ أكياس","🍼 زجاجات","👕 ملابس","🚗 إطارات","📱 هواتف","💉 طب","🏗️ مواسير","✈️ طائرات"];
+const ring=document.getElementById('ring');
+uses.forEach((u,i)=>{const s=document.createElement('span');s.textContent=u;s.style.transform=`rotateY(${i*45}deg) translateZ(${innerWidth<700?150:190}px)`;ring.appendChild(s);});
 
-// reveal + counters
-const io = new IntersectionObserver(es=>es.forEach(e=>{
-  if(!e.isIntersecting) return;
-  const el=e.target; el.classList.add('in');
-  [...el.children].forEach((ch,i)=>ch.style.transitionDelay=(Math.min(i,8)*0.06)+'s');
-  el.querySelectorAll('[data-count]').forEach(n=>{
-    const end=+n.dataset.count, suf=n.dataset.suffix||''; let s=null;
-    const step=ts=>{ if(!s)s=ts; const k=Math.min(1,(ts-s)/1600); const v=Math.round(end*(1-Math.pow(1-k,3)));
-      n.textContent=v+suf; if(k<1)requestAnimationFrame(step);}; requestAnimationFrame(step);
-  });
-  io.unobserve(el);
-}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// nav dots
-const secs=[...document.querySelectorAll('section.s')];
+const secs=[...document.querySelectorAll('.sc')];
 const dots=document.getElementById('dots');
-secs.forEach(s=>{const a=document.createElement('a');a.href='#'+s.id;a.title=s.dataset.title;dots.appendChild(a);});
+secs.forEach((s,i)=>{const a=document.createElement('a');a.href='#';a.title=s.dataset.name;a.onclick=e=>{e.preventDefault();scrollTo({top:s.offsetTop+(i?innerHeight*.35:0),behavior:'smooth'})};dots.appendChild(a)});
 const dotEls=[...dots.children];
+const countEl=document.getElementById('count');
 
-// 3D tilt of cards while scrolling
-const cards=[...document.querySelectorAll('.card')];
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-function tilt(){
-  const H=innerHeight; let active=0, best=1e9;
-  cards.forEach((c,i)=>{
-    const r=c.getBoundingClientRect();
-    if(r.bottom<-200||r.top>H+200) return;
-    const d=(r.top+Math.min(r.height,H)/2-H/2)/H;
-    if(Math.abs(d)<best){best=Math.abs(d);active=i;}
-    if(reduce) return;
-    const cd=Math.max(-1,Math.min(1,d));
-    const k=innerWidth<700?.55:1;
-    c.style.transform=`rotateX(${cd*-14*k}deg) rotateY(${cd*7*k}deg) translateZ(${-Math.abs(cd)*120*k}px)`;
-    c.style.filter=`brightness(${1-Math.min(.45,Math.abs(cd)*.5)})`;
+window.__S=0;   // continuous scene value used by the 3D engine
+function update(){
+  const vh=innerHeight, max=document.documentElement.scrollHeight-vh;
+  document.getElementById('bar').style.width=(max>0?scrollY/max*100:0)+'%';
+  let S=0, cur=0;
+  secs.forEach((s,k)=>{
+    const top=s.offsetTop, h=s.offsetHeight-vh;
+    if(scrollY>=top-1){ cur=k; const l=Math.max(0,Math.min(1,(scrollY-top)/h));
+      const m=l<.55?0:(l-.55)/.45; S=k+m*m*(3-2*m); s.__l=l; }
   });
-  dotEls.forEach((d,i)=>d.classList.toggle('on',i===active));
+  if(cur===secs.length-1) S=Math.min(S,secs.length-1);
+  window.__S=S;
+  secs.forEach((s,k)=>s.classList.toggle('on',k===cur && (s.__l??0)<.9 || (k===secs.length-1&&k===cur)));
+  dotEls.forEach((d,k)=>d.classList.toggle('on',k===cur));
+  // polymer counter
+  const l2=secs[2].__l??0; const n=Math.round(1+Math.pow(Math.min(1,l2/.6),3)*9999);
+  countEl.innerHTML=`n = ${n.toLocaleString('en')} <small>وحدة</small>`;
+  // ring rotation
+  ring.style.transform=`rotateX(-12deg) rotateY(${(secs[6].__l??0)*540}deg)`;
 }
-window.__scrollP=0;
-function onScroll(){
-  const max=document.documentElement.scrollHeight-innerHeight;
-  const p=max>0?scrollY/max:0; window.__scrollP=p;
-  document.getElementById('progress').style.width=(p*100)+'%';
-  tilt();
-}
-addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll); onScroll();
+addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
 </script>
 
-<script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
+<script type="importmap">{"imports":{"three":"./three.module.min.js","three/addons/":"./addons/"}}</script>
 <script type="module">
 import * as THREE from 'three';
-const canvas=document.getElementById('bg');
-let renderer;
-try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }catch(e){ canvas.remove(); throw e; }
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
+import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+
+const canvas=document.getElementById('gl');
 const mobile=innerWidth<700;
+const renderer=new THREE.WebGLRenderer({canvas,antialias:!mobile,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.5:2));
+renderer.setClearColor(0x04050d,1);
 const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(45,1,0.1,200);
-scene.add(new THREE.AmbientLight(0xffffff,0.55));
-const l1=new THREE.DirectionalLight(0xffffff,1.6); l1.position.set(5,8,10); scene.add(l1);
-const l2=new THREE.PointLight(0x8b5cf6,40,60); l2.position.set(-8,-4,6); scene.add(l2);
-const l3=new THREE.PointLight(0x4fd1c5,40,60); l3.position.set(8,4,-6); scene.add(l3);
+scene.fog=new THREE.FogExp2(0x04050d,0.012);
+const camera=new THREE.PerspectiveCamera(45,1,0.1,400);
+camera.position.set(0,0,30);
+const composer=new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene,camera));
+const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),1.15,0.55,0.08);
+composer.addPass(bloom); composer.addPass(new OutputPass());
 
-// build a coiled polyethylene-like chain: C backbone (zig-zag on a helix) + 2 H per C
-const N=mobile?70:110;
-const R=3.2, pitch=0.16, turn=0.42;
-const C=[], Hs=[];
-for(let i=0;i<N;i++){
-  const a=i*turn, z=(i%2?0.35:-0.35);
-  const rr=R+z;
-  const p=new THREE.Vector3(Math.cos(a)*rr,(i-N/2)*pitch,Math.sin(a)*rr);
-  C.push(p);
-  const radial=new THREE.Vector3(Math.cos(a),0,Math.sin(a)).multiplyScalar(i%2?1:-1);
-  const up=new THREE.Vector3(0,1,0);
-  Hs.push(p.clone().add(radial.clone().multiplyScalar(0.75)).add(up.clone().multiplyScalar(0.45)));
-  Hs.push(p.clone().add(radial.clone().multiplyScalar(0.75)).add(up.clone().multiplyScalar(-0.45)));
-}
+/* ---------- ATOMS ---------- */
+const N=120;
 const group=new THREE.Group(); scene.add(group);
-const cMat=new THREE.MeshStandardMaterial({color:0x2a3550,roughness:.35,metalness:.3,emissive:0x111a33});
-const hMat=new THREE.MeshStandardMaterial({color:0xeef2ff,roughness:.4,metalness:.05,emissive:0x222233});
-const bMat=new THREE.MeshStandardMaterial({color:0x4fd1c5,roughness:.3,metalness:.2,emissive:0x0b3a36});
-const hbMat=new THREE.MeshStandardMaterial({color:0xa7b0d0,roughness:.5});
-const seg=mobile?12:20;
-const cMesh=new THREE.InstancedMesh(new THREE.SphereGeometry(0.34,seg,seg),cMat,N);
-const hMesh=new THREE.InstancedMesh(new THREE.SphereGeometry(0.2,seg,seg),hMat,N*2);
-const cyl=new THREE.CylinderGeometry(0.08,0.08,1,8); cyl.translate(0,0.5,0); cyl.rotateX(Math.PI/2);
-const bMesh=new THREE.InstancedMesh(cyl,bMat,N-1);
-const hbMesh=new THREE.InstancedMesh(new THREE.CylinderGeometry(0.05,0.05,1,6).translate(0,0.5,0).rotateX(Math.PI/2),hbMat,N*2);
-group.add(cMesh,hMesh,bMesh,hbMesh);
-const m=new THREE.Matrix4(), q=new THREE.Quaternion(), s=new THREE.Vector3(), tmp=new THREE.Object3D();
-function bond(mesh,idx,a,b,scale){
-  tmp.position.copy(a); tmp.lookAt(b); tmp.scale.set(scale,scale,a.distanceTo(b)*scale); tmp.updateMatrix(); mesh.setMatrixAt(idx,tmp.matrix);
-}
-function place(mesh,idx,p,sc){ s.setScalar(sc); m.compose(p,q,s); mesh.setMatrixAt(idx,m); }
+const atomGeo=new THREE.SphereGeometry(0.32,mobile?14:22,mobile?14:22);
+const atomMat=new THREE.MeshBasicMaterial({color:0xffffff});
+const atoms=new THREE.InstancedMesh(atomGeo,atomMat,N);
+atoms.instanceColor=new THREE.InstancedBufferAttribute(new Float32Array(N*3),3);
+group.add(atoms);
+// halo sprites around atoms
+const glowTex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');
+  const r=g.createRadialGradient(32,32,0,32,32,32);r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(.25,'rgba(255,255,255,.45)');r.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=r;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);})();
 
-// floating monomers (particles) in background
-const pg=new THREE.BufferGeometry(); const PC=mobile?250:500; const pos=new Float32Array(PC*3);
-for(let i=0;i<PC*3;i++) pos[i]=(Math.random()-.5)*60;
-pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0x8b5cf6,size:0.12,transparent:true,opacity:.7}));
-scene.add(pts);
+/* ---------- SCENE SHAPES (target positions per state) ---------- */
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function sphereRand(r){const u=Math.random(),v=Math.random(),th=2*Math.PI*u,ph=Math.acos(2*v-1),rr=r*Math.cbrt(Math.random());return V(rr*Math.sin(ph)*Math.cos(th),rr*Math.sin(ph)*Math.sin(th),rr*Math.cos(ph));}
+const chainBonds=(a,b)=>{const o=[];for(let i=a;i<b-1;i++)o.push([i,i+1]);return o;};
+const states=[];
+// 0 cloud of monomers (pairs)
+{const P=[],B=[],S=[];for(let i=0;i<N;i+=2){const c=sphereRand(11),d=new THREE.Vector3().randomDirection().multiplyScalar(.45);P.push(c.clone().add(d),c.clone().sub(d));B.push([i,i+1]);S.push(1,1);}
+ states.push({P,B,S,cam:42,hue:.5});}
+// 1 single monomer (ethylene) close up
+{const P=[],B=[[0,1],[0,2],[0,3],[1,4],[1,5]],S=[];
+ P.push(V(-.75,0,0),V(.75,0,0),V(-1.4,1.05,0),V(-1.4,-1.05,0),V(1.4,1.05,0),V(1.4,-1.05,0));S.push(1.9,1.9,1.1,1.1,1.1,1.1);
+ for(let i=6;i<N;i++){const a=rnd(0,Math.PI*2),r=rnd(16,26);P.push(V(Math.cos(a)*r,rnd(-8,8),Math.sin(a)*r));S.push(.45);}
+ states.push({P,B,S,cam:12,hue:.47});}
+// 2 coiled chain (helix)
+{const P=[],S=[];for(let i=0;i<N;i++){const a=i*.42,rr=3.2+(i%2?.35:-.35);P.push(V(Math.cos(a)*rr,(i-N/2)*.13,Math.sin(a)*rr));S.push(1);}
+ states.push({P,B:chainBonds(0,N),S,cam:26,hue:.55});}
+// 3 linear: 3 parallel zigzag chains
+const rows=(gap)=>{const P=[];for(let r=0;r<3;r++)for(let j=0;j<40;j++)P.push(V((j-19.5)*.42,(r-1)*gap+(j%2?.25:-.25),0));return P;};
+{const B=[...chainBonds(0,40),...chainBonds(40,80),...chainBonds(80,120)];states.push({P:rows(2.2),B,S:Array(N).fill(1),cam:24,hue:.62});}
+// 4 branched
+{const P=[],B=chainBonds(0,60);for(let j=0;j<60;j++)P.push(V((j-29.5)*.3,(j%2?.18:-.18),0));
+ const at=[5,15,25,35,45,55];let k=60;
+ at.forEach((a,bi)=>{const up=bi%2?1:-1,dir=V(bi%3-1,up*1.6,rnd(-.5,.5)).normalize();
+   for(let s=0;s<10;s++){const p=P[a].clone().add(dir.clone().multiplyScalar((s+1)*.42)).add(V(Math.sin(s)*.15,0,Math.cos(s)*.15));P.push(p);B.push(s===0?[a,k]:[k-1,k]);k++;}});
+ states.push({P,B,S:Array(N).fill(1),cam:24,hue:.72});}
+// 5 cross-linked network
+{const B=[...chainBonds(0,40),...chainBonds(40,80),...chainBonds(80,120)];
+ for(let j=0;j<40;j++){if(j%6===2)B.push([j,40+j]);if(j%6===5)B.push([40+j,80+j]);}
+ const P=rows(2.6).map((p,i)=>p.add(V(0,0,Math.sin(i*.3)*.6)));
+ states.push({P,B,S:Array(N).fill(1),cam:24,hue:.8});}
+// 6 torus knot
+{const P=[];for(let i=0;i<N;i++){const t=i/N*Math.PI*2,r=Math.cos(3*t)+2.2;P.push(V(r*Math.cos(2*t)*2.6,r*Math.sin(2*t)*2.6,-Math.sin(3*t)*2.6));}
+ states.push({P,B:[...chainBonds(0,N),[N-1,0]],S:Array(N).fill(1),cam:28,hue:.9});}
+// 7 DNA double helix
+{const P=[],B=[...chainBonds(0,60),...chainBonds(60,120)];
+ for(let s=0;s<2;s++)for(let j=0;j<60;j++){const a=j*.36+s*Math.PI;P.push(V(Math.cos(a)*2.6,(j-29.5)*.27,Math.sin(a)*2.6));}
+ for(let j=0;j<60;j+=2)B.push([j,60+j]);
+ states.push({P,B,S:Array(N).fill(1),cam:24,hue:.35});}
+// 8 recycle triangle loop (with 3 arrow gaps)
+{const P=[],B=[];for(let i=0;i<N;i++){const th=i/N*Math.PI*2+Math.PI/2,seg=((th-Math.PI/2)%(2*Math.PI/3)+2*Math.PI/3)%(2*Math.PI/3);
+   const rt=7*Math.cos(Math.PI/3)/Math.cos(seg-Math.PI/3),r=rt*.78+7*.5*.22*2;P.push(V(Math.cos(th)*r,Math.sin(th)*r,Math.sin(i*.5)*.4));}
+ for(let i=0;i<N;i++){const j=(i+1)%N;if(i%40!==19)B.push([i,j]);}
+ states.push({P,B,S:Array(N).fill(1),cam:26,hue:.38});}
+// 9 fibonacci sphere spiral
+{const P=[];for(let i=0;i<N;i++){const y=1-(i/(N-1))*2,r=Math.sqrt(1-y*y),t=i*2.39996;P.push(V(Math.cos(t)*r*6,y*6,Math.sin(t)*r*6));}
+ states.push({P,B:chainBonds(0,N),S:Array(N).fill(1),cam:26,hue:.6});}
+const SC=states.length;
 
-function resize(){ const w=innerWidth,h=innerHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
-addEventListener('resize',resize); resize();
-let mx=0,my=0; addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;});
+/* ---------- BONDS (two line layers for cross-fade) ---------- */
+function makeLines(){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(N*3*2*3),3));
+  g.setAttribute('color',new THREE.BufferAttribute(new Float32Array(N*3*2*3),3));
+  const l=new THREE.LineSegments(g,new THREE.LineBasicMaterial({vertexColors:true,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));group.add(l);return l;}
+const LA=makeLines(),LB=makeLines();
 
-const nval=document.getElementById('nval');
-let shown=0, smoothP=0; const clock=new THREE.Clock();
-const ease=x=>1-Math.pow(1-x,2);
+/* ---------- STARFIELD (twinkling shader) ---------- */
+const SN=mobile?1200:2600, sp=new Float32Array(SN*3), sph=new Float32Array(SN), ssz=new Float32Array(SN);
+for(let i=0;i<SN;i++){const p=sphereRand(1).normalize().multiplyScalar(rnd(40,140));sp.set([p.x,p.y,p.z],i*3);sph[i]=Math.random()*6.28;ssz[i]=rnd(.6,2.4);}
+const sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.BufferAttribute(sp,3));sg.setAttribute('ph',new THREE.BufferAttribute(sph,1));sg.setAttribute('sz',new THREE.BufferAttribute(ssz,1));
+const starMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms:{t:{value:0},pr:{value:renderer.getPixelRatio()}},
+ vertexShader:`attribute float ph;attribute float sz;uniform float t;uniform float pr;varying float a;
+  void main(){vec4 mv=modelViewMatrix*vec4(position,1.);a=.35+.65*pow(.5+.5*sin(t*1.7+ph*3.),3.);gl_PointSize=sz*pr*(1.+a)*60./-mv.z;gl_Position=projectionMatrix*mv;}`,
+ fragmentShader:`varying float a;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);float s=max(0.,1.-d*2.);float cross=max(0.,1.-abs(c.x)*14.)*max(0.,1.-abs(c.y)*2.)+max(0.,1.-abs(c.y)*14.)*max(0.,1.-abs(c.x)*2.);
+  gl_FragColor=vec4(vec3(.85,.9,1.),(s*s+cross*.6)*a);}`});
+const stars=new THREE.Points(sg,starMat);scene.add(stars);
+
+/* ---------- SPARKLE BURSTS ---------- */
+const MAXS=mobile?900:1800;
+const bp=new Float32Array(MAXS*3),bc=new Float32Array(MAXS*3),bl=new Float32Array(MAXS),bv=new Float32Array(MAXS*3);
+const bg=new THREE.BufferGeometry();bg.setAttribute('position',new THREE.BufferAttribute(bp,3));bg.setAttribute('color',new THREE.BufferAttribute(bc,3));bg.setAttribute('life',new THREE.BufferAttribute(bl,1));
+const sparkMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms:{pr:{value:renderer.getPixelRatio()}},vertexColors:true,
+ vertexShader:`attribute float life;uniform float pr;varying float l;varying vec3 vc;void main(){l=life;vc=color;vec4 mv=modelViewMatrix*vec4(position,1.);gl_PointSize=pr*(2.+10.*life)*30./-mv.z;gl_Position=projectionMatrix*mv;}`,
+ fragmentShader:`varying float l;varying vec3 vc;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);float core=max(0.,1.-d*2.);
+  float cr=max(0.,1.-abs(c.x)*10.)*max(0.,1.-abs(c.y)*2.2)+max(0.,1.-abs(c.y)*10.)*max(0.,1.-abs(c.x)*2.2);gl_FragColor=vec4(mix(vc,vec3(1.),core*core),(core*core+cr)*l);}`});
+const sparks=new THREE.Points(bg,sparkMat);sparks.frustumCulled=false;scene.add(sparks);
+let sHead=0;const col=new THREE.Color();
+function burst(p,n,speed,hue){for(let k=0;k<n;k++){const i=sHead;sHead=(sHead+1)%MAXS;
+  bp[i*3]=p.x;bp[i*3+1]=p.y;bp[i*3+2]=p.z;const v=new THREE.Vector3().randomDirection().multiplyScalar(speed*rnd(.3,1));bv[i*3]=v.x;bv[i*3+1]=v.y;bv[i*3+2]=v.z;
+  bl[i]=rnd(.7,1);col.setHSL((hue+rnd(-.08,.08)+1)%1,.9,.7);bc[i*3]=col.r;bc[i*3+1]=col.g;bc[i*3+2]=col.b;}}
+
+/* ---------- interaction: cursor trail + tap bursts ---------- */
+const ray=new THREE.Raycaster(),plane=new THREE.Plane(V(0,0,1),0),hit=new THREE.Vector3(),ndc=new THREE.Vector2();
+let lastTrail=0,curHue=.5;
+function toWorld(x,y){ndc.set(x/innerWidth*2-1,-(y/innerHeight)*2+1);ray.setFromCamera(ndc,camera);plane.normal.copy(camera.getWorldDirection(new THREE.Vector3())).negate();plane.constant=0;return ray.ray.intersectPlane(plane,hit);}
+addEventListener('pointermove',e=>{const n=performance.now();if(n-lastTrail<16)return;lastTrail=n;if(toWorld(e.clientX,e.clientY))burst(hit,mobile?2:3,1.2,curHue+.1);mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;});
+addEventListener('pointerdown',e=>{if(toWorld(e.clientX,e.clientY))burst(hit,90,9,curHue);});
+let mx=0,my=0;
+
+/* ---------- layout ---------- */
+function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);composer.setSize(w,h);bloom.resolution.set(w/(mobile?2:1),h/(mobile?2:1));camera.aspect=w/h;camera.updateProjectionMatrix();}
+addEventListener('resize',resize);resize();
+
+/* ---------- animate ---------- */
+const cur=[],prevM=new Float32Array(N).fill(1);for(let i=0;i<N;i++)cur.push(states[0].P[i].clone());
+const tmpM=new THREE.Matrix4(),q=new THREE.Quaternion(),sc=new THREE.Vector3(),wp=new THREE.Vector3();
+const sm=x=>x*x*(3-2*x);
+let S=0,lastA=-1,clock=new THREE.Clock();
+function fillLines(L,B,alpha,hue){const pa=L.geometry.attributes.position.array,ca=L.geometry.attributes.color.array;let k=0;
+  for(const [a,b] of B){const A=cur[a],Bp=cur[b];pa.set([A.x,A.y,A.z,Bp.x,Bp.y,Bp.z],k*6);
+    col.setHSL((hue+a/N*.25)%1,.85,.6);ca.set([col.r*alpha,col.g*alpha,col.b*alpha],k*6);col.setHSL((hue+b/N*.25)%1,.85,.6);ca.set([col.r*alpha,col.g*alpha,col.b*alpha],k*6+3);k++;}
+  L.geometry.setDrawRange(0,k*2);L.geometry.attributes.position.needsUpdate=true;L.geometry.attributes.color.needsUpdate=true;}
+let first=true;
 function frame(){
-  const t=clock.getElapsedTime();
-  smoothP+=(window.__scrollP-smoothP)*0.08;
-  const p=smoothP;
-  // chain grows with scroll
-  const target=4+ease(Math.min(1,p*1.15))*(N-4);
-  shown+=(target-shown)*0.12;
-  const full=Math.floor(shown), frac=shown-full;
+  const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
+  S+=(window.__S-S)*Math.min(1,dt*6);
+  const a=Math.min(SC-1,Math.floor(S)),b=Math.min(SC-1,a+1),m=S-a;
+  const A=states[a],B=states[b];
+  const hue=A.hue+(B.hue-A.hue)*m;curHue=hue;
+  // scene change sparkle
+  if(a!==lastA&&lastA!==-1){for(let i=0;i<N;i+=3){group.localToWorld(wp.copy(cur[i]));burst(wp,4,4,hue);}}lastA=a;
   for(let i=0;i<N;i++){
-    const k=i<full?1:(i===full?frac:0);
-    const sc=k<1? k*k*(3-2*k) : 1;
-    place(cMesh,i,C[i],sc);
-    place(hMesh,2*i,Hs[2*i],sc); place(hMesh,2*i+1,Hs[2*i+1],sc);
-    bond(hbMesh,2*i,C[i],Hs[2*i],sc); bond(hbMesh,2*i+1,C[i],Hs[2*i+1],sc);
-    if(i<N-1){ const kb=i+1<full?1:(i+1===full?frac:0); bond(bMesh,i,C[i],C[i+1],kb); }
+    const mi=sm(Math.max(0,Math.min(1,m*1.6-(i/N)*.6)));
+    const p=cur[i].copy(A.P[i]).lerp(B.P[i],mi);
+    // arc flight
+    p.z+=Math.sin(mi*Math.PI)*3*((i%2)?1:-1);
+    // idle wobble
+    p.x+=Math.sin(t*1.3+i)*.04;p.y+=Math.cos(t*1.1+i*.7)*.04;
+    // sparkle when an atom lands
+    if(prevM[i]<.97&&mi>=.97&&i%2===0){group.localToWorld(wp.copy(p));burst(wp,5,2.5,hue+.15);}
+    prevM[i]=mi;
+    const s=(A.S[i]+(B.S[i]-A.S[i])*mi)*(1+.12*Math.sin(t*3+i*.5));
+    sc.setScalar(s);tmpM.compose(p,q,sc);atoms.setMatrixAt(i,tmpM);
+    col.setHSL((hue+i/N*.25)%1,.8,.62+.12*Math.sin(t*2+i));atoms.setColorAt(i,col);
   }
-  [cMesh,hMesh,bMesh,hbMesh].forEach(x=>x.instanceMatrix.needsUpdate=true);
-  nval.textContent=Math.max(1,Math.round(shown));
-  // keep visible part centered
-  const midY=(C[0].y + C[Math.max(0,Math.min(N-1,full))].y)/2;
-  group.position.y+=(-midY-group.position.y)*0.08;
+  atoms.instanceMatrix.needsUpdate=true;atoms.instanceColor.needsUpdate=true;
+  fillLines(LA,A.B,1-sm(m),hue);fillLines(LB,B.B,sm(m),hue);
   // rotation driven by scroll
-  group.rotation.y=p*Math.PI*8+t*0.12;
-  group.rotation.x=Math.sin(p*Math.PI*2)*0.55+my*0.3;
-  group.rotation.z=Math.cos(p*Math.PI*3)*0.25+mx*0.2;
-  // camera dolly
-  const span=Math.abs(C[Math.max(1,full)].y-C[0].y);
-  const dist=(mobile?20:16)+span*0.9 - Math.sin(p*Math.PI)*2;
-  camera.position.set(mobile?0:-4+mx*2, my*-2, dist);
-  camera.lookAt(mobile?0:-4,0,0);
-  // colour shift across the research
-  bMat.color.setHSL((0.48+p*0.45)%1,0.65,0.55); bMat.emissive.setHSL((0.48+p*0.45)%1,0.7,0.12);
-  pts.rotation.y=t*0.02+p*1.5; pts.rotation.x=p*0.6;
-  renderer.render(scene,camera);
+  group.rotation.y=S*1.35+t*.15+mx*.4;
+  group.rotation.x=Math.sin(S*.9)*.35+my*.3;
+  group.rotation.z=Math.cos(S*.7)*.12;
+  // camera
+  let dist=A.cam+(B.cam-A.cam)*sm(m);if(camera.aspect<1)dist*=1.75;
+  const offX=camera.aspect<1?0:-(dist*.22), offY=camera.aspect<1?-dist*.13:0;
+  const heroK=Math.max(0,1-S); // hero: centered
+  group.position.x+=((offX*(1-heroK))-group.position.x)*.08;
+  group.position.y+=((offY*(1-heroK)+(camera.aspect<1?0:0))-group.position.y)*.08;
+  camera.position.x+=(mx*2-camera.position.x)*.05;camera.position.y+=(-my*2-camera.position.y)*.05;
+  camera.position.z+=(dist-camera.position.z)*.08;camera.lookAt(0,0,0);
+  // sparks physics
+  for(let i=0;i<MAXS;i++){if(bl[i]<=0)continue;bl[i]-=dt*.9;bv[i*3+1]-=dt*.6;bv[i*3]*=.97;bv[i*3+1]*=.97;bv[i*3+2]*=.97;
+    bp[i*3]+=bv[i*3]*dt;bp[i*3+1]+=bv[i*3+1]*dt;bp[i*3+2]+=bv[i*3+2]*dt;if(bl[i]<0)bl[i]=0;}
+  bg.attributes.position.needsUpdate=true;bg.attributes.life.needsUpdate=true;bg.attributes.color.needsUpdate=true;
+  starMat.uniforms.t.value=t;stars.rotation.y=t*.01+S*.08;stars.rotation.x=S*.03;
+  bloom.strength=(mobile?.75:1.05)+.2*Math.sin(t*.8);
+  composer.render();
+  if(first){first=false;setTimeout(()=>{document.getElementById('loader').classList.add('hide');for(let i=0;i<N;i+=2){group.localToWorld(wp.copy(cur[i]));burst(wp,3,5,.5);}},400);}
   requestAnimationFrame(frame);
 }
 frame();
 </script>
+<script>setTimeout(()=>document.getElementById('loader').classList.add('hide'),6000);</script>
 </body>
 </html>
