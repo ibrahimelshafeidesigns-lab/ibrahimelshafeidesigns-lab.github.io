@@ -449,7 +449,7 @@
       try { localStorage.setItem(key, JSON.stringify(L)); } catch (x) { }
       label(); if (hint) hint.classList.add("gone");
       var im = t.querySelector("img");
-      try { fetch("https://edith.tail4ca497.ts.net/b/" + tok + "/like", { method: "POST", mode: "no-cors", keepalive: true, body: JSON.stringify({ id: id, title: im ? im.alt : id, on: on }) }).catch(function () { }); } catch (x) { }
+      try { fetch("https://edith.tail4ca497.ts.net/b/" + tok + "/like", { method: "POST", mode: "no-cors", keepalive: true, body: JSON.stringify({ id: id, title: im ? im.alt : id, img: im ? ((im.getAttribute("src") || "").match(/img\/(.+)$/) || [])[1] || "" : "", on: on }) }).catch(function () { }); } catch (x) { }
     });
     (t.querySelector(".pic") || t).appendChild(b);
   });
