@@ -6,10 +6,23 @@
 <title>البوليمرات | بحث تفاعلي ثلاثي الأبعاد</title>
 <meta name="description" content="بحث كامل عن البوليمرات مع نماذج جزيئية ثلاثية الأبعاد تفاعلية.">
 <meta name="theme-color" content="#05060f">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/cairo-arabic-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Cairo';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/cairo-arabic-400-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/cairo-arabic-600-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/cairo-arabic-700-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:900;font-display:swap;src:url(fonts/cairo-arabic-900-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/cairo-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/cairo-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:900;font-display:swap;src:url(fonts/cairo-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tajawal-arabic-400-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tajawal-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/tajawal-arabic-500-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/tajawal-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/tajawal-arabic-700-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/tajawal-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');}
 @property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
 :root{--a:#4fd1c5;--b:#8b5cf6;--c:#f472b6;--d:#facc15;--ink:#f3f5ff;--muted:#9ba4c9;--glass:rgba(10,13,30,.78)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -62,7 +75,7 @@ main{position:relative;z-index:2;pointer-events:none}
 .hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:20px}
 .hero-in{max-width:min(1100px,100%)}
 .hero .tag{display:inline-block;font:700 12px 'JetBrains Mono';direction:ltr;letter-spacing:2px;color:var(--a);border:1px solid rgba(79,209,197,.45);padding:5px 16px;border-radius:999px;background:rgba(79,209,197,.06);opacity:0;animation:up 1s .4s forwards}
-.hero h1{display:block;width:fit-content;margin:0 auto;white-space:nowrap;padding:0 .12em;max-width:100%;font-size:clamp(54px,12.5vw,165px);font-weight:900;line-height:1.15;background:linear-gradient(100deg,#fff 10%,var(--a) 30%,var(--b) 50%,var(--c) 65%,#fff 85%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite,heroIn 1.6s .2s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 0 40px rgba(139,92,246,.45))}
+.hero h1{display:block;width:fit-content;margin:0 auto;white-space:nowrap;padding:.05em .2em .18em;max-width:100%;font-size:clamp(54px,12.5vw,165px);font-weight:900;line-height:1.15;background:linear-gradient(100deg,#fff 10%,var(--a) 30%,var(--b) 50%,var(--c) 65%,#fff 85%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite,heroIn 1.6s .2s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 0 40px rgba(139,92,246,.45))}
 .hero .sub{font-size:clamp(18px,3vw,26px);color:#d6dcf5;opacity:0;animation:up 1s 1s forwards;text-shadow:0 2px 20px #000}
 .cover{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:28px auto 0;max-width:720px;opacity:0;animation:up 1s 1.3s forwards}
 .cover div{background:var(--glass);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:9px 12px;backdrop-filter:blur(10px);font-size:15px}
