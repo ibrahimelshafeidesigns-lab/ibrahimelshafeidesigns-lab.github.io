@@ -437,7 +437,9 @@
   try { if (tok) sessionStorage.setItem("brief", tok); else tok = sessionStorage.getItem("brief"); } catch (e) { }
   if (!tok) return;
   var key = "likes:" + tok, L = {}; try { L = JSON.parse(localStorage.getItem(key) || "{}"); } catch (e) { }
-  var ar = document.documentElement.lang === "ar";
+  var ar = document.documentElement.lang === "ar", back, hint;
+  // the way back says how many he picked; the hint at the top tells him what to do, then steps aside
+  function label() { var n = Object.keys(L).length; back.textContent = (ar ? "خلصت" : "Done") + (n ? " (" + n + ")" : "") + (ar ? " · ارجع للفورم" : " · back to the form"); }
   document.querySelectorAll("a.tile").forEach(function (t) {
     var id = ((t.getAttribute("href") || "").match(/p\/([a-z0-9-]+)\//) || [])[1]; if (!id) return;
     var b = document.createElement("button"); b.type = "button"; b.className = "heart" + (L[id] ? " on" : ""); b.setAttribute("aria-label", ar ? "عجبني" : "Like"); b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6s-7.4-4.7-9.4-9.1C1.1 8.2 2.9 4.4 6.5 4.4c2.1 0 3.6 1.1 5.5 3.3 1.9-2.2 3.4-3.3 5.5-3.3 3.6 0 5.4 3.8 3.9 7.1-2 4.4-9.4 9.1-9.4 9.1z"/></svg>';
@@ -445,11 +447,14 @@
       e.preventDefault(); e.stopPropagation();
       var on = !L[id]; if (on) L[id] = 1; else delete L[id]; b.classList.toggle("on", on); b.classList.remove("pop"); void b.offsetWidth; if (on) b.classList.add("pop");
       try { localStorage.setItem(key, JSON.stringify(L)); } catch (x) { }
+      label(); if (hint) hint.classList.add("gone");
       var im = t.querySelector("img");
       try { fetch("https://edith.tail4ca497.ts.net/b/" + tok + "/like", { method: "POST", mode: "no-cors", keepalive: true, body: JSON.stringify({ id: id, title: im ? im.alt : id, on: on }) }).catch(function () { }); } catch (x) { }
     });
     (t.querySelector(".pic") || t).appendChild(b);
   });
-  var back = document.createElement("a"); back.className = "briefback"; back.href = "https://edith.tail4ca497.ts.net/b/" + tok;
-  back.textContent = ar ? "خلصت · ارجع للفورم" : "Done · back to the form"; document.body.appendChild(back);
+  back = document.createElement("a"); back.className = "briefback"; back.href = "https://edith.tail4ca497.ts.net/b/" + tok;
+  label(); document.body.appendChild(back);
+  hint = document.createElement("div"); hint.className = "briefhint"; hint.textContent = ar ? "دوس ♥ على المشاريع اللي تعجبك، وبعدين ارجع للفورم" : "Tap ♥ on the projects you like, then go back to the form"; document.body.appendChild(hint);
+  setTimeout(function () { hint.classList.add("gone"); }, 9000);
 })();
