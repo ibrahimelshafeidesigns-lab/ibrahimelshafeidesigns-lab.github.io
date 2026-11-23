@@ -446,7 +446,7 @@
       var on = !L[id]; if (on) L[id] = 1; else delete L[id]; b.classList.toggle("on", on);
       try { localStorage.setItem(key, JSON.stringify(L)); } catch (x) { }
       var im = t.querySelector("img");
-      try { fetch("https://edith.tail4ca497.ts.net/b/" + tok + "/like", { method: "POST", mode: "no-cors", keepalive: true, body: JSON.stringify({ id: id, title: im ? im.alt : id, on: on }) }); } catch (x) { }
+      try { fetch("https://edith.tail4ca497.ts.net/b/" + tok + "/like", { method: "POST", mode: "no-cors", keepalive: true, body: JSON.stringify({ id: id, title: im ? im.alt : id, on: on }) }).catch(function () { }); } catch (x) { }
     });
     (t.querySelector(".pic") || t).appendChild(b);
   });
