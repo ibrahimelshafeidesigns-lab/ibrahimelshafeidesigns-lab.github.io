@@ -447,7 +447,7 @@
       e.preventDefault(); e.stopPropagation();
       var on = !L[id]; if (on) L[id] = 1; else delete L[id]; b.classList.toggle("on", on); b.classList.remove("pop"); void b.offsetWidth; if (on) b.classList.add("pop");
       try { localStorage.setItem(key, JSON.stringify(L)); } catch (x) { }
-      label(); if (hint) hint.classList.add("gone");
+      label(); if (hint) hint.classList.add("gone"); document.documentElement.classList.remove("brief-nudge");
       var im = t.querySelector("img");
       try { fetch("https://edith.tail4ca497.ts.net/b/" + tok + "/like", { method: "POST", mode: "no-cors", keepalive: true, body: JSON.stringify({ id: id, title: im ? im.alt : id, img: im ? ((im.getAttribute("src") || "").match(/img\/(.+)$/) || [])[1] || "" : "", on: on }) }).catch(function () { }); } catch (x) { }
     });
@@ -456,5 +456,13 @@
   back = document.createElement("a"); back.className = "briefback"; back.href = "https://edith.tail4ca497.ts.net/b/" + tok;
   label(); document.body.appendChild(back);
   hint = document.createElement("div"); hint.className = "briefhint"; hint.textContent = ar ? "دوس ♥ على المشاريع اللي تعجبك، وبعدين ارجع للفورم" : "Tap ♥ on the projects you like, then go back to the form"; document.body.appendChild(hint);
-  setTimeout(function () { hint.classList.add("gone"); }, 9000);
+  // nobody guesses a heart on a photo by himself: a card says it once on arrival, the hint stays and the hearts beat until his first pick
+  document.documentElement.classList.add("brief-nudge");
+  var seen = false; try { seen = sessionStorage.getItem("briefintro") === "1"; } catch (e) { }
+  if (!seen) {
+    var intro = document.createElement("div"); intro.className = "briefintro";
+    intro.innerHTML = '<div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6s-7.4-4.7-9.4-9.1C1.1 8.2 2.9 4.4 6.5 4.4c2.1 0 3.6 1.1 5.5 3.3 1.9-2.2 3.4-3.3 5.5-3.3 3.6 0 5.4 3.8 3.9 7.1-2 4.4-9.4 9.1-9.4 9.1z"/></svg><b>' + (ar ? "اختار اللي يعجبك من شغلنا" : "Pick what you like from our work") + '</b><p>' + (ar ? "دوس على القلب فوق أي صورة تعجبك. كل قلب بيوصلنا علشان نصمم على ذوقك." : "Tap the heart on any photo you like. Every heart reaches us, so we design to your taste.") + '</p><button type="button">' + (ar ? "تمام، وريني الشغل" : "OK, show me") + '</button></div>';
+    intro.querySelector("button").addEventListener("click", function () { intro.remove(); try { sessionStorage.setItem("briefintro", "1"); } catch (e) { } });
+    document.body.appendChild(intro);
+  }
 })();
