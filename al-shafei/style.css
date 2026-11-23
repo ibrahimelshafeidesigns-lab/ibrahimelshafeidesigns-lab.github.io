@@ -257,3 +257,8 @@ html[lang=ar] .top .mark::after{direction:ltr}
 /* nosave: no long-press save / drag on photos */
 img,video,.photos,.car,#viewer{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none}
 img{pointer-events:auto}
+
+/* Hearts for a client's design brief (2026-11-23): shown only to a client who came from his brief form (app.js) */
+.heart{position:absolute;top:8px;inset-inline-end:8px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(246,243,238,.94);color:#b9b2a8;font-size:21px;line-height:1;cursor:pointer;z-index:2;padding:0}
+.heart.on{color:#c0392b}
+.briefback{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:60;padding:13px 24px;border-radius:999px;background:#a8714a;color:#fff;text-decoration:none;font-size:15px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.2)}
