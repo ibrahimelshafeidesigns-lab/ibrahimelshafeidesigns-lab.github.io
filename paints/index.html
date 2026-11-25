@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الدهانات | بحث تفاعلي ثلاثي الأبعاد</title>
+<meta name="description" content="بحث كامل عن الدهانات: تركيبها الكيميائي وأنواعها وخواصها وطرق تصنيعها واستخداماتها، مع نماذج ثلاثية الأبعاد.">
+<meta name="theme-color" content="#05060f">
+<link rel="preload" href="fonts/cairo-arabic-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Cairo';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/cairo-arabic-400-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/cairo-arabic-600-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/cairo-arabic-700-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:900;font-display:swap;src:url(fonts/cairo-arabic-900-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/cairo-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/cairo-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Cairo';font-style:normal;font-weight:900;font-display:swap;src:url(fonts/cairo-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tajawal-arabic-400-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tajawal-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/tajawal-arabic-500-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/tajawal-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/tajawal-arabic-700-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/tajawal-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F;}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');}
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+:root{--a:#38bdf8;--b:#f472b6;--c:#fb923c;--d:#facc15;--ink:#f3f5ff;--muted:#9ba4c9;--glass:rgba(10,13,30,.78)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#05060f;color:var(--ink);font-family:'Tajawal',system-ui,sans-serif;overflow-x:clip}
+body{font-size:17px;line-height:1.95}
+h1,h2,h3,h4{font-family:'Cairo',sans-serif;line-height:1.35}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;cursor:grab}
+#gl:active{cursor:grabbing}
+.vign{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at 35% 50%,transparent 45%,rgba(0,0,0,.7))}
+.grain{position:fixed;inset:-50%;pointer-events:none;z-index:1;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .8s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+.scan{position:fixed;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+#bar{position:fixed;top:0;right:0;height:3px;width:0;z-index:40;background:linear-gradient(90deg,var(--c),var(--b),var(--a));box-shadow:0 0 14px var(--b),0 0 4px #fff}
+
+/* HUD */
+#hud{position:fixed;top:18px;left:18px;max-width:300px;z-index:40;direction:ltr;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#b9c3ea;background:rgba(5,7,18,.6);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;backdrop-filter:blur(10px);min-width:250px;pointer-events:none}
+#hud .r{display:flex;justify-content:space-between;gap:14px}
+#hud b{color:#fff;font-weight:700}
+#hud .nm{font-size:13px;color:var(--a);margin:2px 0 6px;font-weight:700;text-shadow:0 0 10px rgba(79,209,197,.5)}
+#hud .els{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+#hud .el{display:flex;align-items:center;gap:4px;padding:1px 7px;border-radius:999px;border:1px solid rgba(255,255,255,.14)}
+#hud .el i{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 6px currentColor}
+#hud .live{display:inline-block;width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;animation:blink 1.2s infinite;margin-right:6px}
+#hud .hint{color:var(--muted);font-size:10.5px;margin-top:6px;opacity:.8}
+@keyframes blink{50%{opacity:.2}}
+#dots{position:fixed;left:22px;bottom:22px;z-index:40;display:flex;gap:7px;direction:ltr}
+#dots a{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);transition:.4s;display:block}
+#dots a.on{background:var(--a);width:22px;border-radius:5px;box-shadow:0 0 10px var(--a)}
+@media(max-width:900px){
+  #hud{top:auto;bottom:10px;left:10px;right:10px;min-width:0;padding:7px 12px;border-radius:12px}
+  #hud .hide-m{display:none}#hud .nm{margin:0}#hud .els{margin-top:4px}
+  #dots{display:none}
+}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:60;background:#05060f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 1s,visibility 1s}
+#loader.hide{opacity:0;visibility:hidden}
+#loader .hex{width:72px;height:72px;animation:spin 2.4s linear infinite}
+#loader path{stroke-dasharray:240;stroke-dashoffset:240;animation:draw 1.4s ease-in-out infinite alternate}
+#loader p{font:400 12px 'JetBrains Mono';color:var(--muted);direction:ltr;letter-spacing:1px}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes draw{to{stroke-dashoffset:0}}
+
+/* layout */
+main{position:relative;z-index:2;pointer-events:none}
+.col{width:min(640px,47vw);margin-right:4vw;padding-bottom:30vh}
+@media(max-width:900px){.col{width:auto;margin:0 12px}}
+.card,a,button,table,.tw{pointer-events:auto}
+
+/* hero */
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:20px}
+.hero-in{max-width:min(1100px,100%)}
+.hero .tag{display:inline-block;font:700 12px 'JetBrains Mono';direction:ltr;letter-spacing:2px;color:var(--a);border:1px solid rgba(79,209,197,.45);padding:5px 16px;border-radius:999px;background:rgba(79,209,197,.06);opacity:0;animation:up 1s .4s forwards}
+.hero h1{display:block;width:fit-content;margin:0 auto;white-space:nowrap;padding:.05em .2em .18em;max-width:100%;font-size:clamp(54px,12.5vw,165px);font-weight:900;line-height:1.15;background:linear-gradient(100deg,#fff 5%,#ffc43d 22%,#e63946 38%,#f472b6 52%,#3a86ff 68%,#2ec27e 82%,#fff 95%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite,heroIn 1.6s .2s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 0 40px rgba(139,92,246,.45))}
+.hero .sub{font-size:clamp(18px,3vw,26px);color:#d6dcf5;opacity:0;animation:up 1s 1s forwards;text-shadow:0 2px 20px #000}
+.cover{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:28px auto 0;max-width:720px;opacity:0;animation:up 1s 1.3s forwards}
+.cover div{background:var(--glass);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:9px 12px;backdrop-filter:blur(10px);font-size:15px}
+.cover small{display:block;color:var(--muted);font-size:12px}
+.mem{margin:10px auto 0;max-width:720px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;opacity:0;animation:up 1s 1.5s forwards}
+.mem span{background:var(--glass);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:3px 14px;font-size:14.5px;backdrop-filter:blur(8px)}
+.scrl{margin-top:34px;font:400 11px 'JetBrains Mono';letter-spacing:2px;color:var(--muted);direction:ltr;opacity:0;animation:up 1s 2s forwards}
+.scrl i{display:block;width:1px;height:48px;margin:10px auto 0;background:linear-gradient(var(--a),transparent);animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes heroIn{from{opacity:0;letter-spacing:.3em;filter:blur(30px)}to{opacity:1}}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes shine{to{background-position:-250% 0}}
+
+/* section headers */
+.sec{padding-top:34vh}
+@media(max-width:900px){.sec{padding-top:70vh}.sec>.card[data-mol]:not(:nth-child(2)){margin-top:62vh}}
+.sh{position:relative;margin-bottom:18px}
+.sh .no{font:900 clamp(80px,12vw,150px)/1 'Cairo';color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.22);position:absolute;top:-58px;left:0;direction:ltr;transition:1.4s cubic-bezier(.2,.8,.2,1);opacity:0;transform:translateX(-60px)}
+.sh.in .no{opacity:1;transform:none}
+.sh .kick{font:700 11.5px 'JetBrains Mono';letter-spacing:3px;color:var(--a);direction:ltr;text-align:right}
+.sh h2{font-size:clamp(36px,5.4vw,62px);font-weight:900;perspective:600px;text-shadow:0 4px 30px rgba(0,0,0,.8)}
+.sh h2 .w{display:inline-block;margin-left:.25em;background:linear-gradient(100deg,#fff,var(--a) 60%,var(--b));-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:rotateX(-95deg) translateY(30px);transform-origin:bottom;transition:transform .9s cubic-bezier(.2,.9,.25,1.3),opacity .6s}
+.sh.in h2 .w{opacity:1;transform:none}
+.sh .ln{height:2px;width:0;background:linear-gradient(90deg,transparent,var(--a),var(--b));margin-top:6px;transition:width 1.4s .3s;box-shadow:0 0 12px var(--a)}
+.sh.in .ln{width:100%}
+
+/* cards */
+.card{position:relative;background:var(--glass);border-radius:22px;padding:clamp(18px,3.2vw,30px);margin:16px 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.card:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.3px;background:conic-gradient(from var(--ang),rgba(255,255,255,.08) 0deg,var(--a) 60deg,rgba(255,255,255,.08) 120deg,var(--b) 220deg,rgba(255,255,255,.08) 300deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:rot 6s linear infinite;pointer-events:none}
+@keyframes rot{to{--ang:360deg}}
+.card h3{font-size:clamp(20px,3vw,25px);margin-bottom:6px;color:#fff;display:flex;align-items:center;gap:10px}
+.card h3 .ic{font-size:22px;width:40px;height:40px;flex:none;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(139,92,246,.4),rgba(79,209,197,.25));box-shadow:0 0 18px rgba(139,92,246,.4)}
+.card p{margin:8px 0;color:#dbe0f6}
+.card strong{color:#fff}
+.k{font-style:normal;color:#fff;background:linear-gradient(90deg,var(--a),var(--b)) no-repeat 100% 100%/0 2px;transition:background-size 1s .5s;padding-bottom:1px}
+.in .k{background-size:100% 2px}
+ul.l{margin:8px 20px 8px 0}ul.l li{margin:5px 0}ul.l li::marker{color:var(--a)}
+.f{direction:ltr;unicode-bidi:isolate;font-family:'JetBrains Mono',monospace;font-size:.9em;color:var(--d);white-space:nowrap}
+.eq{direction:ltr;text-align:center;font:700 clamp(12.5px,2.2vw,16px)/1.6 'JetBrains Mono',monospace;color:var(--d);background:rgba(0,0,0,.35);border:1px solid rgba(250,204,21,.3);border-radius:14px;padding:14px 12px;margin:14px 0;overflow-x:auto;white-space:nowrap;text-shadow:0 0 12px rgba(250,204,21,.45);min-height:54px}
+.eq:after{content:"▋";animation:blink .8s infinite;color:var(--a);margin-left:2px}
+.eq.done:after{content:""}
+.note{border-right:3px solid var(--c);background:rgba(244,114,182,.09);padding:10px 14px;border-radius:10px;margin:12px 0;font-size:15.5px}
+.tag3d{display:inline-flex;align-items:center;gap:6px;font:700 11px 'JetBrains Mono';direction:ltr;color:var(--a);border:1px dashed rgba(79,209,197,.5);border-radius:999px;padding:2px 10px;margin-bottom:8px}
+.tag3d:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--a);box-shadow:0 0 8px var(--a);animation:blink 1s infinite}
+
+/* reveal variants */
+.rv{opacity:0;transition:opacity .9s,transform 1.1s cubic-bezier(.2,.85,.25,1),filter 1s}
+.rv.flip{transform:perspective(1000px) rotateY(-38deg) translateX(-60px)}
+.rv.rise{transform:translateY(70px) scale(.94);filter:blur(8px)}
+.rv.zoom{transform:scale(.75) rotateX(30deg);filter:blur(10px)}
+.rv.in{opacity:1;transform:none;filter:none}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}
+.mini{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:13px;transition:opacity .6s,transform .6s cubic-bezier(.3,1.4,.5,1),border-color .3s,background .3s;opacity:0;transform:translateY(24px) scale(.9)}
+.in .mini{opacity:1;transform:none}
+.mini:hover{border-color:var(--a);background:rgba(79,209,197,.08)}
+.mini .e{font-size:24px}
+.mini h4{font-size:16.5px;color:#fff;margin:2px 0}
+.mini p{font-size:14.5px;color:var(--muted);margin:0;line-height:1.75}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.stat{text-align:center;padding:12px 6px;border-radius:16px;background:linear-gradient(160deg,rgba(139,92,246,.2),rgba(79,209,197,.07));border:1px solid rgba(255,255,255,.1)}
+.stat b{display:block;font:700 clamp(20px,3.4vw,30px) 'JetBrains Mono';color:var(--a);text-shadow:0 0 16px rgba(79,209,197,.6);direction:ltr}
+.stat span{font-size:12.5px;color:var(--muted);line-height:1.5;display:block}
+
+/* timeline */
+.tl{position:relative;padding-right:30px;margin-top:10px}
+.tl .rail{position:absolute;right:8px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.08)}
+.tl .fill{position:absolute;right:8px;top:0;width:2px;height:0;background:linear-gradient(var(--a),var(--b),var(--c));box-shadow:0 0 12px var(--a)}
+.ev{position:relative;margin-bottom:16px;opacity:.25;transform:translateX(-14px);transition:.6s}
+.ev.on{opacity:1;transform:none}
+.ev:before{content:"";position:absolute;right:-28px;top:9px;width:12px;height:12px;border-radius:50%;background:#05060f;border:2px solid rgba(255,255,255,.3);transition:.5s}
+.ev.on:before{border-color:var(--a);background:var(--a);box-shadow:0 0 14px var(--a)}
+.ev .y{font:700 19px 'JetBrains Mono';color:var(--d);direction:ltr;display:inline-block}
+.ev p{margin:0;font-size:15.5px}
+
+/* table */
+.tw{overflow-x:auto;margin:12px 0;border-radius:14px;border:1px solid rgba(255,255,255,.1)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+th,td{padding:9px 11px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top}
+th{background:rgba(139,92,246,.25);font:700 14px 'Cairo';color:#fff}
+tbody tr{opacity:0;transform:translateX(-30px);transition:.6s}
+.in tbody tr{opacity:1;transform:none}
+tbody tr.sel td{background:rgba(79,209,197,.14)}
+tbody tr[data-poly]{cursor:pointer}
+tbody tr[data-poly]:hover td{background:rgba(255,255,255,.06)}
+
+/* polymer selector */
+.sel-btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.sel-btns button{font:700 13px 'JetBrains Mono';direction:ltr;color:#cfd6f5;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:8px 14px;cursor:pointer;transition:.3s}
+.sel-btns button:hover{border-color:var(--a);color:#fff}
+.sel-btns button.on{background:linear-gradient(135deg,var(--a),var(--b));color:#05060f;border-color:transparent;box-shadow:0 0 22px rgba(79,209,197,.55)}
+.pinfo{font-size:15px;color:#dbe0f6;min-height:56px}
+
+/* recycle codes */
+.codes{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:8px;margin:12px 0}
+.code{text-align:center;padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);opacity:0;transform:scale(.5) rotate(-20deg);transition:.6s cubic-bezier(.3,1.6,.5,1)}
+.in .code{opacity:1;transform:none}
+.code .t{width:46px;height:46px;margin:0 auto 4px;position:relative;display:flex;align-items:center;justify-content:center;font:700 17px 'JetBrains Mono';color:var(--a)}
+.code svg{position:absolute;inset:0;animation:spin 12s linear infinite}
+.code b{display:block;font:700 13px 'JetBrains Mono';direction:ltr}
+.code span{font-size:12px;color:var(--muted)}
+.refs li{margin:7px 0;color:#c6cdea;font-size:14.5px;direction:ltr;text-align:left}
+footer{position:relative;z-index:2;text-align:center;color:var(--muted);font:400 12px 'JetBrains Mono';direction:ltr;padding:0 0 110px}
+@media(max-width:600px){.hero h1{font-size:18vw}}
+@media(max-width:900px){body{font-size:16px}.card{border-radius:18px}.sh .no{top:-40px}footer{padding-bottom:90px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.steps{display:grid;gap:10px;margin:12px 0}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:600px){.pc{grid-template-columns:1fr}}
+.ev .y{font-family:'Cairo';font-size:17px}
+#hud .el{font-size:10.5px}
+.hero .sub{display:inline-block;background:rgba(5,6,15,.72);backdrop-filter:blur(10px);padding:6px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<div id="loader"><svg class="hex" viewBox="0 0 100 100"><path d="M50 6 L88 28 L88 72 L50 94 L12 72 L12 28 Z" fill="none" stroke="#4fd1c5" stroke-width="4"/></svg><p>INITIALIZING MOLECULAR ENGINE…</p></div>
+<canvas id="gl"></canvas>
+<div class="vign"></div><div class="scan"></div><div class="grain"></div>
+<div id="bar"></div>
+<div id="hud">
+  <div class="r"><span><span class="live"></span>LIVE 3D MODEL</span><span class="hide-m" id="hscene">SEC 00</span></div>
+  <div class="nm" id="hname">—</div>
+  <div class="r hide-m"><span>ATOMS <b id="hatoms">0</b></span><span>BONDS <b id="hbonds">0</b></span><span>FPS <b id="hfps">60</b></span></div>
+  <div class="els" id="hels"></div>
+  <div class="hint hide-m">drag to rotate · click for sparks</div>
+</div>
+<nav id="dots"></nav>
+
+<main>
+<header class="hero" data-mol="swirl" data-sec="0">
+  <div class="hero-in">
+    <div class="tag">GENERAL CHEMISTRY · 2026/2027</div>
+    <h1>الدهانات</h1>
+    <p class="sub">تركيبها الكيميائي وأنواعها وخواصها وطرق تصنيعها واستخداماتها</p>
+    <div class="cover">
+      <div><small>المادة</small>كيمياء عامة</div>
+      <div><small>موضوع البحث</small>الدهانات (Paints)</div>
+      <div><small>مقدم إلى</small><span id="doctor"></span></div>
+    </div>
+    <div class="mem" id="members"></div>
+    <div class="scrl">SCROLL TO EXPLORE<i></i></div>
+  </div>
+</header>
+
+<div class="col">
+
+<section class="sec" data-sec="1">
+  <div class="sh" data-mol="film"><div class="no">01</div><div class="kick">INTRODUCTION</div><h2>المقدمة وأهمية الدهانات</h2><div class="ln"></div></div>
+  <div class="card rv flip">
+    <div class="tag3d">3D · PAINT FILM ON STEEL</div>
+    <p>تُعد <em class="k">الدهانات</em> من أهم المواد الكيميائية المستخدمة في الحياة اليومية والصناعات المختلفة، حيث تدخل في طلاء المباني والأثاث والسيارات والمعادن والأخشاب وغيرها من المنتجات.</p>
+    <p>ولا يقتصر دور الدهانات على تحسين المظهر الجمالي للأسطح، بل تمتد أهميتها إلى حماية المواد من العوامل الخارجية مثل الرطوبة والحرارة والتآكل والصدأ، مما يساعد على زيادة عمرها الافتراضي. النموذج يوضح طبقة دهان (جسيمات ملونة) فوق سطح من الحديد (برتقالي).</p>
+    <p>وقد تطورت صناعة الدهانات بصورة كبيرة مع تقدم العلوم الكيميائية، فأصبحت تتوافر أنواع متعددة تختلف في تركيبها وخواصها وطريقة استخدامها، وأصبح اختيار نوع الدهان يعتمد على طبيعة السطح والظروف المحيطة به والغرض المطلوب منه.</p>
+  </div>
+  <div class="card rv rise">
+    <h3><span class="ic">🛡️</span>أهمية الدهانات</h3>
+    <div class="grid">
+      <div class="mini"><div class="e">🧱</div><h4>الحماية</h4><p>حماية الأسطح من التلف والتآكل.</p></div>
+      <div class="mini"><div class="e">🎨</div><h4>الجمال</h4><p>تحسين المظهر الجمالي وإضافة الألوان المختلفة.</p></div>
+      <div class="mini"><div class="e">💧</div><h4>مقاومة الماء</h4><p>مقاومة الرطوبة والماء في الأنواع المصممة لذلك.</p></div>
+      <div class="mini"><div class="e">🧽</div><h4>سهولة التنظيف</h4><p>تسهيل تنظيف بعض الأسطح.</p></div>
+      <div class="mini"><div class="e">🔥</div><h4>خصائص خاصة</h4><p>مقاومة الحرارة أو الحريق أو المواد الكيميائية.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-sec="2">
+  <div class="sh" data-mol="latex"><div class="no">02</div><div class="kick">DEFINITION & HISTORY</div><h2>التعريف ونبذة تاريخية</h2><div class="ln"></div></div>
+  <div class="card rv flip" data-mol="latex">
+    <div class="tag3d">3D · BINDER PARTICLES IN WATER</div>
+    <h3><span class="ic">📖</span>تعريف الدهانات (Paints)</h3>
+    <p><em class="k">الدهانات</em> هي مواد سائلة أو شبه سائلة تُوضع على الأسطح المختلفة، ثم تجف لتكوّن طبقة رقيقة متماسكة تلتصق بالسطح، وتعمل على حمايته أو تحسين مظهره أو تحقيق وظيفتين معًا.</p>
+    <p>تتكون الدهانات عادةً من مجموعة من المواد الكيميائية، أهمها <strong>المادة الرابطة</strong> و<strong>الأصباغ</strong> و<strong>المذيبات</strong> و<strong>المواد المضافة</strong>. في النموذج: جسيمات المادة الرابطة (أزرق فاتح) معلّقة بين جزيئات الماء قبل الجفاف.</p>
+  </div>
+  <div class="card rv flip" data-mol="hematite">
+    <div class="tag3d">3D · IRON OXIDE Fe₂O₃ (RED OCHRE)</div>
+    <h3><span class="ic">🏺</span>تاريخ الدهانات</h3>
+    <div class="tl" id="tl"><div class="rail"></div><div class="fill"></div>
+      <div class="ev"><span class="y">القديم</span><p>استخدم الإنسان القديم مواد طبيعية مثل الطين والفحم و<strong>الأكاسيد المعدنية</strong> للحصول على الألوان، ورسم بها النقوش على جدران الكهوف. النموذج يوضح بلورة أكسيد الحديد (المغرة الحمراء) من أقدم الألوان المعروفة.</p></div>
+      <div class="ev"><span class="y">التطور</span><p>مع مرور الزمن تطورت طرق تحضير الألوان واستخدام <strong>الزيوت الطبيعية</strong> والمواد الرابطة.</p></div>
+      <div class="ev"><span class="y">الصناعة</span><p>شهدت صناعة الدهانات تطورًا كبيرًا مع ظهور <strong>الكيمياء الصناعية</strong> و<strong>البوليمرات الصناعية</strong>.</p></div>
+      <div class="ev"><span class="y">الحديث</span><p>ظهرت <strong>الدهانات المائية</strong> والصناعية والمتخصصة التي تقاوم الظروف البيئية المختلفة.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-sec="3">
+  <div class="sh" data-mol="acrylic"><div class="no">03</div><div class="kick">CHEMICAL COMPONENTS</div><h2>المكونات الكيميائية</h2><div class="ln"></div></div>
+  <div class="card rv rise">
+    <p>تتكون الدهانات من عدة مكونات أساسية، ويؤدي كل مكون وظيفة محددة تساعد على تكوين طبقة الدهان النهائية.</p>
+  </div>
+  <div class="card rv flip" data-mol="acrylic">
+    <div class="tag3d">3D · ACRYLIC RESIN (PMMA)</div>
+    <h3><span class="ic">🔗</span>1. المادة الرابطة (Binder)</h3>
+    <p>من أهم مكونات الدهانات؛ تعمل على ربط جزيئات الصبغة ببعضها وبالسطح المراد طلاؤه، وتساعد على تكوين طبقة متماسكة بعد الجفاف. النموذج: سلسلة راتنج أكريليك.</p>
+    <ul class="l">
+      <li>راتنجات الأكريليك (Acrylic Resins).</li>
+      <li>راتنجات الألكيد (Alkyd Resins).</li>
+      <li>راتنجات الإيبوكسي (Epoxy Resins).</li>
+    </ul>
+  </div>
+  <div class="card rv flip" data-mol="pig">
+    <div class="tag3d">3D · INTERACTIVE — PICK A PIGMENT</div>
+    <h3><span class="ic">🎨</span>2. الأصباغ (Pigments)</h3>
+    <p>مواد تُضاف إلى الدهان لإكسابه اللون والقدرة على تغطية السطح، كما يمكن لبعضها أن يمنح الدهان خصائص إضافية. اضغط على صبغة لتشاهد تركيبها:</p>
+    <div class="sel-btns" id="selb">
+      <button data-pig="tio2" class="on">TiO₂</button><button data-pig="hematite">Fe₂O₃</button><button data-pig="cblack">Carbon Black</button>
+    </div>
+    <p class="pinfo" id="pinfo"></p>
+  </div>
+  <div class="card rv flip" data-mol="water">
+    <div class="tag3d">3D · H₂O</div>
+    <h3><span class="ic">💧</span>3. المذيبات (Solvents)</h3>
+    <p>تُستخدم لضبط <strong>لزوجة</strong> الدهان وتسهيل تطبيقه على الأسطح. قد تكون <strong>المياه</strong> هي الوسط السائل في الدهانات المائية (كما في النموذج)، بينما تُستخدم <strong>مذيبات عضوية</strong> في أنواع أخرى.</p>
+  </div>
+  <div class="card rv rise">
+    <h3><span class="ic">🧪</span>4. المواد المضافة (Additives)</h3>
+    <p>تُضاف بكميات صغيرة لتحسين خواص الدهان، مثل:</p>
+    <div class="grid">
+      <div class="mini"><h4>مضادات الرغوة</h4><p>Defoamers</p></div>
+      <div class="mini"><h4>المواد الحافظة</h4><p>Preservatives</p></div>
+      <div class="mini"><h4>الانسيابية والتسوية</h4><p>Flow and Leveling Agents</p></div>
+      <div class="mini"><h4>منع الترسيب</h4><p>Anti-settling Agents</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-sec="4">
+  <div class="sh" data-mol="latex"><div class="no">04</div><div class="kick">TYPES OF PAINT</div><h2>أنواع الدهانات</h2><div class="ln"></div></div>
+  <div class="card rv rise"><p>توجد أنواع عديدة من الدهانات، ويختلف تصنيفها حسب تركيبها الكيميائي وطريقة استخدامها.</p></div>
+  <div class="card rv flip" data-mol="latex">
+    <div class="tag3d">3D · LATEX IN WATER</div>
+    <h3><span class="ic">💧</span>1. الدهانات المائية (Water-Based)</h3>
+    <p>تعتمد على الماء بوصفه الوسط السائل، ومن أشهرها دهانات الأكريليك والدهانات البلاستيكية المستخدمة في طلاء الجدران.</p>
+    <ul class="l"><li>سرعة الجفاف نسبيًا.</li><li>انخفاض رائحة المذيبات مقارنةً بكثير من الدهانات الزيتية.</li><li>سهولة تنظيف الأدوات بالماء قبل جفاف الدهان، حسب نوع المنتج.</li></ul>
+  </div>
+  <div class="card rv flip" data-mol="alkyd">
+    <div class="tag3d">3D · ALKYD (OIL-MODIFIED POLYESTER)</div>
+    <h3><span class="ic">🛢️</span>2. الدهانات الزيتية (Oil-Based)</h3>
+    <p>تعتمد على مواد رابطة زيتية أو <strong>راتنجات ألكيدية</strong>، ويُستخدم معها عادةً مذيب عضوي. النموذج: سلسلة بوليستر بها سلاسل زيت جانبية طويلة.</p>
+    <ul class="l"><li>تكوين طبقة متماسكة.</li><li>ملاءمتها لبعض الأسطح الخشبية والمعدنية.</li><li>إمكانية الحصول على سطح ناعم ولامع.</li></ul>
+  </div>
+  <div class="card rv flip" data-mol="acrylic">
+    <div class="tag3d">3D · ACRYLIC RESIN</div>
+    <h3><span class="ic">🖌️</span>3. دهانات الأكريليك (Acrylic)</h3>
+    <p>تعتمد على راتنجات الأكريليك، وتتميز بقدرتها على الالتصاق بالعديد من الأسطح، وتوجد منها أنواع مائية تُستخدم في المباني والعديد من التطبيقات الأخرى.</p>
+  </div>
+  <div class="card rv flip" data-mol="epoxy">
+    <div class="tag3d">3D · CURED EPOXY NETWORK</div>
+    <h3><span class="ic">🏭</span>4. دهانات الإيبوكسي (Epoxy)</h3>
+    <p>تُستخدم في التطبيقات التي تحتاج إلى مقاومة جيدة للتآكل والمواد الكيميائية، مثل بعض الأرضيات والمنشآت الصناعية. النموذج: شبكة متشابكة تربط سلاسلها جسور من النيتروجين (أزرق) بعد التصلب.</p>
+  </div>
+  <div class="card rv flip" data-mol="pu">
+    <div class="tag3d">3D · URETHANE LINKS –NH–CO–O–</div>
+    <h3><span class="ic">🚗</span>5. دهانات البولي يوريثان (Polyurethane)</h3>
+    <p>تتميز بمقاومة جيدة للخدش والعوامل الجوية في التركيبات المناسبة، وتُستخدم في طلاء السيارات والأثاث وبعض الأسطح الصناعية.</p>
+  </div>
+</section>
+
+<section class="sec" data-sec="5">
+  <div class="sh" data-mol="film"><div class="no">05</div><div class="kick">PROPERTIES</div><h2>الخواص الفيزيائية والكيميائية</h2><div class="ln"></div></div>
+  <div class="card rv flip">
+    <div class="tag3d">3D · ADHESION TO SURFACE</div>
+    <p>تؤثر خواص الدهانات في جودتها وكفاءتها وقدرتها على أداء الوظيفة المطلوبة.</p>
+    <h3><span class="ic">📏</span>أولاً: الخواص الفيزيائية</h3>
+    <div class="tw"><table><thead><tr><th>الخاصية</th><th>المعنى</th></tr></thead><tbody>
+      <tr><td><strong>اللزوجة</strong> Viscosity</td><td>مقاومة الدهان للتدفق، وتؤثر في سهولة فرده على السطح.</td></tr>
+      <tr><td><strong>اللون</strong> Color</td><td>يحدد المظهر النهائي للسطح.</td></tr>
+      <tr><td><strong>اللمعان</strong> Gloss</td><td>درجة انعكاس الضوء عن السطح المطلي.</td></tr>
+      <tr><td><strong>زمن الجفاف</strong> Drying Time</td><td>الوقت اللازم للجفاف وفقًا لنوع الدهان وظروف التطبيق.</td></tr>
+      <tr><td><strong>قوة التغطية</strong> Hiding Power</td><td>قدرة الدهان على إخفاء لون السطح الأصلي.</td></tr>
+      <tr><td><strong>الالتصاق</strong> Adhesion</td><td>قدرة الدهان على الثبات على السطح.</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="card rv rise">
+    <h3><span class="ic">⚗️</span>ثانياً: الخواص الكيميائية</h3>
+    <div class="grid">
+      <div class="mini"><h4>مقاومة التآكل الكيميائي</h4><p>قدرة بعض الدهانات على تحمل تأثير مواد كيميائية معينة.</p></div>
+      <div class="mini"><h4>مقاومة الأكسدة</h4><p>تساعد بعض التركيبات على حماية الأسطح المعدنية من الصدأ.</p></div>
+      <div class="mini"><h4>الثبات الكيميائي</h4><p>احتفاظ المكونات بخصائصها في ظروف الاستخدام.</p></div>
+      <div class="mini"><h4>مقاومة الماء</h4><p>تختلف حسب نوع الدهان وتركيبته ودرجة جفافه.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-sec="6">
+  <div class="sh" data-mol="mix"><div class="no">06</div><div class="kick">MANUFACTURING</div><h2>مراحل تصنيع الدهانات</h2><div class="ln"></div></div>
+  <div class="card rv flip" data-mol="mix">
+    <div class="tag3d">3D · MIXING VORTEX</div>
+    <p>تمر صناعة الدهانات بعدة مراحل أساسية، وتختلف التفاصيل حسب نوع المنتج وتركيبته.</p>
+    <div class="steps">
+      <div class="mini"><div class="e">1️⃣</div><h4>تحضير المواد الخام</h4><p>اختيار المواد الخام وتحديد نسبها وفقًا للمواصفات المطلوبة.</p></div>
+      <div class="mini"><div class="e">2️⃣</div><h4>الخلط (Mixing)</h4><p>تُخلط المادة الرابطة مع جزء من الوسط السائل والمواد المضافة، ثم تُضاف الأصباغ تدريجيًا.</p></div>
+    </div>
+  </div>
+  <div class="card rv flip" data-mol="grind">
+    <div class="tag3d">3D · LIVE DISPERSION</div>
+    <div class="steps">
+      <div class="mini"><div class="e">3️⃣</div><h4>الطحن والتشتيت (Grinding & Dispersion)</h4><p>معدات خاصة تفرّق جزيئات الأصباغ داخل الوسط السائل وتمنع تجمعها في كتل، للحصول على توزيع متجانس. شاهد في النموذج كتلة الصبغة وهي تتفكك وتنتشر.</p></div>
+      <div class="mini"><div class="e">4️⃣</div><h4>ضبط الخواص (Adjustment)</h4><p>ضبط اللزوجة واللون والخواص الأخرى بإضافة الكميات المناسبة من المكونات.</p></div>
+      <div class="mini"><div class="e">5️⃣</div><h4>الترشيح (Filtration)</h4><p>إزالة الشوائب والجزيئات غير المرغوب فيها للحصول على منتج أكثر تجانسًا.</p></div>
+      <div class="mini"><div class="e">6️⃣</div><h4>التعبئة والتغليف (Packaging)</h4><p>تعبئة الدهان في عبوات مناسبة، ثم تُغلق وتُوضع عليها بيانات المنتج وطريقة الاستخدام والتحذيرات.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-sec="7">
+  <div class="sh" data-mol="coated"><div class="no">07</div><div class="kick">APPLICATIONS</div><h2>استخدامات الدهانات</h2><div class="ln"></div></div>
+  <div class="card rv rise">
+    <div class="tag3d">3D · COATED STEEL PART</div>
+    <p>تدخل الدهانات في العديد من المجالات الصناعية والحياتية، ومن أهم استخداماتها:</p>
+    <div class="grid">
+      <div class="mini"><div class="e">🏗️</div><h4>البناء والتشييد</h4><p>طلاء الجدران والأسقف والواجهات لتحسين المظهر وحماية الأسطح.</p></div>
+      <div class="mini"><div class="e">🪑</div><h4>الأثاث والأخشاب</h4><p>تلوين الأخشاب وحمايتها من العوامل الخارجية وإعطاؤها مظهرًا جماليًا.</p></div>
+      <div class="mini"><div class="e">🚗</div><h4>صناعة السيارات</h4><p>طلاء هياكل السيارات لحمايتها من التآكل وتحسين مظهرها.</p></div>
+      <div class="mini"><div class="e">⚙️</div><h4>الصناعات المعدنية</h4><p>حماية المعادن من الصدأ والتآكل، خاصةً في المنشآت والهياكل الخارجية.</p></div>
+      <div class="mini"><div class="e">🏭</div><h4>التطبيقات الصناعية</h4><p>دهانات متخصصة للمصانع والمعدات والخزانات والأرضيات الصناعية.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-sec="8">
+  <div class="sh" data-mol="voc"><div class="no">08</div><div class="kick">PROS, CONS & ENVIRONMENT</div><h2>المميزات والعيوب والبيئة</h2><div class="ln"></div></div>
+  <div class="card rv rise">
+    <div class="pc">
+      <div><h3><span class="ic">✅</span>المميزات</h3><ul class="l">
+        <li>حماية الأسطح وإطالة عمرها الافتراضي.</li><li>تحسين الشكل الجمالي للمنتجات والمباني.</li><li>توافر ألوان ودرجات متنوعة.</li><li>أنواع متخصصة لمقاومة الحرارة والرطوبة والتآكل.</li><li>سهولة تجديد بعض الأسطح بإعادة الطلاء.</li></ul></div>
+      <div><h3><span class="ic">⚠️</span>العيوب</h3><ul class="l">
+        <li>قد تتأثر بعض الأنواع بالرطوبة أو أشعة الشمس.</li><li>قد يحدث تقشر أو تشقق عند سوء تحضير السطح أو التطبيق.</li><li>بعض الأنواع تحتاج وقتًا طويلًا نسبيًا للجفاف.</li><li>قد تحتوي بعض التركيبات على مواد متطايرة تؤثر في جودة الهواء.</li><li>بعض الأنواع تحتاج طرقًا خاصة في التخزين والتطبيق والتخلص من المخلفات.</li></ul></div>
+    </div>
+  </div>
+  <div class="card rv flip" data-mol="voc">
+    <div class="tag3d">3D · VOCs (TOLUENE) ESCAPING</div>
+    <h3><span class="ic">🌍</span>التأثير البيئي</h3>
+    <p>قد ينتج عن استخدام بعض الدهانات انبعاث <em class="k">مركبات عضوية متطايرة</em> (Volatile Organic Compounds – VOCs)، والتي قد تؤثر في جودة الهواء الداخلي والخارجي. في النموذج: جزيئات مذيب (التولوين) تتصاعد من طبقة الدهان أثناء الجفاف.</p>
+    <p>ولذلك اتجهت الصناعات الحديثة إلى تطوير دهانات <strong>أقل في انبعاث المركبات المتطايرة</strong>، واستخدام مواد أكثر أمانًا، وتحسين طرق التصنيع والتخلص من المخلفات.</p>
+  </div>
+  <div class="card rv zoom">
+    <h3><span class="ic">🦺</span>احتياطات السلامة</h3>
+    <div class="grid">
+      <div class="mini"><div class="e">🌬️</div><p>توفير تهوية جيدة أثناء العمل.</p></div>
+      <div class="mini"><div class="e">🧤</div><p>ارتداء القفازات ومعدات الوقاية المناسبة.</p></div>
+      <div class="mini"><div class="e">👁️</div><p>تجنب ملامسة الدهان للعينين والجلد.</p></div>
+      <div class="mini"><div class="e">🔥</div><p>إبعاد الدهانات والمذيبات القابلة للاشتعال عن مصادر الحرارة والنيران.</p></div>
+      <div class="mini"><div class="e">📋</div><p>اتباع تعليمات الشركة المصنعة.</p></div>
+      <div class="mini"><div class="e">🚱</div><p>عدم التخلص من البقايا في المصارف أو البيئة دون اتباع تعليمات التخلص الآمن.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-sec="9">
+  <div class="sh" data-mol="wheel"><div class="no">09</div><div class="kick">CONCLUSION</div><h2>الخاتمة</h2><div class="ln"></div></div>
+  <div class="card rv zoom">
+    <p>في نهاية هذا البحث، يتضح أن الدهانات ليست مجرد مواد تُستخدم لإضافة الألوان والمظهر الجمالي للأسطح، بل هي منتجات كيميائية مهمة تؤدي دورًا أساسيًا في <strong>حماية المواد</strong> المختلفة وتحسين خواصها وزيادة عمرها الافتراضي.</p>
+    <p>وقد تناول البحث تعريف الدهانات وتاريخها، ومكوناتها الكيميائية، وأنواعها المختلفة، بالإضافة إلى خواصها الفيزيائية والكيميائية ومراحل تصنيعها واستخداماتها المتعددة.</p>
+    <p>كما تبين أن التطور العلمي في مجال الكيمياء ساهم في إنتاج دهانات أكثر كفاءة وتخصصًا، مع الاهتمام بتقليل تأثيرها البيئي وتحسين مستوى السلامة أثناء استخدامها.</p>
+    <p>ومن هنا تظهر أهمية دراسة الدهانات وفهم تركيبها الكيميائي وخواصها، لما لذلك من دور في <em class="k">اختيار النوع المناسب لكل استخدام</em>.</p>
+  </div>
+  <div class="card rv rise">
+    <h3><span class="ic">📚</span>المراجع (References)</h3>
+    <ol class="refs" style="margin-left:18px">
+      <li>Encyclopaedia Britannica – pigments and coatings (general information).</li>
+      <li>American Coatings Association (paint.org) – paint and coatings industry.</li>
+      <li>U.S. Environmental Protection Agency (EPA) – Volatile Organic Compounds and indoor air quality.</li>
+      <li>Wicks, Z. W., Jones, F. N., Pappas, S. P., &amp; Wicks, D. A. <em>Organic Coatings: Science and Technology</em>. Wiley.</li>
+      <li>Lambourne, R., &amp; Strivens, T. A. <em>Paint and Surface Coatings: Theory and Practice</em>. Woodhead Publishing.</li>
+    </ol>
+  </div>
+</section>
+</div>
+</main>
+<footer>PAINTS · GENERAL CHEMISTRY 2026/2027 · BUILT WITH THREE.JS / WEBGL</footer>
+
+<script>
+/* ===== عدّل هنا: أسماء المجموعة واسم الدكتور ===== */
+const MEMBERS=["الطالب الأول","الطالب الثاني","الطالب الثالث","الطالب الرابع","الطالب الخامس"];
+const DOCTOR="الدكتور / ............";
+/* ================================================== */
+document.getElementById('doctor').textContent=DOCTOR;
+document.getElementById('members').innerHTML=MEMBERS.map(m=>`<span>${m}</span>`).join('');
+document.querySelectorAll('.sh h2').forEach(h=>{h.innerHTML=h.textContent.trim().split(/\s+/).map((w,i)=>`<span class="w" style="transition-delay:${.1+i*.1}s">${w}</span>`).join(' ');});
+document.querySelectorAll('.grid,.steps').forEach(g=>[...g.children].forEach((c,i)=>c.style.transitionDelay=(.25+i*.09)+'s'));
+document.querySelectorAll('tbody').forEach(g=>[...g.children].forEach((c,i)=>c.style.transitionDelay=(.2+i*.07)+'s'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);}),{threshold:.15});
+document.querySelectorAll('.rv,.sh').forEach(el=>io.observe(el));
+if(matchMedia('(hover:hover)').matches)document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('pointermove',e=>{if(!c.classList.contains('in'))return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transition='transform .15s';c.style.transform=`perspective(1000px) rotateY(${x*5}deg) rotateX(${-y*5}deg)`;});
+  c.addEventListener('pointerleave',()=>{c.style.transition='transform .6s';c.style.transform='';});});
+const secs=[...document.querySelectorAll('[data-sec]')];const dots=document.getElementById('dots');
+secs.forEach(s=>{const a=document.createElement('a');a.href='#';a.onclick=e=>{e.preventDefault();s.scrollIntoView({behavior:'smooth'})};dots.appendChild(a)});
+const anchors=[...document.querySelectorAll('[data-mol]')];
+const tl=document.getElementById('tl'),evs=[...tl.querySelectorAll('.ev')];
+window.__mol='swirl';window.__sec=0;
+function onScroll(){
+  const vh=innerHeight,max=document.documentElement.scrollHeight-vh;
+  document.getElementById('bar').style.width=(max>0?scrollY/max*100:0)+'%';
+  const th=innerWidth<=900?.92:.58;let m='swirl';for(const a of anchors){if(a.getBoundingClientRect().top<vh*th)m=a.dataset.mol;}
+  window.__mol=m;
+  let sc=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<vh*.6)sc=i;});window.__sec=sc;
+  [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===sc));
+  const r=tl.getBoundingClientRect(),p=Math.max(0,Math.min(1,(vh*.6-r.top)/r.height));
+  tl.querySelector('.fill').style.height=(p*100)+'%';
+  evs.forEach(ev=>ev.classList.toggle('on',ev.getBoundingClientRect().top<vh*.62));
+}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+const PINFO={tio2:"<strong>ثاني أكسيد التيتانيوم (TiO₂):</strong> يُستخدم للحصول على اللون <strong>الأبيض</strong> والتغطية الجيدة. النموذج: التيتانيوم (فضي) محاط بذرات الأكسجين (أحمر).",
+ hematite:"<strong>أكسيد الحديد (Fe₂O₃):</strong> يُستخدم لإنتاج درجات <strong>الأحمر والأصفر والبني</strong>. النموذج: طبقات من الحديد (برتقالي) والأكسجين (أحمر).",
+ cblack:"<strong>الكربون الأسود (Carbon Black):</strong> يُستخدم للحصول على اللون <strong>الأسود</strong>. النموذج: طبقات كربون سداسية متراصة."};
+window.__pig='tio2';
+function pick(p){window.__pig=p;document.querySelectorAll('#selb button').forEach(b=>b.classList.toggle('on',b.dataset.pig===p));
+  document.getElementById('pinfo').innerHTML=PINFO[p];window.__pigChanged=true;}
+document.querySelectorAll('[data-pig]').forEach(b=>b.addEventListener('click',()=>pick(b.dataset.pig)));
+pick('tio2');
+</script>
+
+<script type="importmap">{"imports":{"three":"./three.module.min.js","three/addons/":"./addons/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
+import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+
+const canvas=document.getElementById('gl');
+const mobile=matchMedia('(max-width:900px)').matches;
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.75:2));
+renderer.setClearColor(0x05060f,1);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x05060f,0.009);
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(),0.04).texture;
+const camera=new THREE.PerspectiveCamera(40,1,0.1,500);camera.position.set(0,0,40);
+const composer=new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene,camera));
+const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),.5,.5,.85);composer.addPass(bloom);
+composer.addPass(new OutputPass());
+scene.add(new THREE.HemisphereLight(0x8fb7ff,0x1a0b2e,.5));
+const key=new THREE.DirectionalLight(0xffffff,1.6);key.position.set(6,10,12);scene.add(key);
+const rimA=new THREE.PointLight(0x38bdf8,120,80),rimB=new THREE.PointLight(0xf472b6,120,80);scene.add(rimA,rimB);
+
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+let seed=7;const srnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const srndV=(r)=>V(srnd()-.5,srnd()-.5,srnd()-.5).normalize().multiplyScalar(r);
+
+/* ============ ELEMENTS & PIGMENT PARTICLES ============ */
+const EL={C:{c:0x4a5066,r:.44,n:'C'},H:{c:0xf1f4ff,r:.27,n:'H'},O:{c:0xff3346,r:.42,n:'O'},N:{c:0x3d6dff,r:.42,n:'N'},
+  Ti:{c:0xc9d1dc,r:.55,n:'Ti',m:.7},Fe:{c:0xe0782f,r:.5,n:'Fe',m:.55},
+  pR:{c:0xe63946,r:.6,n:'Red'},pY:{c:0xffc43d,r:.6,n:'Yellow'},pB:{c:0x3a86ff,r:.6,n:'Blue'},
+  pG:{c:0x2ec27e,r:.6,n:'Green'},pW:{c:0xcfd5e0,r:.6,n:'White'},pL:{c:0x9ad7ff,r:.6,n:'Binder'}};
+const CAP={C:380,H:480,O:220,N:50,Ti:60,Fe:220,pR:90,pY:90,pB:90,pG:90,pW:90,pL:60};
+const group=new THREE.Group();scene.add(group);
+const sphere=new THREE.SphereGeometry(1,mobile?20:32,mobile?16:24);
+const pools={},ID=new THREE.Quaternion();
+for(const e in EL){
+  const col=new THREE.Color(EL[e].c),isP=e[0]==='p';
+  const mat=new THREE.MeshPhysicalMaterial({color:col,roughness:e==='pW'?.55:isP?.32:(e==='C'?.28:.2),metalness:EL[e].m??(e==='C'?.35:.05),clearcoat:1,clearcoatRoughness:.08,
+    emissive:col.clone().multiplyScalar(e==='H'||e==='pW'?0:.12),envMapIntensity:1.2,transparent:e==='pL',opacity:e==='pL'?.85:1});
+  const mesh=new THREE.InstancedMesh(sphere,mat,CAP[e]);mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);mesh.frustumCulled=false;group.add(mesh);
+  const z=new THREE.Matrix4().makeScale(0,0,0);for(let k=0;k<CAP[e];k++)mesh.setMatrixAt(k,z);
+  const inst=[];for(let k=0;k<CAP[e];k++)inst.push({from:V(0,0,0),to:V(0,0,0),cur:V(0,0,0),rp:V(0,0,0),arc:V(0,0,0),fs:0,ts:0,cs:0,rs:0,t0:0,dur:1,u:1,land:false,landed:true,f:null});
+  pools[e]={mesh,inst,base:EL[e].r};
+}
+const BCAP=1600;
+const bondGeo=new THREE.CylinderGeometry(1,1,1,mobile?8:12,1,true);
+const bondMat=new THREE.MeshPhysicalMaterial({color:0xc9d2ee,roughness:.25,metalness:.6,clearcoat:.6,emissive:0x1a2240});
+const bonds=new THREE.InstancedMesh(bondGeo,bondMat,BCAP);bonds.frustumCulled=false;bonds.instanceMatrix.setUsage(THREE.DynamicDrawUsage);bonds.count=0;group.add(bonds);
+
+/* ============ BUILDERS ============ */
+const mk=()=>({atoms:[],bonds:[]});
+const add=(m,el,p,x)=>{m.atoms.push(Object.assign({el,p},x||{}));return m.atoms.length-1;};
+const bd=(m,i,j,o=1)=>m.bonds.push([i,j,o]);
+const XA=V(1,0,0);
+function basis(d){const a=Math.abs(d.x)<.9?XA:V(0,1,0);const u=new THREE.Vector3().crossVectors(d,a).normalize();const v=new THREE.Vector3().crossVectors(d,u).normalize();return [u,v];}
+function methyl(m,c,d){const cp=m.atoms[c].p,[u,v]=basis(d);for(let k=0;k<3;k++){const a=k*2.094;bd(m,c,add(m,'H',cp.clone().addScaledVector(d,.38).addScaledVector(u,Math.cos(a)*.98).addScaledVector(v,Math.sin(a)*.98)));}}
+function sub(m,ci,p,d,t){
+  const at=(el,l)=>{const i=add(m,el,p.clone().addScaledVector(d,l));bd(m,ci,i);return i;};
+  if(t==='H')at('H',1.08);
+  else if(t==='=O'){bd(m,ci,add(m,'O',p.clone().addScaledVector(d,1.25)),2);}
+  else if(t==='CH3'){methyl(m,at('C',1.52),d);}
+  else if(t==='COOCH3'){const c=at('C',1.52),cp=m.atoms[c].p,[u]=basis(d);
+    bd(m,c,add(m,'O',cp.clone().addScaledVector(d,.6).addScaledVector(u,1.05)),2);
+    const o2=add(m,'O',cp.clone().addScaledVector(d,.7).addScaledVector(u,-1.0));bd(m,c,o2);
+    const dd=d.clone().addScaledVector(u,-.5).normalize();const c2=add(m,'C',m.atoms[o2].p.clone().addScaledVector(dd,1.35));bd(m,o2,c2);methyl(m,c2,dd);}
+  else if(t==='FA'){const[u,v]=basis(d);let prev=ci;for(let k=0;k<7;k++){const q=p.clone().addScaledVector(d,1.3+k*1.15).addScaledVector(u,k%2?.4:-.4);const c=add(m,'C',q);bd(m,prev,c);prev=c;
+    bd(m,c,add(m,'H',q.clone().addScaledVector(v,1.0).addScaledVector(u,k%2?.4:-.4)));bd(m,c,add(m,'H',q.clone().addScaledVector(v,-1.0).addScaledVector(u,k%2?.4:-.4)));}}
+}
+function chain(units,len){const m=mk(),ids=[];
+  for(let i=0;i<len;i++){const [el,subs]=units[i%units.length],s=i%2?1:-1,p=V(i*1.28,s*.42,0),id=add(m,el,p);if(i)bd(m,ids[i-1],id);ids.push(id);
+    const dirs=subs.length===1?[V(0,s,0)]:[V(0,s*.6,.8).normalize(),V(0,s*.6,-.8).normalize()];subs.forEach((t,k)=>sub(m,id,p,dirs[k],t));}
+  return m;}
+function centroid(m){const c=V(0,0,0);m.atoms.forEach(a=>c.add(a.p));return c.divideScalar(m.atoms.length);}
+function finish(m,o={}){const c=centroid(m);m.atoms.forEach(a=>a.p.sub(c));
+  if(o.bend)m.atoms.forEach(a=>{const x=a.p.x;a.p.y+=Math.sin(x*o.bend[1])*o.bend[0];a.p.z+=(Math.cos(x*o.bend[1])-1)*o.bend[0];});
+  if(o.bend){const c2=centroid(m);m.atoms.forEach(a=>a.p.sub(c2));}
+  m.R=o.R||Math.max(...m.atoms.map(a=>a.p.length()));return m;}
+function bondByDist(m,A,B,dmax){const n=m.atoms.length;for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){const a=m.atoms[i],b=m.atoms[j];
+  if(((a.el===A&&b.el===B)||(a.el===B&&b.el===A))&&a.p.distanceTo(b.p)<dmax)bd(m,i,j);}}
+function relax(P,minD,it=60){for(let k=0;k<it;k++)for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const d=P[i].p.distanceTo(P[j].p),need=minD(P[i],P[j]);if(d<need&&d>1e-4){const v=P[j].p.clone().sub(P[i].p).multiplyScalar((need-d)/d*.5);P[j].p.add(v);P[i].p.sub(v);}}}
+const HH=['H','H'];
+function water(m,c,f){const o=add(m,'O',c.clone(),f?{f}:undefined);const d=srndV(1),[u]=basis(d);
+  bd(m,o,add(m,'H',c.clone().addScaledVector(u,.78).addScaledVector(d,.6),f?{f}:undefined));bd(m,o,add(m,'H',c.clone().addScaledVector(u,-.78).addScaledVector(d,.6),f?{f}:undefined));}
+function toluene(m,c,f){const n=srndV(1),[u,v]=basis(n);const ids=[];for(let k=0;k<6;k++){const a=k*Math.PI/3,dir=u.clone().multiplyScalar(Math.cos(a)).addScaledVector(v,Math.sin(a));
+  ids.push(add(m,'C',c.clone().addScaledVector(dir,1.4),{f}));if(k)bd(m,ids[k],add(m,'H',c.clone().addScaledVector(dir,2.45),{f}));}
+  for(let k=0;k<6;k++)bd(m,ids[k],ids[(k+1)%6],k%2?1:2);const me=add(m,'C',c.clone().addScaledVector(u,2.9),{f});bd(m,ids[0],me);
+  const[u2,v2]=basis(u);for(let k=0;k<3;k++){const a=k*2.094;bd(m,me,add(m,'H',m.atoms[me].p.clone().addScaledVector(u,.38).addScaledVector(u2,Math.cos(a)*.98).addScaledVector(v2,Math.sin(a)*.98),{f}));}}
+const PIG=['pR','pY','pB','pG','pW'];
+const M={};
+// hero: swirling galaxy of pigment particles
+M.swirl=(()=>{seed=21;const m=mk();const arms=5;let i=0;for(const e of PIG)for(let k=0;k<54;k++,i++){const arm=PIG.indexOf(e),t=k/54;const ang=arm*Math.PI*2/arms+t*4.2;const r=1.2+t*10;
+  add(m,e,V(Math.cos(ang)*r+srnd()*.9,(srnd()-.5)*1.6*(1-t*.5),Math.sin(ang)*r+srnd()*.9),{s:.7+srnd()*.9,f:{mode:'bob',vec:srndV(.35),ph:srnd()*6}});}
+  m.R=16;return m;})();
+// paint film on steel substrate
+function steelFilm(n,layers,R){seed=4;const m=mk();const sp=1.05,ids=[];for(let i=0;i<n;i++)for(let j=0;j<n;j++){const id=add(m,'Fe',V((i-(n-1)/2)*sp,-2.2,(j-(n-1)/2)*sp));ids.push(id);if(i)bd(m,ids[(i-1)*n+j],id);if(j)bd(m,ids[i*n+j-1],id);}
+  const g=Math.floor(n*sp/1.75);const mix=['pW','pW','pR','pL','pW','pL','pY'];let q=0;
+  for(let L=0;L<layers;L++)for(let a=0;a<g;a++)for(let b=0;b<g;b++){const x=(a-(g-1)/2)*1.75+(L%2)*.85,z=(b-(g-1)/2)*1.75+(L%2)*.85;add(m,mix[(q++)%mix.length],V(x,-.75+L*1.45,z),{s:1.38});}
+  m.R=R;return m;}
+M.film=steelFilm(13,2,10);
+// latex binder particles + water
+M.latex=(()=>{seed=8;const m=mk();const P=[];for(let k=0;k<14;k++)P.push({p:srndV(2+srnd()*6),r:2});relax(P,()=>4.2);
+  P.forEach(b=>add(m,'pL',b.p,{s:3.3,f:{mode:'bob',vec:srndV(.5),ph:srnd()*6}}));
+  for(let w=0;w<46;w++){let c;do{c=srndV(1+srnd()*9);}while(P.some(b=>b.p.distanceTo(c)<2.6));water(m,c,{mode:'bob',vec:srndV(.6),ph:srnd()*6});}
+  m.R=10;return m;})();
+// pure water cluster
+M.water=(()=>{seed=9;const m=mk();const P=[];for(let w=0;w<55;w++)P.push({p:srndV(1+srnd()*6.5)});relax(P,()=>2.4);P.forEach(c=>water(m,c.p,{mode:'bob',vec:srndV(.4),ph:srnd()*6}));m.R=8;return m;})();
+// hematite Fe2O3 (simplified layered corundum)
+M.hematite=(()=>{const m=mk();const a=2.0,n=5;for(let L=0;L<4;L++){for(let i=0;i<n;i++)for(let j=0;j<n;j++)add(m,'O',V((i+.5*j-n*.75)*a,(L-1.5)*2.3,(j*.866-n*.43)*a));
+  if(L<3)for(let i=0;i<n;i++)for(let j=0;j<n;j++){if((i+2*j+L)%3===0)continue;add(m,'Fe',V((i+.5*j+.5-n*.75)*a,(L-1.5)*2.3+1.15,(j*.866+.29-n*.43)*a));}}
+  bondByDist(m,'Fe','O',2.0);return finish(m);})();
+// TiO2 (simplified octahedral network)
+M.tio2=(()=>{const m=mk();const n=3,s=2.3,key={},get=(p)=>{const k=p.toArray().map(v=>v.toFixed(2)).join();if(key[k]===undefined)key[k]=add(m,'O',p);return key[k];};
+  for(let i=0;i<n;i++)for(let j=0;j<n;j++)for(let k=0;k<n;k++){const c=V((i-1)*s,(j-1)*s,(k-1)*s);const t=add(m,'Ti',c);
+    [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].forEach(d=>bd(m,t,get(c.clone().add(V(...d).multiplyScalar(s/2))),1));}
+  return finish(m);})();
+// carbon black: turbostratic graphene stacks
+M.cblack=(()=>{const m=mk();const b=1.3;for(let L=0;L<3;L++){const rot=L*.45,off=m.atoms.length;
+  for(let i=-6;i<=6;i++)for(let j=-6;j<=6;j++){const A=V(i*1.5*b+j*1.5*b,0,i*.866*b-j*.866*b);for(const p of [A,A.clone().add(V(b,0,0))]){if(p.length()>4.8)continue;
+    const q=p.clone().applyAxisAngle(V(0,1,0),rot);q.y=(L-1)*2.4+.04*q.lengthSq()*(L===1?-1:1);add(m,'C',q);}}
+  for(let i=off;i<m.atoms.length;i++)for(let j=i+1;j<m.atoms.length;j++){const pa=m.atoms[i].p,pb=m.atoms[j].p;if(Math.abs(pa.y-pb.y)<.6&&pa.distanceTo(pb)<b*1.12)bd(m,i,j);}}
+  return finish(m);})();
+// acrylic (PMMA)
+M.acrylic=finish(chain([['C',HH],['C',['CH3','COOCH3']]],14),{bend:[.9,.25]});
+// alkyd: polyester backbone with fatty-acid side chains
+M.alkyd=finish(chain([['O',[]],['C',['=O']],['C',HH],['C',HH],['C',['=O']],['O',[]],['C',HH],['C',['H','FA']],['C',HH]],20),{bend:[.8,.22]});
+// polyurethane
+M.pu=finish(chain([['N',['H']],['C',['=O']],['O',[]],['C',HH],['C',HH],['C',HH],['C',HH],['O',[]],['C',['=O']],['N',['H']],['C',HH],['C',HH],['C',HH],['C',HH]],24),{bend:[.9,.24]});
+// cured epoxy network: chains + N cross-links
+M.epoxy=(()=>{const m=mk();const rows=[];for(let r=0;r<3;r++){const ids=[];for(let i=0;i<20;i++){const el=(i%5===2)?'O':'C';const id=add(m,el,V(i*1.28,(r-1)*3.8+(i%2?.42:-.42),Math.sin(r*1.7)*.8));if(i)bd(m,id-1,id);ids.push(id);}rows.push(ids);}
+  const link=(a,b)=>{const pa=m.atoms[a].p,pb=m.atoms[b].p;const c1=add(m,'C',pa.clone().lerp(pb,.3)),n=add(m,'N',pa.clone().lerp(pb,.5).add(V(0,0,.6))),c2=add(m,'C',pa.clone().lerp(pb,.7));bd(m,a,c1);bd(m,c1,n);bd(m,n,c2);bd(m,c2,b);bd(m,n,add(m,'H',m.atoms[n].p.clone().add(V(0,0,1))));};
+  [3,10,17].forEach(j=>link(rows[0][j],rows[1][j]));[6,13].forEach(j=>link(rows[1][j],rows[2][j]));return finish(m);})();
+// mixing vortex
+M.mix=(()=>{seed=13;const m=mk();const set=[['pW',70],['pR',40],['pY',40],['pB',40],['pL',30]];for(const [e,n] of set)for(let k=0;k<n;k++){const y=(srnd()-.5)*10,r=1.5+Math.abs(y)*.25+srnd()*5,a=srnd()*6.28;
+  add(m,e,V(Math.cos(a)*r,y,Math.sin(a)*r),{s:e==='pL'?1.6:.8+srnd()*.5,f:{mode:'spin',ph:a,r,y}});}m.R=9;return m;})();
+// grinding: agglomerate <-> dispersed (same particles)
+const gp=[];seed=17;for(let k=0;k<70;k++)gp.push({e:k<50?'pW':'pR'});
+M.agglom=(()=>{const m=mk();const P=gp.map(()=>({p:srndV(srnd()*2.5)}));relax(P,()=>1.15,80);P.forEach((q,k)=>add(m,gp[k].e,q.p,{s:1.45}));
+  m.atoms.forEach((a,i)=>m.atoms.forEach((b,j)=>{if(j>i&&a.p.distanceTo(b.p)<1.3&&srnd()<.35)bd(m,i,j);}));m.R=9;return m;})();
+M.dispersed=(()=>{const m=mk();seed=19;const P=gp.map(()=>({p:srndV(2+srnd()*8)}));relax(P,()=>2.2,60);P.forEach((q,k)=>add(m,gp[k].e,q.p,{s:1.45,f:{mode:'bob',vec:srndV(.5),ph:srnd()*6}}));m.R=9;return m;})();
+// coated steel part
+M.coated=(()=>{const m=mk();const fib=(N,r,cb)=>{for(let i=0;i<N;i++){const y=1-(i/(N-1))*2,rr=Math.sqrt(1-y*y),t=i*2.39996;cb(V(Math.cos(t)*rr*r,y*r,Math.sin(t)*rr*r));}};
+  const core=[];fib(150,4.2,p=>core.push(add(m,'Fe',p)));
+  core.forEach(i=>{core.map(j=>[j,m.atoms[i].p.distanceTo(m.atoms[j].p)]).filter(x=>x[0]>i).sort((a,b)=>a[1]-b[1]).slice(0,2).forEach(([j])=>bd(m,i,j));});
+  let k=0;fib(85,5.7,p=>add(m,(k++)%5===0?'pW':'pR',p,{s:1.3}));m.R=7;return m;})();
+// VOCs escaping from drying film
+M.voc=(()=>{const m=steelFilm(10,1,9);seed=31;for(let k=0;k<6;k++){const c=V((srnd()-.5)*7,1.5,(srnd()-.5)*7);toluene(m,c,{mode:'rise',ph:k/6});}m.R=9;return m;})();
+// colour wheel
+M.wheel=(()=>{const m=mk();const cols=['pR','pY','pG','pB','pL','pW'];const N=cols.length*24;for(let i=0;i<N;i++){const a=i/N*Math.PI*2,c=cols[Math.floor(i/24)];
+  for(const z of [-.75,.75])add(m,c,V(Math.cos(a)*(7+(z>0?.8:0)),Math.sin(a)*(7+(z>0?.8:0)),z),{s:1.1,f:{mode:'bob',vec:V(0,0,.4),ph:a*3}});}m.R=8.5;return m;})();
+const NAMES={swirl:'Pigment particles · paint',film:'Paint film on steel substrate',latex:'Binder (latex) particles in water',water:'Water · H₂O solvent',hematite:'Iron oxide · Fe₂O₃ (simplified)',
+  tio2:'Titanium dioxide · TiO₂ (simplified)',cblack:'Carbon black · graphitic layers',acrylic:'Acrylic resin · PMMA',alkyd:'Alkyd resin · oil-modified polyester',pu:'Polyurethane · –NH–CO–O–',
+  epoxy:'Cured epoxy network',mix:'Mixing vortex',agglom:'Pigment agglomerate',dispersed:'Dispersed pigment',coated:'Coated steel part',voc:'VOC release · toluene',wheel:'Colour wheel'};
+const VIEW={swirl:{el:.75},film:{el:.45},voc:{el:.35},hematite:{el:.3},tio2:{el:.4},cblack:{el:.35},wheel:{el:.05},mix:{el:.3}};
+
+/* ============ ENGINE ============ */
+let now=0,curBonds=[],oldBonds=[],oldT0=-9,curMol=null,curKey='';
+const tmpQ=new THREE.Quaternion(),tmpM=new THREE.Matrix4(),tmpS=new THREE.Vector3(),UP=V(0,1,0),wp=new THREE.Vector3(),dv=new THREE.Vector3(),mid=new THREE.Vector3();
+function randFar(){return new THREE.Vector3().randomDirection().multiplyScalar(rnd(18,30));}
+const hexOf=e=>'#'+new THREE.Color(EL[e].c).getHexString();
+function setTarget(m,opt={}){
+  const st=opt.stagger??.9;oldBonds=curBonds;oldT0=now;const cnt={};for(const e in EL)cnt[e]=0;const ref=[];const n=m.atoms.length;
+  m.atoms.forEach((a,idx)=>{const k=cnt[a.el]++;const I=pools[a.el].inst[k];ref.push(I);
+    I.from.copy(I.cur);const fresh=I.cs<.02;if(fresh)I.from.copy(randFar());
+    I.fs=fresh?0:I.cs;I.to.copy(a.p);I.ts=pools[a.el].base*(a.s||1);const dist=I.from.distanceTo(I.to);
+    I.t0=now+(fresh||dist>.05?(idx/n)*st:0);I.dur=dist<.05?.01:.9+Math.min(.6,dist*.03);I.arc.randomDirection().multiplyScalar(dist*.3);I.land=dist>2;I.landed=false;I.f=a.f||null;});
+  for(const e in EL){const P=pools[e];for(let k=cnt[e];k<P.inst.length;k++){const I=P.inst[k];if(I.ts===0&&I.cs<.01)continue;
+    I.from.copy(I.cur);I.fs=I.cs;I.to.copy(I.cur).multiplyScalar(1.8).add(new THREE.Vector3().randomDirection().multiplyScalar(6));I.ts=0;I.t0=now+Math.random()*.25;I.dur=.8;I.arc.set(0,0,0);I.land=false;I.f=null;}}
+  curBonds=m.bonds.map(([i,j,o])=>({a:ref[i],b:ref[j],o}));curMol=m;
+  if(!opt.quiet){ring.userData.t0=now;ring.userData.R=m.R;for(let i=0;i<70;i++){wp.copy(new THREE.Vector3().randomDirection().multiplyScalar(m.R*.8)).applyMatrix4(group.matrixWorld);burst(wp,2,5,Math.random());}}
+  document.getElementById('hatoms').textContent=m.atoms.length;document.getElementById('hbonds').textContent=m.bonds.length;
+  const els=[...new Set(m.atoms.map(a=>a.el))];
+  document.getElementById('hels').innerHTML=els.map(e=>`<span class="el"><i style="background:${hexOf(e)};color:${hexOf(e)}"></i>${EL[e].n}</span>`).join('');
+}
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function setBond(idx,a,b,r,off){dv.subVectors(b,a);const len=dv.length();if(len<1e-4||r<=0){tmpM.makeScale(0,0,0);bonds.setMatrixAt(idx,tmpM);return;}
+  tmpQ.setFromUnitVectors(UP,dv.divideScalar(len));mid.addVectors(a,b).multiplyScalar(.5);if(off)mid.add(off);tmpS.set(r,len,r);tmpM.compose(mid,tmpQ,tmpS);bonds.setMatrixAt(idx,tmpM);}
+const perp=V(0,0,0),ZA=V(0,0,1),nperp=V(0,0,0);
+function updateAtoms(t){
+  for(const e in pools){const P=pools[e];let any=false;
+    for(let k=0;k<P.inst.length;k++){const I=P.inst[k];
+      if(I.ts===0&&I.cs<.001&&I.u>=1){if(I.rs!==0){I.rs=0;tmpM.makeScale(0,0,0);P.mesh.setMatrixAt(k,tmpM);any=true;}continue;}
+      I.u=Math.max(0,Math.min(1,(now-I.t0)/I.dur));const e2=ease(I.u);
+      I.cur.copy(I.from).lerp(I.to,e2).addScaledVector(I.arc,Math.sin(Math.PI*e2));I.cs=I.fs+(I.ts-I.fs)*e2;
+      if(I.land&&!I.landed&&I.u>=1){I.landed=true;if(Math.random()<.35){wp.copy(I.cur).applyMatrix4(group.matrixWorld);burst(wp,4,3,Math.random());}}
+      I.rp.copy(I.cur);let s=I.cs;
+      if(I.f&&I.u>=1){const f=I.f;
+        if(f.mode==='bob')I.rp.addScaledVector(f.vec,Math.sin(t*.7+f.ph));
+        else if(f.mode==='rise'){const fr=(t*.16+f.ph)%1;I.rp.y+=fr*11;I.rp.x+=Math.sin(t+f.ph*9)*fr*1.5;s*=Math.min(1,fr*6)*(1-fr*fr);}
+        else if(f.mode==='spin'){const a=f.ph+t*(1.6/(1+f.r*.25));I.rp.set(Math.cos(a)*f.r,f.y+Math.sin(t*1.3+f.ph)*.3,Math.sin(a)*f.r);}}
+      I.rs=s;tmpS.setScalar(s);tmpM.compose(I.rp,ID,tmpS);P.mesh.setMatrixAt(k,tmpM);any=true;}
+    if(any)P.mesh.instanceMatrix.needsUpdate=true;}
+  let bi=0;
+  const draw=(list,fade,old)=>{for(const B of list){if(bi>=BCAP-2)break;const A=B.a,C=B.b;
+    let app=old?fade:Math.max(0,Math.min(1,(Math.min(A.u,C.u)-.82)/.18));
+    const ra=A.ts?A.rs/A.ts:(old&&A.fs?A.rs/A.fs:0),rc=C.ts?C.rs/C.ts:(old&&C.fs?C.rs/C.fs:0);app*=Math.min(1,ra,rc);
+    if(app<=.01)continue;
+    if(B.o===2){perp.subVectors(C.rp,A.rp).cross(ZA);if(perp.lengthSq()<1e-4)perp.set(0,1,0);perp.normalize().multiplyScalar(.15);nperp.copy(perp).negate();
+      setBond(bi++,A.rp,C.rp,.075*app,perp);setBond(bi++,A.rp,C.rp,.075*app,nperp);}
+    else setBond(bi++,A.rp,C.rp,.12*app);}};
+  draw(curBonds,1,false);const of=1-Math.min(1,(now-oldT0)/.3);if(of>0)draw(oldBonds,of,true);
+  bonds.count=bi;bonds.instanceMatrix.needsUpdate=true;
+}
+
+/* ============ STARS / NEBULA / SPARKS / RING ============ */
+const SN=mobile?1400:3000,sp=new Float32Array(SN*3),sph=new Float32Array(SN),ssz=new Float32Array(SN),scl=new Float32Array(SN*3);
+const cA=new THREE.Color();for(let i=0;i<SN;i++){const p=new THREE.Vector3().randomDirection().multiplyScalar(rnd(60,170));sp.set([p.x,p.y,p.z],i*3);sph[i]=Math.random()*6.28;ssz[i]=rnd(.5,2.2);cA.setHSL(Math.random(),.7,.82);scl.set([cA.r,cA.g,cA.b],i*3);}
+const sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.BufferAttribute(sp,3));sg.setAttribute('ph',new THREE.BufferAttribute(sph,1));sg.setAttribute('sz',new THREE.BufferAttribute(ssz,1));sg.setAttribute('color',new THREE.BufferAttribute(scl,3));
+const starMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,vertexColors:true,uniforms:{t:{value:0},pr:{value:renderer.getPixelRatio()}},
+  vertexShader:`attribute float ph;attribute float sz;uniform float t;uniform float pr;varying float a;varying vec3 vc;void main(){vc=color;vec4 mv=modelViewMatrix*vec4(position,1.);a=.25+.75*pow(.5+.5*sin(t*1.6+ph*3.),4.);gl_PointSize=sz*pr*(1.+a*1.4)*90./-mv.z;gl_Position=projectionMatrix*mv;}`,
+  fragmentShader:`varying float a;varying vec3 vc;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);float s=max(0.,1.-d*2.);float cr=max(0.,1.-abs(c.x)*16.)*max(0.,1.-abs(c.y)*2.)+max(0.,1.-abs(c.y)*16.)*max(0.,1.-abs(c.x)*2.);gl_FragColor=vec4(vc,(s*s*s+cr*.7)*a);}`});
+const stars=new THREE.Points(sg,starMat);scene.add(stars);
+const nebTex=(()=>{const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d');const r=g.createRadialGradient(128,128,0,128,128,128);r.addColorStop(0,'rgba(255,255,255,.55)');r.addColorStop(.4,'rgba(255,255,255,.15)');r.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=r;g.fillRect(0,0,256,256);return new THREE.CanvasTexture(c);})();
+const nebs=[];[[0xf43f5e,-40,20,-90,90],[0x38bdf8,50,-25,-100,100],[0xfacc15,10,40,-120,80]].forEach(([c,x,y,z,s])=>{const n=new THREE.Sprite(new THREE.SpriteMaterial({map:nebTex,color:c,transparent:true,opacity:.3,depthWrite:false,blending:THREE.AdditiveBlending,fog:false}));n.position.set(x,y,z);n.scale.setScalar(s);scene.add(n);nebs.push(n);});
+const MAXS=mobile?1200:2400,bp=new Float32Array(MAXS*3),bc=new Float32Array(MAXS*3),bl=new Float32Array(MAXS),bv=new Float32Array(MAXS*3);
+const bg=new THREE.BufferGeometry();bg.setAttribute('position',new THREE.BufferAttribute(bp,3));bg.setAttribute('color',new THREE.BufferAttribute(bc,3));bg.setAttribute('life',new THREE.BufferAttribute(bl,1));
+const sparks=new THREE.Points(bg,new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,vertexColors:true,uniforms:{pr:{value:renderer.getPixelRatio()}},
+  vertexShader:`attribute float life;uniform float pr;varying float l;varying vec3 vc;void main(){l=life;vc=color;vec4 mv=modelViewMatrix*vec4(position,1.);gl_PointSize=pr*(2.+14.*life)*30./-mv.z;gl_Position=projectionMatrix*mv;}`,
+  fragmentShader:`varying float l;varying vec3 vc;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);float core=max(0.,1.-d*2.);float cr=max(0.,1.-abs(c.x)*10.)*max(0.,1.-abs(c.y)*2.2)+max(0.,1.-abs(c.y)*10.)*max(0.,1.-abs(c.x)*2.2);gl_FragColor=vec4(mix(vc,vec3(1.),core*core),(core*core*core+cr)*l);}`}));
+sparks.frustumCulled=false;scene.add(sparks);
+let sH=0;const scol=new THREE.Color();
+function burst(p,n,spd,h){for(let k=0;k<n;k++){const i=sH;sH=(sH+1)%MAXS;bp[i*3]=p.x;bp[i*3+1]=p.y;bp[i*3+2]=p.z;const v=new THREE.Vector3().randomDirection().multiplyScalar(spd*rnd(.3,1));bv[i*3]=v.x;bv[i*3+1]=v.y;bv[i*3+2]=v.z;bl[i]=rnd(.7,1);scol.setHSL((h+rnd(-.06,.06)+1)%1,.85,.7);bc[i*3]=scol.r;bc[i*3+1]=scol.g;bc[i*3+2]=scol.b;}}
+const ring=new THREE.Mesh(new THREE.RingGeometry(.97,1,128),new THREE.MeshBasicMaterial({color:0xffb36b,transparent:true,opacity:0,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false,fog:false}));
+ring.userData={t0:-9,R:5};scene.add(ring);
+const ring2=new THREE.Mesh(ring.geometry,ring.material.clone());ring2.material.color.set(0x7fd3ff);scene.add(ring2);
+
+/* ============ INTERACTION ============ */
+let dragX=0,dragY=0,vX=0,vY=0,drag=false,lx=0,ly=0,mx=0,my=0,lastTrail=0;
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2(),pl=new THREE.Plane(),hit=new THREE.Vector3();
+function toWorld(x,y){ndc.set(x/innerWidth*2-1,-(y/innerHeight)*2+1);ray.setFromCamera(ndc,camera);pl.setFromNormalAndCoplanarPoint(camera.getWorldDirection(new THREE.Vector3()).negate(),V(0,0,0));return ray.ray.intersectPlane(pl,hit);}
+canvas.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;if(toWorld(e.clientX,e.clientY))burst(hit,110,10,Math.random());});
+addEventListener('pointerup',()=>drag=false);
+addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;
+  if(drag){vY=(e.clientX-lx)*.006;vX=(e.clientY-ly)*.004;lx=e.clientX;ly=e.clientY;}
+  const n=performance.now();if(n-lastTrail>18&&e.pointerType==='mouse'){lastTrail=n;if(toWorld(e.clientX,e.clientY))burst(hit,2,1,Math.random());}});
+
+/* ============ LOOP ============ */
+let offX=0,camD=40,camEl=.2,azi=0,gState=0,lastG=0,fpsT=0,fpsN=0,lookY=0;
+function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);composer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();}
+addEventListener('resize',resize);resize();
+const clock=new THREE.Clock();let started=false;const SPEED=+(new URLSearchParams(location.search).get('speed')||1);
+function frame(){
+  const dt=Math.min(clock.getDelta(),.05)*SPEED;now+=dt;const t=now;
+  let key=window.__mol,target=null,opt={},newKey=null;
+  if(key==='pig'){const p=window.__pig;if(curKey!=='pig:'+p||window.__pigChanged){window.__pigChanged=false;target=M[p];newKey='pig:'+p;}}
+  else if(key==='grind'){if(!curKey.startsWith('grind')){gState=0;lastG=t;target=M.agglom;newKey='grind:agglom';}
+    else if(t-lastG>3.4){lastG=t;gState^=1;const k=gState?'dispersed':'agglom';target=M[k];opt={stagger:.4,quiet:true};newKey='grind:'+k;}}
+  else if(key!==curKey){target=M[key];newKey=key;}
+  if(target){setTarget(target,opt);curKey=newKey;const nk=newKey.split(':');document.getElementById('hname').textContent=NAMES[nk[1]||nk[0]]||nk[0];}
+  document.getElementById('hscene').textContent='SEC '+String(window.__sec).padStart(2,'0');
+  dragY+=vY;dragX+=vX;vY*=.93;vX*=.93;dragX*=.98;
+  const base=(curKey.split(':')[1])||curKey;
+  group.rotation.y=scrollY*.0011+t*.1+dragY+mx*.25;
+  group.rotation.x=Math.sin(scrollY*.0005)*.25+dragX+my*.15;
+  group.updateMatrixWorld();
+  updateAtoms(t);
+  const R=curMol?curMol.R:8,portrait=camera.aspect<1;
+  const wantD=(R*2.9+7)*(portrait?1.35:1);
+  const K=1-Math.exp(-dt*3);camD+=(wantD-camD)*K;const vk=VIEW[base]||{};camEl+=((vk.el??.18)-camEl)*K;azi=Math.sin(t*.05)*1.2;
+  const wantLook=(portrait&&base!=='swirl')?-R*.3:0;lookY+=(wantLook-lookY)*K;
+  camera.position.copy(V(Math.sin(azi)*.3+mx*.12,Math.sin(camEl)-my*.08,1).normalize().multiplyScalar(camD));
+  camera.lookAt(0,lookY,0);
+  const wantOff=(!portrait&&window.__mol!=='swirl')?innerWidth*.23:0;offX+=(wantOff-offX)*K;
+  if(Math.abs(offX)>.5)camera.setViewOffset(innerWidth,innerHeight,offX,0,innerWidth,innerHeight);else camera.clearViewOffset();
+  rimA.position.set(Math.cos(t*.6)*18,6,Math.sin(t*.6)*18);rimB.position.set(Math.cos(t*.6+3)*18,-6,Math.sin(t*.6+3)*18);
+  [ring,ring2].forEach((r,i)=>{const k=(t-ring.userData.t0-i*.18)/1.3;if(k>0&&k<1){r.material.opacity=(1-k)*.8;r.scale.setScalar(ring.userData.R*(.4+k*1.6));r.quaternion.copy(camera.quaternion);r.rotateX(.9*(i?1:-1));}else r.material.opacity=0;});
+  for(let i=0;i<MAXS;i++){if(bl[i]<=0)continue;bl[i]=Math.max(0,bl[i]-dt*.85);bv[i*3+1]-=dt*.8;bv[i*3]*=.965;bv[i*3+1]*=.965;bv[i*3+2]*=.965;bp[i*3]+=bv[i*3]*dt;bp[i*3+1]+=bv[i*3+1]*dt;bp[i*3+2]+=bv[i*3+2]*dt;}
+  bg.attributes.position.needsUpdate=true;bg.attributes.life.needsUpdate=true;bg.attributes.color.needsUpdate=true;
+  if(Math.random()<(mobile?.25:.5)){wp.copy(new THREE.Vector3().randomDirection().multiplyScalar(R*rnd(.6,1.3))).applyMatrix4(group.matrixWorld);burst(wp,1,.6,Math.random());}
+  starMat.uniforms.t.value=t;stars.rotation.y=t*.006+scrollY*.00008;stars.rotation.x=scrollY*.00004;
+  nebs.forEach((n,i)=>{n.material.opacity=.24+.1*Math.sin(t*.4+i*2);});
+  bloom.strength=.5+.12*Math.sin(t*.9);
+  composer.render();
+  fpsN++;if(t-fpsT>1){document.getElementById('hfps').textContent=fpsN;fpsN=0;fpsT=t;}
+  if(!started){started=true;setTimeout(()=>document.getElementById('loader').classList.add('hide'),500);}
+  requestAnimationFrame(frame);
+}
+frame();
+</script>
+<script>setTimeout(()=>document.getElementById('loader').classList.add('hide'),7000);</script>
+</body>
+</html>
